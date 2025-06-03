@@ -10,6 +10,10 @@ setup.py
 ../build/kraken/kraken.egg-info/top_level.txt
 ../build/kraken/kraken.egg-info/zip-safe
 kraken/__init__.py
+kraken/computer_vision.py
+kraken/controller.py
+kraken/planner.py
+kraken/state_estimator.py
 resource/kraken
 test/test_copyright.py
 test/test_flake8.py

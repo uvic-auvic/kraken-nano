@@ -20,6 +20,10 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'planner = kraken.planner:main',
+            'controller = kraken.controller:main',
+            'computer_vision = kraken.computer_vision:main',
+            'state_estimator = kraken.state_estimator:main',
         ],
     },
 )

@@ -1,0 +1,37 @@
+[0.649s] Invoking command in '/home/vboxuser/kraken-nano/ROS/ws/src/kraken': PYTHONPATH=/home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/kraken build --build-base /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/build install --record /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/install.log --single-version-externally-managed install_data
+[0.884s] running egg_info
+[0.885s] writing ../build/kraken/kraken.egg-info/PKG-INFO
+[0.885s] writing dependency_links to ../build/kraken/kraken.egg-info/dependency_links.txt
+[0.886s] writing entry points to ../build/kraken/kraken.egg-info/entry_points.txt
+[0.889s] writing requirements to ../build/kraken/kraken.egg-info/requires.txt
+[0.889s] writing top-level names to ../build/kraken/kraken.egg-info/top_level.txt
+[0.889s] reading manifest file '../build/kraken/kraken.egg-info/SOURCES.txt'
+[0.889s] adding license file 'LICENSE'
+[0.889s] writing manifest file '../build/kraken/kraken.egg-info/SOURCES.txt'
+[0.889s] running build
+[0.889s] running build_py
+[0.889s] copying kraken/state_estimator.py -> /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/build/lib/kraken
+[0.889s] copying kraken/controller.py -> /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/build/lib/kraken
+[0.890s] copying kraken/planner.py -> /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/build/lib/kraken
+[0.890s] copying kraken/computer_vision.py -> /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/build/lib/kraken
+[0.890s] running install
+[0.890s] running install_lib
+[0.891s] copying /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/build/lib/kraken/state_estimator.py -> /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages/kraken
+[0.892s] copying /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/build/lib/kraken/controller.py -> /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages/kraken
+[0.892s] copying /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/build/lib/kraken/planner.py -> /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages/kraken
+[0.892s] copying /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/build/lib/kraken/computer_vision.py -> /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages/kraken
+[0.892s] byte-compiling /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages/kraken/state_estimator.py to state_estimator.cpython-310.pyc
+[0.893s] byte-compiling /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages/kraken/controller.py to controller.cpython-310.pyc
+[0.894s] byte-compiling /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages/kraken/planner.py to planner.cpython-310.pyc
+[0.894s] byte-compiling /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages/kraken/computer_vision.py to computer_vision.cpython-310.pyc
+[0.895s] running install_data
+[0.895s] running install_egg_info
+[0.896s] removing '/home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages/kraken-0.0.0-py3.10.egg-info' (and everything under it)
+[0.897s] Copying ../build/kraken/kraken.egg-info to /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages/kraken-0.0.0-py3.10.egg-info
+[0.897s] running install_scripts
+[0.915s] Installing computer_vision script to /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/kraken
+[0.915s] Installing controller script to /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/kraken
+[0.916s] Installing planner script to /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/kraken
+[0.916s] Installing state_estimator script to /home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/kraken
+[0.916s] writing list of installed files to '/home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/install.log'
+[0.938s] Invoked command in '/home/vboxuser/kraken-nano/ROS/ws/src/kraken' returned '0': PYTHONPATH=/home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/vboxuser/kraken-nano/ROS/ws/src/install/kraken/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../build/kraken build --build-base /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/build install --record /home/vboxuser/kraken-nano/ROS/ws/src/build/kraken/install.log --single-version-externally-managed install_data
