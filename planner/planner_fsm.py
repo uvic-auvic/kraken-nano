@@ -1,4 +1,8 @@
 import time
+from publisher import PlannerPublisher
+from planner_node import PlannerNode 
+from messages import Direction 
+
 
 class PlannerFSM:
     def __init__(self):
@@ -30,9 +34,11 @@ class PlannerFSM:
     def step1(self):
         bool gateFound = False 
         while gateFound == False:
-            print("Performing step 1 logic...")
+            print("Performing Yaw to Search")
+
             # Insert actual logic here
             #perfom rotation
+
             self.rotate(60)
             self.wait_for_step_complete(1)
 
