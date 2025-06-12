@@ -42,3 +42,8 @@ OBJECT_TYPES = [
 
 def make_search_space_message(objects: List[str]) -> dict:
     return {"objects": objects}
+
+class DetectedType(str, Enum):
+    GATE = "gate"
+    PICTURE = "picture"
+    SLALOM = "slalom"
