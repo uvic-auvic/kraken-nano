@@ -11,7 +11,7 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'custom'],
     zip_safe=True,
     maintainer='vboxuser',
     maintainer_email='vboxuser@todo.todo',
