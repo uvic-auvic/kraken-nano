@@ -11,7 +11,7 @@ class Simulation():
 		self.BLP = node.create_publisher(Float64, '/model/auv/joint/BL_joint/cmd_thrust', 10)
 		self.BRP = node.create_publisher(Float64, '/model/auv/joint/BR_joint/cmd_thrust', 10)
 		
-	def right(self, speed):
+	def left(self, speed):
 		msg = Float64()
 		msg.data = float(speed)
 		self.FP.publish(msg)

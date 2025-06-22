@@ -15,7 +15,7 @@ class Controller(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
         
         self.sim = Simulation(self)
-        self.sim.right(10)
+        self.sim.left(10)
 
     def timer_callback(self):
         self.get_logger().info('Controller Running')
