@@ -14,6 +14,7 @@ kraken/computer_vision.py
 kraken/controller.py
 kraken/planner.py
 kraken/state_estimator.py
+launch/kraken.launch.py
 resource/kraken
 test/test_copyright.py
 test/test_flake8.py
