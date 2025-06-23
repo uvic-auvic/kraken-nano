@@ -27,7 +27,6 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(custom
   "msg/Task.msg"
-  "msg/SimAltimeter.msg"
  )
 
 ament_package()

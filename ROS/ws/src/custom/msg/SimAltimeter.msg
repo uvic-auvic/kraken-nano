@@ -1,2 +1,0 @@
-float64 vertical_position
-float64 vertical_velocity
