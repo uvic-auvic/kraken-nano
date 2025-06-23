@@ -1,18 +1,59 @@
 from std_msgs.msg import Float64
 
+# Creates publishers for each thruster and publishes values based on desired actions
 class Simulation():
 	def __init__(self, node):
-		self.FP = node.create_publisher(Float64, '/model/auv/joint/F_joint/cmd_thrust', 10)
-		self.BP = node.create_publisher(Float64, '/model/auv/joint/B_joint/cmd_thrust', 10)
-		self.LP = node.create_publisher(Float64, '/model/auv/joint/L_joint/cmd_thrust', 10)
-		self.RP = node.create_publisher(Float64, '/model/auv/joint/R_joint/cmd_thrust', 10)
-		self.FLP = node.create_publisher(Float64, '/model/auv/joint/FL_joint/cmd_thrust', 10)
-		self.FRP = node.create_publisher(Float64, '/model/auv/joint/FR_joint/cmd_thrust', 10)
-		self.BLP = node.create_publisher(Float64, '/model/auv/joint/BL_joint/cmd_thrust', 10)
-		self.BRP = node.create_publisher(Float64, '/model/auv/joint/BR_joint/cmd_thrust', 10)
+		self.FP = node.create_publisher(Float64, '/model/auv/joint/F_joint/cmd_thrust', 10) # Front
+		self.BP = node.create_publisher(Float64, '/model/auv/joint/B_joint/cmd_thrust', 10) # Back
+		self.LP = node.create_publisher(Float64, '/model/auv/joint/L_joint/cmd_thrust', 10) # Left
+		self.RP = node.create_publisher(Float64, '/model/auv/joint/R_joint/cmd_thrust', 10) # Right
+		self.FLP = node.create_publisher(Float64, '/model/auv/joint/FL_joint/cmd_thrust', 10) # Front Left
+		self.FRP = node.create_publisher(Float64, '/model/auv/joint/FR_joint/cmd_thrust', 10) # Front Right
+		self.BLP = node.create_publisher(Float64, '/model/auv/joint/BL_joint/cmd_thrust', 10) # Back Left
+		self.BRP = node.create_publisher(Float64, '/model/auv/joint/BR_joint/cmd_thrust', 10) # Back Right
 		
+	# Move the simulated AUV forward
+	def forward(self, speed):
+		msg = Float64()
+		msg.data = float(speed)
+		self.LP.publish(msg)
+		self.RP.publish(msg)
+	
+	# Move the simulated AUV backward
+	def backward(self, speed):
+		msg = Float64()
+		msg.data = float(-speed)
+		self.LP.publish(msg)
+		self.RP.publish(msg)
+		
+	# Move the simulated AUV left
 	def left(self, speed):
 		msg = Float64()
 		msg.data = float(speed)
 		self.FP.publish(msg)
 		self.BP.publish(msg)
+	
+	# Move the simulated AUV right
+	def right(self, speed):
+		msg = Float64()
+		msg.data = float(-speed)
+		self.FP.publish(msg)
+		self.BP.publish(msg)
+	
+	# Move the simulated AUV up
+	def up(self, speed):
+		msg = Float64()
+		msg.data = float(speed)
+		self.FLP.publish(msg)
+		self.FRP.publish(msg)
+		self.BLP.publish(msg)
+		self.BRP.publish(msg)
+	
+	# Move the simulated AUV down
+	def down(self, speed):
+		msg = Float64()
+		msg.data = float(-speed)
+		self.FLP.publish(msg)
+		self.FRP.publish(msg)
+		self.BLP.publish(msg)
+		self.BRP.publish(msg)
