@@ -17,7 +17,7 @@ def generate_launch_description():
     Popen(["ros2", "run", "ros_gz_bridge", "parameter_bridge", "/altimeter@ros_gz_interfaces/msg/Altimeter[ignition.msgs.Altimeter"])
     Popen(["ros2", "run", "ros_gz_bridge", "parameter_bridge", "/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU"])
     
-    time.sleep(5)
+    time.sleep(10)
 
     return launch.LaunchDescription([
         launch_ros.actions.Node(

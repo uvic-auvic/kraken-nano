@@ -1,4 +1,6 @@
 from std_msgs.msg import Float64
+from sensor_msgs.msg import Imu
+from ros_gz_interfaces.msg import Altimeter
 
 # Creates publishers for each thruster and publishes values based on desired actions
 class Simulation():
@@ -11,6 +13,10 @@ class Simulation():
 		self.FRP = node.create_publisher(Float64, '/model/auv/joint/FR_joint/cmd_thrust', 10) # Front Right
 		self.BLP = node.create_publisher(Float64, '/model/auv/joint/BL_joint/cmd_thrust', 10) # Back Left
 		self.BRP = node.create_publisher(Float64, '/model/auv/joint/BR_joint/cmd_thrust', 10) # Back Right
+		self.IMU_sub = node.create_subscription(Imu, '/imu', self.imu_callback, 10)
+		self.Altimeter_sub = node.create_subscription(Altimeter, '/altimeter', self.altimeter_callback, 10)
+		self.imu = None
+		self.altimeter = None
 		
 	# Move the simulated AUV forward
 	def forward(self, speed):
@@ -57,3 +63,15 @@ class Simulation():
 		self.FRP.publish(msg)
 		self.BLP.publish(msg)
 		self.BRP.publish(msg)
+		
+	def get_imu(self):
+		return self.imu
+	
+	def get_altimeter(self):
+		return self.altimeter
+		
+	def imu_callback(self, msg):
+		self.imu = msg
+	
+	def altimeter_callback(self, msg):
+		self.altimeter = msg
