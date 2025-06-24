@@ -106,65 +106,126 @@ class PlannerFSM:
         self.node.publish_move(Direction.X, 0.0)
         self.mark_step_complete(4)
 
-    #locate the bin with the bottom camera
+    # step5: rotate until orange path detected by bottom camera
     def step5(self):
-        while not self.step_complete[5]:
-            print("Performing step 5 logic...")
-            self.wait_for_step_complete(5)
+        print("Step 5: yaw until orange path detected")
+        # start continuous yaw
+        self.node.publish_move(Direction.YAW, float('inf'))
+        # wait until bottom camera sees ORANGE_PATH
+        while self.node.get_last_bottom_detection() != DetectedType.ORANGE_PATH:
+            time.sleep(0.5)
+            print(f" Bottom seen so far: {self.node.get_last_bottom_detection()}")
+        print("Orange path detected! Stopping yaw.")
+        # stop yaw
+        self.node.publish_move(Direction.YAW, 0.0)
+        # mark this step done
+        self.mark_step_complete(5)
 
-    #locate image that matches the image that is on the gate that we went through on the start
     def step6(self):
-        while not self.step_complete[6]:
-            print("Performing step 6 logic...")
-            self.wait_for_step_complete(6)
+        print("Step 6: follow orange path until bin detected")
+        # start forward motion indefinitely
+        self.node.publish_move(Direction.X, float('inf'))
+        # wait until bottom camera sees BIN
+        while self.node.get_last_bottom_detection() != DetectedType.BIN:
+            time.sleep(0.5)
+            print(f" Bottom seen so far: {self.node.get_last_bottom_detection()}")
+        print("Bin detected! Stopping motion.")
+        # stop motion
+        self.node.publish_move(Direction.X, 0.0)
+        # mark this step done
+        self.mark_step_complete(6)
 
-    #orient/yaw with bin
+    # step7: drop the ball into the bin
     def step7(self):
-        while not self.step_complete[7]:
-            print("Performing step 7 logic...")
-            self.wait_for_step_complete(7)
+        print("Step 7: drop the ball into the bin")
+        # activate dropper
+        self.node.publish_dropper(Direction.ON)
+        # (optional: wait a moment for drop to complete)
+        time.sleep(0.5)
+        # deactivate dropper
+        self.node.publish_dropper(Direction.OFF)
+        # mark complete
+        self.mark_step_complete(7)
 
-    #Drop the ball into the bin
+    # step8: rotate until picture detected and center it
     def step8(self):
-        while not self.step_complete[8]:
-            print("Performing step 8 logic...")
-            self.wait_for_step_complete(8)
+        print("Step 8: find and center the picture")
+        # start yaw to search for picture
+        self.node.publish_move(Direction.YAW, float('inf'))
+        # wait until front camera detects picture
+        while self.node.get_last_detection() != DetectedType.PICTURE:
+            time.sleep(0.5)
+            print(f" Seen so far: {self.node.get_last_detection()}")
+        print("Picture detected! Stopping search yaw.")
+        # stop yaw
+        self.node.publish_move(Direction.YAW, 0.0)
+        # now center the picture
+        print("Centering picture")
+        self.node.publish_move(Direction.YAW, float('inf'))
+        while not self.node.is_picture_centered():
+            time.sleep(0.1)
+        print("Picture centered. Stopping yaw.")
+        self.node.publish_move(Direction.YAW, 0.0)
+        # mark complete
+        self.mark_step_complete(8)
 
-    #locate target for torpedo
+    # step9: find and center the red-square target
     def step9(self):
-        while not self.step_complete[9]:
-            print("Performing step 9 logic...")
-            self.wait_for_step_complete(9)
+        print("Step 9: search for red-square target")
+        # start yaw to search for target
+        self.node.publish_move(Direction.YAW, float('inf'))
+        # wait until detection of RED_SQUARE
+        while self.node.get_last_detection() != DetectedType.RED_SQUARE:
+            time.sleep(0.5)
+            print(f" Seen so far: {self.node.get_last_detection()}")
+        print("Red-square detected! Stopping search yaw.")
+        # stop yaw
+        self.node.publish_move(Direction.YAW, 0.0)
+        # center the target
+        print("Centering red-square target")
+        self.node.publish_move(Direction.YAW, float('inf'))
+        while not self.node.is_target_centered():
+            time.sleep(0.1)
+        print("Target centered. Stopping yaw.")
+        self.node.publish_move(Direction.YAW, 0.0)
+        # mark complete
+        self.mark_step_complete(9)
 
-    #drive towards target
+    # step10: approach the target until 0.5m away, center, then launch torpedo
     def step10(self):
-        while not self.step_complete[10]:
-            print("Performing step 10 logic...")
-            self.wait_for_step_complete(10)
+        print("Step 10: approach target until 0.5m away")
+        # start forward motion
+        self.node.publish_move(Direction.X, float('inf'))
+        # wait until distance ≤ 0.5m
+        while True:
+            dist = self.node.get_target_distance()
+            if dist is not None and dist <= 0.5:
+                break
+            time.sleep(0.1)
+            print(f" Distance to target: {dist}")
+        print("Close enough; stopping forward motion")
+        self.node.publish_move(Direction.X, 0.0)
+        # center before launch
+        print("Centering target before launch")
+        self.node.publish_move(Direction.YAW, float('inf'))
+        while not self.node.is_target_centered():
+            time.sleep(0.1)
+        print("Target centered. Stopping yaw.")
+        self.node.publish_move(Direction.YAW, 0.0)
+        # launch torpedo
+        print("Launching torpedo")
+        self.node.publish_torpedo()
+        # mark this step done
+        self.mark_step_complete(10)
 
-    #orient with target
+    # step11: ascend to the surface
     def step11(self):
-        while not self.step_complete[11]:
-            print("Performing step 11 logic...")
-            self.wait_for_step_complete(11)
+        print("Step 11: ascending vertically to surface")
+        # publish upward movement on Z axis
+        self.node.publish_move(Direction.Z, float('inf'))
+        # mark complete immediately
+        self.mark_step_complete(11)
 
-    #launch torpedo
-    def step12(self):
-        while not self.step_complete[12]:
-            print("Performing step 12 logic...")
-            self.wait_for_step_complete(12)
-
-    #find entrance gate
-    def step13(self):
-        while not self.step_complete[13]:
-            print("Performing step 13 logic...")
-            self.wait_for_step_complete(13)
-
-    #go through entrance gate
-    def step14(self):
-        while not self.step_complete[13]:
-            print("Performing step 14 logic...")
-            self.wait_for_step_complete(14)
 # Example/test usage
 if __name__ == "__main__":
     import threading
