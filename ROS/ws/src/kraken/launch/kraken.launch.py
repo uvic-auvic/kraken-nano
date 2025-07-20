@@ -4,7 +4,7 @@ from subprocess import Popen
 import time
 
 def generate_launch_description():
-    Popen(["ign", "gazebo", "-r", "/home/vboxuser/kraken-nano/ROS/ws/src/kraken/worlds/kraken.sdf"])
+    Popen(["ign", "gazebo", "-r", "/home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/kraken/worlds/kraken.sdf"])
     
     Popen(["ros2", "run", "ros_gz_bridge", "parameter_bridge", "/model/auv/joint/F_joint/cmd_thrust@std_msgs/msg/Float64]ignition.msgs.Double"])
     Popen(["ros2", "run", "ros_gz_bridge", "parameter_bridge", "/model/auv/joint/B_joint/cmd_thrust@std_msgs/msg/Float64]ignition.msgs.Double"])
