@@ -24,4 +24,9 @@ def generate_launch_description():
             package="kraken",
             executable="controller",
             name="controller"),
+            
+        launch_ros.actions.Node(
+            package="kraken",
+            executable="state_estimator",
+            name="state_estimator"),
     ])
