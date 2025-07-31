@@ -2,18 +2,32 @@ import rclpy
 from rclpy.node import Node
 import sys
 from std_msgs.msg import Float64
-
 sys.path.append("/home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/kraken/kraken/include")
-
 from simulation import Simulation
 from std_msgs.msg import String
 from pid import PID
+from motor_board import MotorBoard, System
 
+
+
+# Enum for logical system names (decouples code from physical system mapping)
+class System(Enum):
+    PROPULSION = 'propulsion'
+    VERTICAL = 'vertical'
+    YAW = 'yaw'
+    ROLL = 'roll'
+    PITCH = 'pitch'
+    DROPPER = 'dropper'
+    GRABBER = 'grabber'
+    TORPEDO = 'torpedo'
 
 class Controller(Node):
 
     def __init__(self):
         super().__init__('controller')
+
+
+        self.motor_board = MotorBoard('/dev/ttyUSB0', baudrate=115200, timeout=0.1)
 
         timer_period = 0.5  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
@@ -151,10 +165,10 @@ class Controller(Node):
     # TODO: Implement a method to receive a task result
     def forward(self, speed):
         self.get_logger().info(f'Forward speed set to: {speed}')
-        # Update forward PID setpoint and compute output
         self.forward_pid.setpoint = speed
         output = self.forward_pid.update(self.current_forward, 0.5)
         self.get_logger().info(f"[FORWARD] Measured: {self.current_forward:.2f}, PID output: {output:.2f}")
+        self.motor_board.forward(int(max(min(output, 127), -128)))
 
     # TODO: Implement a method to set right movement speed
     def right(self, speed):
@@ -162,6 +176,7 @@ class Controller(Node):
         self.right_pid.setpoint = speed
         output = self.right_pid.update(self.current_right, 0.5)
         self.get_logger().info(f"[RIGHT] Measured: {self.current_right:.2f}, PID output: {output:.2f}")
+        self.motor_board.right(int(max(min(output, 127), -128)))
 
     # TODO: Implement a method to set up movement speed
     def up(self, speed):
@@ -169,6 +184,7 @@ class Controller(Node):
         self.up_pid.setpoint = speed
         output = self.up_pid.update(self.current_up, 0.5)
         self.get_logger().info(f"[UP] Measured: {self.current_up:.2f}, PID output: {output:.2f}")
+        self.motor_board.vertical(int(max(min(output, 127), -128)))
 
     # TODO: Implement a method to set yaw speed
     def yaw(self, speed):
@@ -176,6 +192,7 @@ class Controller(Node):
         self.yaw_pid.setpoint = speed
         output = self.yaw_pid.update(self.current_yaw, 0.5)
         self.get_logger().info(f"[YAW] Measured: {self.current_yaw:.2f}, PID output: {output:.2f}")
+        self.motor_board.yaw(int(max(min(output, 127), -128)))
 
     # TODO: Implement a method to set roll speed
     def roll(self, speed):
@@ -183,6 +200,7 @@ class Controller(Node):
         self.roll_pid.setpoint = speed
         output = self.roll_pid.update(self.current_roll, 0.5)
         self.get_logger().info(f"[ROLL] Measured: {self.current_roll:.2f}, PID output: {output:.2f}")
+        self.motor_board.roll(int(max(min(output, 127), -128)))
 
     # TODO: Implement a method to set pitch speed
     def pitch(self, speed):
@@ -190,6 +208,7 @@ class Controller(Node):
         self.pitch_pid.setpoint = speed
         output = self.pitch_pid.update(self.current_pitch, 0.5)
         self.get_logger().info(f"[PITCH] Measured: {self.current_pitch:.2f}, PID output: {output:.2f}")
+        self.motor_board.pitch(int(max(min(output, 127), -128)))
 
     # TODO: Implement a method to set the dropper
     def set_dropper(self, ball):
