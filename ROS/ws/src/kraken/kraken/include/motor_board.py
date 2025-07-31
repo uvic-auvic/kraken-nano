@@ -10,8 +10,24 @@ class System(Enum):
     DROPPER = 'dropper'
     GRABBER = 'grabber'
     TORPEDO = 'torpedo'
+    LED = "led"
 
 class MotorBoard:
+    def led(self, indices, magnitude):
+        """
+        Toggle LEDs by index (0-2). 'indices' is a list of LED indices to toggle.
+        'magnitude' is an int 0-2; the value byte will be 1 << magnitude (only one bit set).
+        The motor_mask will have bits set for each index in 'indices'.
+        """
+        if not all(0 <= idx <= 2 for idx in indices):
+            raise ValueError("LED indices must be between 0 and 2")
+        if not (0 <= magnitude <= 2):
+            raise ValueError("Magnitude must be between 0 and 2")
+        motor_mask = 0
+        for idx in indices:
+            motor_mask |= (1 << idx)
+        value_byte = 1 << magnitude
+        self._send(System.LED, motor_mask, value_byte)
     """
     Handles UART communication for all robot systems and motors.
     System and motor mapping is internal and fixed for this robot.
@@ -22,14 +38,15 @@ class MotorBoard:
     """
     # Internal mapping: System enum -> (system_id, [motor_indices])
     SYSTEMS = {
-        System.PROPULSION: (0, [0, 1]),
-        System.VERTICAL: (1, [0]),
-        System.YAW: (2, [0]),
-        System.ROLL: (3, [0]),
-        System.PITCH: (4, [0]),
-        System.DROPPER: (5, [0]),
-        System.GRABBER: (6, [0]),
-        System.TORPEDO: (7, [0]),
+        System.PROPULSION: ('M', [0, 1]),
+        System.VERTICAL: ('M', [0]),
+        System.YAW: ('M', [0]),
+        System.ROLL: ('M', [0]),
+        System.PITCH: ('M', [0]),
+        System.DROPPER: ('M', [0]),
+        System.GRABBER: ('M', [0]),
+        System.TORPEDO: ('M', [0]),
+        System.LED: ('L', [0]),
     }
 
     def __init__(self, port, baudrate=115200, timeout=0.1):
@@ -46,7 +63,7 @@ class MotorBoard:
         if not (-128 <= value <= 127):
             raise ValueError("Value must be -128 to 127")
         value_byte = value & 0xFF
-        msg = bytes([system_id, motor_mask, value_byte])
+        msg = bytes([ord(system_id), motor_mask, value_byte])
         self.serial.write(msg)
 
     def propulsion(self, value, motors=[0, 1]):
