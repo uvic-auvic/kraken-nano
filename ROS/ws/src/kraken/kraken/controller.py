@@ -52,13 +52,13 @@ class Controller(Node):
         self.current_pitch = 0.0
 
         self.status_publisher = self.create_publisher(
-            String, 'controller_status', 10)
+            String, 'controller_status', self.status_callback, 10)
         self.pose_publisher = self.create_publisher(
-            String, 'controller_pose', 10)
+            String, 'controller_pose', self.pose_callback, 10)
         self.error_publisher = self.create_publisher(
-            String, 'controller_error', 10)
+            String, 'controller_error', self.error_callback, 10)
         self.warning_publisher = self.create_publisher(
-            String, 'controller_warning', 10)
+            String, 'controller_warning', self.warning_callback, 10)
 
         self.planner_task_subscription = self.create_subscription(
             String,
@@ -108,24 +108,22 @@ class Controller(Node):
         if task_type == "move":
             direction = task.get("direction")
             magnitude = float(task.get("magnitude", 0))
+            # Compute new setpoint based on last known pose
+            if not hasattr(self, 'last_pose'):
+                self.get_logger().warn("No pose received yet; cannot move.")
+                return
+            current_x = self.last_pose['point'][0]
+            current_y = self.last_pose['point'][1]
+            current_yaw = self.last_pose['rot']
             if direction == "x":
-                self.forward_pid.setpoint = magnitude
-                self.get_logger().info(f"Set forward setpoint to {magnitude}")
+                target_x = current_x + magnitude
+                self.forward(target_x)
             elif direction == "y":
-                self.right_pid.setpoint = magnitude
-                self.get_logger().info(f"Set right setpoint to {magnitude}")
-            elif direction == "z":
-                self.up_pid.setpoint = magnitude
-                self.get_logger().info(f"Set up setpoint to {magnitude}")
+                target_y = current_y + magnitude
+                self.right(target_y)
             elif direction == "yaw":
-                self.yaw_pid.setpoint = magnitude
-                self.get_logger().info(f"Set yaw setpoint to {magnitude}")
-            elif direction == "roll":
-                self.roll_pid.setpoint = magnitude
-                self.get_logger().info(f"Set roll setpoint to {magnitude}")
-            elif direction == "pitch":
-                self.pitch_pid.setpoint = magnitude
-                self.get_logger().info(f"Set pitch setpoint to {magnitude}")
+                target_yaw = current_yaw + magnitude
+                self.yaw(target_yaw)
             else:
                 self.get_logger().warn(f"Unknown move direction: {direction}")
         elif task_type == "dropper":
@@ -152,31 +150,54 @@ class Controller(Node):
     # TODO: Implement a pose receiving method    
     def receive_pose(self, pose):
         self.get_logger().info(f'Received pose: {pose}')
-        # Example: parse pose and update current values for each axis
-        # This is a placeholder; real implementation depends on pose format
-        # Suppose pose is a comma-separated string: "forward,right,up,yaw,roll,pitch"
+        # Expecting pose as a JSON string with 'point' (3D) and 'rot' (Euler [yaw, pitch, roll])
+        import json
         try:
-            values = [float(x) for x in pose.split(",")]
-            if len(values) == 6:
-                self.current_forward, self.current_right, self.current_up, self.current_yaw, self.current_roll, self.current_pitch = values
+            pose_obj = json.loads(pose) if isinstance(pose, str) else pose
+            point = pose_obj.get('point', [0.0, 0.0, 0.0])
+            rot = pose_obj.get('rot', [0.0, 0.0, 0.0])
+            # Unpack point and rot
+            x = point[0] if len(point) > 0 else 0.0
+            y = point[1] if len(point) > 1 else 0.0
+            z = point[2] if len(point) > 2 else 0.0
+            yaw = rot[0] if len(rot) > 0 else 0.0
+            pitch = rot[1] if len(rot) > 1 else 0.0
+            roll = rot[2] if len(rot) > 2 else 0.0
+            self.last_pose = {'point': [x, y, z], 'rot': [yaw, pitch, roll]}
+            self.current_forward = x
+            self.current_right = y
+            self.current_up = z
+            self.current_yaw = yaw
+            self.current_pitch = pitch
+            self.current_roll = roll
         except Exception as e:
             self.get_logger().warn(f"Failed to parse pose: {e}")
 
+        # Call all positional movement methods with their current setpoints
+        self.forward(self.forward_pid.setpoint)
+        self.right(self.right_pid.setpoint)
+        self.up(self.up_pid.setpoint)
+        self.yaw(self.yaw_pid.setpoint)
+        self.roll(self.roll_pid.setpoint)
+        self.pitch(self.pitch_pid.setpoint)
+
     # TODO: Implement a method to receive a task result
-    def forward(self, speed):
-        self.get_logger().info(f'Forward speed set to: {speed}')
-        self.forward_pid.setpoint = speed
+    def forward(self, setpoint):
+        self.get_logger().info(f'Forward setpoint: {setpoint}')
+        self.forward_pid.setpoint = setpoint
         output = self.forward_pid.update(self.current_forward, 0.5)
         self.get_logger().info(f"[FORWARD] Measured: {self.current_forward:.2f}, PID output: {output:.2f}")
         self.motor_board.forward(int(max(min(output, 127), -128)))
+        self.sim.forward(output)
 
     # TODO: Implement a method to set right movement speed
-    def right(self, speed):
-        self.get_logger().info(f'Right speed set to: {speed}')
-        self.right_pid.setpoint = speed
+    def right(self, setpoint):
+        self.get_logger().info(f'Right setpoint: {setpoint}')
+        self.right_pid.setpoint = setpoint
         output = self.right_pid.update(self.current_right, 0.5)
         self.get_logger().info(f"[RIGHT] Measured: {self.current_right:.2f}, PID output: {output:.2f}")
         self.motor_board.right(int(max(min(output, 127), -128)))
+        self.sim.right(output)
 
     # TODO: Implement a method to set up movement speed
     def up(self, speed):
@@ -185,11 +206,12 @@ class Controller(Node):
         output = self.up_pid.update(self.current_up, 0.5)
         self.get_logger().info(f"[UP] Measured: {self.current_up:.2f}, PID output: {output:.2f}")
         self.motor_board.vertical(int(max(min(output, 127), -128)))
+        self.sim.up(output)
 
     # TODO: Implement a method to set yaw speed
-    def yaw(self, speed):
-        self.get_logger().info(f'Yaw speed set to: {speed}')
-        self.yaw_pid.setpoint = speed
+    def yaw(self, setpoint):
+        self.get_logger().info(f'Yaw setpoint: {setpoint}')
+        self.yaw_pid.setpoint = setpoint
         output = self.yaw_pid.update(self.current_yaw, 0.5)
         self.get_logger().info(f"[YAW] Measured: {self.current_yaw:.2f}, PID output: {output:.2f}")
         self.motor_board.yaw(int(max(min(output, 127), -128)))
