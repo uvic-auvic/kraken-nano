@@ -1,8 +1,8 @@
 import rclpy
 from rclpy.node import Node
 import sys
-from std_msgs.msg import Float64
 sys.path.append("/home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/kraken/kraken/include")
+from std_msgs.msg import Float64
 from simulation import Simulation
 from std_msgs.msg import String
 from pid import PID
@@ -78,13 +78,13 @@ class Controller(Node):
 
     def planner_task_callback(self, msg):
         # This method will be called when a new task is received from the planner
-        self.get_logger().info(f'Received task: {msg.data}')
-        self.recieve_task(msg.data)
+        self.get_logger().info(f'Received task: {msg}')
+        self.recieve_task(msg)
 
-    def state_estimator_pose_callback(self, msg):
+    def state_estimator_pose_callback(self, pose):
         # This method will be called when a new pose is received from the state estimator
-        self.get_logger().info(f'Received pose: {msg.data}')
-        self.receive_pose(msg.data)
+        self.get_logger().info(f'Received pose: {pose}')
+        self.receive_pose(pose)
 
     # TODO: Implement a task receiving method
     def recieve_task(self, task):
@@ -107,23 +107,17 @@ class Controller(Node):
                 self.get_logger().warn("No pose received yet; cannot move.")
                 return
             if direction == "x":
-                target_x = self.last_pose.point.x + magnitude
-                self.forward(target_x)
+                self.target_forward = self.last_pose.pos.x + magnitude
             elif direction == "y":
-                target_y = self.last_pose.point.y + magnitude
-                self.right(target_y)
+                self.target_right = self.last_pose.pos.y + magnitude
             elif direction == "z":
-                target_z = self.last_pose.point.z + magnitude
-                self.up(target_z)
+                self.target_up = self.last_pose.pos.z + magnitude
             elif direction == "yaw":
-                target_yaw = self.last_pose.rot.yaw + magnitude
-                self.yaw(target_yaw)
+                self.target_yaw = self.last_pose.rot.yaw + magnitude
             elif direction == "roll":
-                target_roll = self.last_pose.rot.roll + magnitude
-                self.roll(target_roll)
+                self.target_roll = self.last_pose.rot.roll + magnitude
             elif direction == "pitch":
-                target_pitch = self.last_pose.rot.pitch + magnitude
-                self.pitch(target_pitch)
+                self.target_pitch = self.last_pose.rot.pitch + magnitude
             else:
                 self.get_logger().warn(f"Unknown move direction: {direction}")
         elif task_type == "dropper":
@@ -155,9 +149,9 @@ class Controller(Node):
         try:
             self.last_pose = pose
 
-            self.current_forward = pose.point.x
-            self.current_right = pose.point.y
-            self.current_up = pose.point.z
+            self.current_forward = pose.pos.x
+            self.current_right = pose.pos.y
+            self.current_up = pose.pos.z
             self.current_yaw = pose.rot.yaw
             self.current_pitch = pose.rot.pitch
             self.current_roll = pose.rot.roll
@@ -165,12 +159,12 @@ class Controller(Node):
             self.get_logger().warn(f"Failed to parse pose: {e}")
 
         # Call all positional movement methods with their current setpoints
-        self.forward(self.forward_pid.setpoint)
-        self.right(self.right_pid.setpoint)
-        self.up(self.up_pid.setpoint)
-        self.yaw(self.yaw_pid.setpoint)
-        self.roll(self.roll_pid.setpoint)
-        self.pitch(self.pitch_pid.setpoint)
+        self.forward()
+        self.right()
+        self.up()
+        self.yaw()
+        self.roll()
+        self.pitch()
 
     # TODO: Implement a method to receive a task result
     def forward(self):
@@ -285,10 +279,10 @@ class Controller(Node):
         self.sim.left(10)
 
     def timer_callback(self):
-        self.get_logger().info('Controller Running')
+        # self.get_logger().info('Controller Running')
         altimeter = self.sim.altimeter
-        if altimeter is not None:
-            self.get_logger().info(str(altimeter.vertical_position))
+        # if altimeter is not None:
+            # self.get_logger().info(str(altimeter.vertical_position))
 
 
 def main(args=None):

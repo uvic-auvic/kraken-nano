@@ -1,12 +1,12 @@
 import rclpy
 from rclpy.node import Node
 import sys
+sys.path.append("/home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/kraken/kraken/include")
 import time
 from scipy.spatial.transform import Rotation
 
 from custom.msg import PoseE
 
-sys.path.append("/home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/kraken/kraken/include")
 
 from simulation import Simulation
 
@@ -73,6 +73,8 @@ class StateEstimator(Node):
                 msg.rot.yaw = float(self.euler[0])
                 msg.rot.roll = float(self.euler[2])
                 msg.rot.pitch = float(self.euler[1])
+        
+        self.pose_pub.publish(msg)
     
     
     """
