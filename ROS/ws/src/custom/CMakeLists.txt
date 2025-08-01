@@ -27,6 +27,9 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(custom
   "msg/Task.msg"
+  "msg/PoseE.msg"
+  "msg/Point.msg"
+  "msg/Euler.msg"
  )
 
 ament_package()
