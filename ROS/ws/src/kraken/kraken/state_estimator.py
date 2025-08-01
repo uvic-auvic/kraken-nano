@@ -4,8 +4,11 @@ import sys
 import time
 from scipy.spatial.transform import Rotation
 
-sys.path.append("/home/vboxuser/kraken-nano/ROS/ws/src/kraken/kraken/include")
+from custom.msg import PoseE
 
+sys.path.append("/home/kraken/kraken-nano/ROS/ws/src/kraken/kraken/include")
+
+import ms5837
 from simulation import Simulation
 
 class StateEstimator(Node):
@@ -14,37 +17,64 @@ class StateEstimator(Node):
         super().__init__('state_estimator')
         timer_period = 0.005  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.pose_pub = self.create_publisher(PoseE, "/state_estimator/pose", 10)
+        
         self.sim = Simulation(self)
+        self.logger = self.get_logger()
+        
+        # Position
         self.x = 0
         self.y = 0
         self.z = 0
+        
+        # Velocity
+        self.u = 0
+        self.v = 0
+        self.w = 0
         self.euler = None
         self.current = time.time()
         self.prev = time.time()
 
-    def timer_callback(self):
+    def timer_callback(self):        
+        
+        self.current = time.time()
+        delta = self.current - self.prev
+        self.prev = self.current
+        accel = self.sim.get_acceleration()
         depth = self.sim.get_depth()
         orient = self.sim.get_orientation()
         
+        msg = PoseE()
+        msg.pos.x = 0.0
+        msg.pos.y = 0.0
+        msg.pos.z = 0.0
+        msg.rot.yaw = 0.0
+        msg.rot.roll = 0.0
+        msg.rot.pitch = 0.0
+        
+        if depth is not None:
+                self.z = depth
+                msg.pos.z = float(self.z)
+        if accel is not None:
+                self.u += delta * accel.x
+                self.v += delta * accel.y
+                
+                self.x += delta * self.u
+                self.y += delta * self.v
+                
+                msg.pos.x = float(self.x)
+                msg.pos.y = float(self.y)
+                
         if orient is not None:
                 quat = (orient.x, orient.y, orient.z, orient.w)
                 
                 rot = Rotation.from_quat(quat)
-                self.euler = rot.as_euler('xyz')
-
-        self.current = time.time()
-        delta = self.current - self.prev
-        self.prev = time.time()
-        accel = self.sim.get_acceleration()
-        
-        if depth is not None:
-                self.z = depth
-        if accel is not None:
-                self.x += (delta ** 2 / 2) * accel.x
-                self.y += (delta ** 2 / 2) * accel.y
+                self.euler = rot.as_euler('zyx')
                 
-        self.get_logger().info(str(self.x) + ', ' + str(self.y) + ', ' + str(self.z))
-        self.get_logger().info(str(orient))
+                msg.rot.yaw = float(self.euler[0])
+                msg.rot.roll = float(self.euler[2])
+                msg.rot.pitch = float(self.euler[1])
+    
     
     """
     Estimated movement of the sub:
