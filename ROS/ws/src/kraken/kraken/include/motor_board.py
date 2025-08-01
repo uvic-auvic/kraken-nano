@@ -1,7 +1,6 @@
 import serial
-from enum import Enum
 
-class System(Enum):
+class System():
     PROPULSION = 'propulsion'
     VERTICAL = 'vertical'
     YAW = 'yaw'

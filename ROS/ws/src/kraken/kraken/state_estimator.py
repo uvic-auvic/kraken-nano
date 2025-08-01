@@ -6,9 +6,8 @@ from scipy.spatial.transform import Rotation
 
 from custom.msg import PoseE
 
-sys.path.append("/home/kraken/kraken-nano/ROS/ws/src/kraken/kraken/include")
+sys.path.append("/home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/kraken/kraken/include")
 
-import ms5837
 from simulation import Simulation
 
 class StateEstimator(Node):
