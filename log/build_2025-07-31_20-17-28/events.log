@@ -1,0 +1,510 @@
+[0.000000] (-) TimerEvent: {}
+[0.004597] (custom) JobQueued: {'identifier': 'custom', 'dependencies': OrderedDict()}
+[0.005269] (kraken) JobQueued: {'identifier': 'kraken', 'dependencies': OrderedDict([('custom', '/home/ubuntu/Documents/uvic/kraken-nano/install/custom')])}
+[0.005320] (custom) JobStarted: {'identifier': 'custom'}
+[0.034581] (custom) JobProgress: {'identifier': 'custom', 'progress': 'cmake'}
+[0.055392] (custom) Command: {'cmd': ['/usr/bin/cmake', '/home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/custom', '-DCMAKE_INSTALL_PREFIX=/home/ubuntu/Documents/uvic/kraken-nano/install/custom'], 'cwd': '/home/ubuntu/Documents/uvic/kraken-nano/build/custom', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'ubuntu'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ubuntu'), ('CHROME_DESKTOP', 'code.desktop'), ('TERM_PROGRAM_VERSION', '1.101.2'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/code.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('MANAGERPID', '1727'), ('SYSTEMD_EXEC_PID', '1898'), ('IM_CONFIG_CHECK_ENV', '1'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3236'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'ubuntu'), ('JOURNAL_STREAM', '8:10105'), ('_', '/home/ubuntu/.local/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'ubuntu'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/ubuntu/.local/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/ubuntu/.config/Code/User/globalStorage/github.copilot-chat/debugCommand'), ('SESSION_MANAGER', 'local/ubuntu-2204:@/tmp/.ICE-unix/1860,unix/ubuntu-2204:/tmp/.ICE-unix/1860'), ('INVOCATION_ID', 'c26104c178c64426ae88baea4fab869f'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.BWVEA3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-4ff709044c.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/ubuntu/Documents/uvic/kraken-nano/build/custom'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[0.103716] (-) TimerEvent: {}
+[0.204535] (custom) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.210780] (-) TimerEvent: {}
+[0.317423] (-) TimerEvent: {}
+[0.419896] (-) TimerEvent: {}
+[0.529064] (-) TimerEvent: {}
+[0.630236] (-) TimerEvent: {}
+[0.731521] (-) TimerEvent: {}
+[0.834427] (-) TimerEvent: {}
+[0.856343] (custom) StdoutLine: {'line': b'-- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter \n'}
+[0.935747] (-) TimerEvent: {}
+[1.038363] (-) TimerEvent: {}
+[1.139652] (-) TimerEvent: {}
+[1.258546] (-) TimerEvent: {}
+[1.375902] (-) TimerEvent: {}
+[1.483489] (-) TimerEvent: {}
+[1.595242] (-) TimerEvent: {}
+[1.730361] (-) TimerEvent: {}
+[1.868336] (-) TimerEvent: {}
+[1.978896] (-) TimerEvent: {}
+[2.061060] (custom) StdoutLine: {'line': b'-- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)\n'}
+[2.083090] (-) TimerEvent: {}
+[2.186222] (-) TimerEvent: {}
+[2.289858] (-) TimerEvent: {}
+[2.345829] (custom) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)\n'}
+[2.390164] (-) TimerEvent: {}
+[2.416031] (custom) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.493248] (-) TimerEvent: {}
+[2.533515] (custom) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[2.595496] (-) TimerEvent: {}
+[2.697293] (-) TimerEvent: {}
+[2.802834] (-) TimerEvent: {}
+[2.912015] (-) TimerEvent: {}
+[3.020267] (-) TimerEvent: {}
+[3.144188] (-) TimerEvent: {}
+[3.210638] (custom) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[3.247457] (-) TimerEvent: {}
+[3.352773] (-) TimerEvent: {}
+[3.478060] (-) TimerEvent: {}
+[3.592022] (-) TimerEvent: {}
+[3.702667] (-) TimerEvent: {}
+[3.804112] (-) TimerEvent: {}
+[3.909526] (-) TimerEvent: {}
+[4.040759] (-) TimerEvent: {}
+[4.178743] (-) TimerEvent: {}
+[4.336439] (-) TimerEvent: {}
+[4.454768] (-) TimerEvent: {}
+[4.561267] (-) TimerEvent: {}
+[4.668580] (-) TimerEvent: {}
+[4.774136] (-) TimerEvent: {}
+[4.878226] (-) TimerEvent: {}
+[4.985392] (-) TimerEvent: {}
+[5.093923] (-) TimerEvent: {}
+[5.201790] (-) TimerEvent: {}
+[5.292003] (custom) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)\n'}
+[5.333979] (-) TimerEvent: {}
+[5.435883] (-) TimerEvent: {}
+[5.537336] (-) TimerEvent: {}
+[5.643595] (-) TimerEvent: {}
+[5.745143] (-) TimerEvent: {}
+[5.857706] (-) TimerEvent: {}
+[5.965272] (-) TimerEvent: {}
+[6.068564] (-) TimerEvent: {}
+[6.174529] (-) TimerEvent: {}
+[6.246902] (custom) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[6.275790] (-) TimerEvent: {}
+[6.379274] (-) TimerEvent: {}
+[6.482246] (-) TimerEvent: {}
+[6.583212] (-) TimerEvent: {}
+[6.685682] (-) TimerEvent: {}
+[6.787119] (-) TimerEvent: {}
+[6.888170] (-) TimerEvent: {}
+[6.990858] (-) TimerEvent: {}
+[7.092790] (-) TimerEvent: {}
+[7.173701] (custom) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[7.194950] (-) TimerEvent: {}
+[7.286817] (custom) StdoutLine: {'line': b'-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") \n'}
+[7.293672] (custom) StdoutLine: {'line': b'-- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)\n'}
+[7.295257] (-) TimerEvent: {}
+[7.396457] (-) TimerEvent: {}
+[7.418409] (custom) StdoutLine: {'line': b'-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") \n'}
+[7.418924] (custom) StdoutLine: {'line': b'-- Using PYTHON_EXECUTABLE: /usr/bin/python3\n'}
+[7.419028] (custom) StdoutLine: {'line': b'-- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10\n'}
+[7.419098] (custom) StdoutLine: {'line': b'-- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so\n'}
+[7.470674] (custom) StdoutLine: {'line': b'-- Found PythonExtra: .so  \n'}
+[7.503096] (-) TimerEvent: {}
+[7.611940] (-) TimerEvent: {}
+[7.732680] (-) TimerEvent: {}
+[7.839338] (-) TimerEvent: {}
+[7.878039] (custom) StdoutLine: {'line': b"-- Added test 'lint_cmake' to check CMake code style\n"}
+[7.903677] (custom) StdoutLine: {'line': b"-- Added test 'xmllint' to check XML markup files\n"}
+[7.939677] (-) TimerEvent: {}
+[7.977489] (custom) StdoutLine: {'line': b'-- Configuring done\n'}
+[8.040728] (-) TimerEvent: {}
+[8.146484] (-) TimerEvent: {}
+[8.158794] (custom) StdoutLine: {'line': b'-- Generating done\n'}
+[8.185995] (custom) StdoutLine: {'line': b'-- Build files have been written to: /home/ubuntu/Documents/uvic/kraken-nano/build/custom\n'}
+[8.264156] (custom) CommandEnded: {'returncode': 0}
+[8.266142] (-) TimerEvent: {}
+[8.266333] (custom) JobProgress: {'identifier': 'custom', 'progress': 'build'}
+[8.266452] (custom) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/ubuntu/Documents/uvic/kraken-nano/build/custom', '--', '-j7', '-l7'], 'cwd': '/home/ubuntu/Documents/uvic/kraken-nano/build/custom', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'ubuntu'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ubuntu'), ('CHROME_DESKTOP', 'code.desktop'), ('TERM_PROGRAM_VERSION', '1.101.2'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/code.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('MANAGERPID', '1727'), ('SYSTEMD_EXEC_PID', '1898'), ('IM_CONFIG_CHECK_ENV', '1'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3236'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'ubuntu'), ('JOURNAL_STREAM', '8:10105'), ('_', '/home/ubuntu/.local/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'ubuntu'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/ubuntu/.local/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/ubuntu/.config/Code/User/globalStorage/github.copilot-chat/debugCommand'), ('SESSION_MANAGER', 'local/ubuntu-2204:@/tmp/.ICE-unix/1860,unix/ubuntu-2204:/tmp/.ICE-unix/1860'), ('INVOCATION_ID', 'c26104c178c64426ae88baea4fab869f'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.BWVEA3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-4ff709044c.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/ubuntu/Documents/uvic/kraken-nano/build/custom'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[8.366762] (-) TimerEvent: {}
+[8.470834] (-) TimerEvent: {}
+[8.586409] (custom) StdoutLine: {'line': b'[  3%] \x1b[34m\x1b[1mGenerating C code for ROS interfaces\x1b[0m\n'}
+[8.587842] (-) TimerEvent: {}
+[8.592778] (custom) StdoutLine: {'line': b'[  6%] \x1b[34m\x1b[1mGenerating C++ code for ROS interfaces\x1b[0m\n'}
+[8.691160] (-) TimerEvent: {}
+[8.715819] (custom) StdoutLine: {'line': b'[  6%] Built target ament_cmake_python_copy_custom\n'}
+[8.795615] (-) TimerEvent: {}
+[8.926836] (-) TimerEvent: {}
+[9.039287] (-) TimerEvent: {}
+[9.143020] (-) TimerEvent: {}
+[9.246184] (-) TimerEvent: {}
+[9.349165] (-) TimerEvent: {}
+[9.461121] (-) TimerEvent: {}
+[9.564317] (-) TimerEvent: {}
+[9.585222] (custom) StdoutLine: {'line': b'running egg_info\n'}
+[9.585728] (custom) StdoutLine: {'line': b'creating custom.egg-info\n'}
+[9.585875] (custom) StdoutLine: {'line': b'writing custom.egg-info/PKG-INFO\n'}
+[9.586001] (custom) StdoutLine: {'line': b'writing dependency_links to custom.egg-info/dependency_links.txt\n'}
+[9.586122] (custom) StdoutLine: {'line': b'writing top-level names to custom.egg-info/top_level.txt\n'}
+[9.586237] (custom) StdoutLine: {'line': b"writing manifest file 'custom.egg-info/SOURCES.txt'\n"}
+[9.646493] (custom) StdoutLine: {'line': b"reading manifest file 'custom.egg-info/SOURCES.txt'\n"}
+[9.651111] (custom) StdoutLine: {'line': b"writing manifest file 'custom.egg-info/SOURCES.txt'\n"}
+[9.671007] (-) TimerEvent: {}
+[9.792826] (-) TimerEvent: {}
+[9.940046] (-) TimerEvent: {}
+[10.045300] (-) TimerEvent: {}
+[10.121320] (custom) StdoutLine: {'line': b'[  6%] Built target ament_cmake_python_build_custom_egg\n'}
+[10.156339] (-) TimerEvent: {}
+[10.188516] (custom) StdoutLine: {'line': b'[  6%] Built target custom__cpp\n'}
+[10.256697] (-) TimerEvent: {}
+[10.262628] (custom) StdoutLine: {'line': b'[  9%] \x1b[32mBuilding C object CMakeFiles/custom__rosidl_generator_c.dir/rosidl_generator_c/custom/msg/detail/task__functions.c.o\x1b[0m\n'}
+[10.298694] (custom) StdoutLine: {'line': b'[ 12%] \x1b[34m\x1b[1mGenerating C++ type support for eProsima Fast-RTPS\x1b[0m\n'}
+[10.315730] (custom) StdoutLine: {'line': b'[ 16%] \x1b[34m\x1b[1mGenerating C++ type support dispatch for ROS interfaces\x1b[0m\n'}
+[10.337450] (custom) StdoutLine: {'line': b'[ 19%] \x1b[34m\x1b[1mGenerating C++ introspection for ROS interfaces\x1b[0m\n'}
+[10.357871] (-) TimerEvent: {}
+[10.467400] (-) TimerEvent: {}
+[10.587761] (-) TimerEvent: {}
+[10.694455] (-) TimerEvent: {}
+[10.807687] (-) TimerEvent: {}
+[10.872830] (custom) StdoutLine: {'line': b'[ 22%] \x1b[32m\x1b[1mLinking C shared library libcustom__rosidl_generator_c.so\x1b[0m\n'}
+[10.911712] (-) TimerEvent: {}
+[10.991328] (custom) StdoutLine: {'line': b'[ 25%] \x1b[32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/custom/msg/task__type_support.cpp.o\x1b[0m\n'}
+[11.010068] (-) TimerEvent: {}
+[11.115406] (-) TimerEvent: {}
+[11.217458] (-) TimerEvent: {}
+[11.260442] (custom) StdoutLine: {'line': b'[ 25%] Built target custom__rosidl_generator_c\n'}
+[11.288393] (custom) StdoutLine: {'line': b'[ 29%] \x1b[32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/custom/msg/detail/task__type_support.cpp.o\x1b[0m\n'}
+[11.329355] (-) TimerEvent: {}
+[11.355401] (custom) StdoutLine: {'line': b'[ 32%] \x1b[34m\x1b[1mGenerating C type support dispatch for ROS interfaces\x1b[0m\n'}
+[11.371402] (custom) StdoutLine: {'line': b'[ 35%] \x1b[34m\x1b[1mGenerating C type support for eProsima Fast-RTPS\x1b[0m\n'}
+[11.420675] (custom) StdoutLine: {'line': b'[ 38%] \x1b[34m\x1b[1mGenerating C introspection for ROS interfaces\x1b[0m\n'}
+[11.437813] (-) TimerEvent: {}
+[11.547424] (-) TimerEvent: {}
+[11.667206] (-) TimerEvent: {}
+[11.752634] (custom) StdoutLine: {'line': b'[ 41%] \x1b[32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/custom/msg/detail/dds_fastrtps/task__type_support.cpp.o\x1b[0m\n'}
+[11.769103] (-) TimerEvent: {}
+[11.885247] (-) TimerEvent: {}
+[11.999378] (-) TimerEvent: {}
+[12.114685] (-) TimerEvent: {}
+[12.220003] (-) TimerEvent: {}
+[12.354013] (-) TimerEvent: {}
+[12.460842] (-) TimerEvent: {}
+[12.563274] (-) TimerEvent: {}
+[12.670584] (-) TimerEvent: {}
+[12.772365] (-) TimerEvent: {}
+[12.893555] (-) TimerEvent: {}
+[13.002685] (-) TimerEvent: {}
+[13.148809] (-) TimerEvent: {}
+[13.269312] (-) TimerEvent: {}
+[13.301284] (custom) StdoutLine: {'line': b'[ 45%] \x1b[32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_c.dir/rosidl_typesupport_c/custom/msg/task__type_support.cpp.o\x1b[0m\n'}
+[13.422915] (custom) StdoutLine: {'line': b'[ 48%] \x1b[32m\x1b[1mLinking CXX shared library libcustom__rosidl_typesupport_c.so\x1b[0m\n'}
+[13.423675] (-) TimerEvent: {}
+[13.429543] (custom) StdoutLine: {'line': b'[ 51%] \x1b[32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/custom/msg/detail/task__type_support_c.cpp.o\x1b[0m\n'}
+[13.458634] (custom) StdoutLine: {'line': b'[ 54%] \x1b[32mBuilding C object CMakeFiles/custom__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/custom/msg/detail/task__type_support.c.o\x1b[0m\n'}
+[13.512101] (custom) StdoutLine: {'line': b'[ 58%] \x1b[32m\x1b[1mLinking CXX shared library libcustom__rosidl_typesupport_cpp.so\x1b[0m\n'}
+[13.534388] (custom) StdoutLine: {'line': b'[ 58%] Built target custom__rosidl_typesupport_c\n'}
+[13.534955] (-) TimerEvent: {}
+[13.598761] (custom) StdoutLine: {'line': b'[ 61%] \x1b[32m\x1b[1mLinking C shared library libcustom__rosidl_typesupport_introspection_c.so\x1b[0m\n'}
+[13.623926] (custom) StdoutLine: {'line': b'[ 61%] Built target custom__rosidl_typesupport_cpp\n'}
+[13.653234] (-) TimerEvent: {}
+[13.708964] (custom) StdoutLine: {'line': b'[ 61%] Built target custom__rosidl_typesupport_introspection_c\n'}
+[14.110001] (custom) StdoutLine: {'line': b'[ 64%] \x1b[32m\x1b[1mLinking CXX shared library libcustom__rosidl_typesupport_fastrtps_cpp.so\x1b[0m\n'}
+[14.114406] (-) TimerEvent: {}
+[14.137053] (custom) StdoutLine: {'line': b'[ 67%] \x1b[32m\x1b[1mLinking CXX shared library libcustom__rosidl_typesupport_introspection_cpp.so\x1b[0m\n'}
+[14.219533] (-) TimerEvent: {}
+[14.332089] (-) TimerEvent: {}
+[14.417803] (custom) StdoutLine: {'line': b'[ 67%] Built target custom__rosidl_typesupport_introspection_cpp\n'}
+[14.437339] (-) TimerEvent: {}
+[14.478657] (custom) StdoutLine: {'line': b'[ 67%] Built target custom__rosidl_typesupport_fastrtps_cpp\n'}
+[14.539829] (-) TimerEvent: {}
+[14.644805] (-) TimerEvent: {}
+[14.712097] (custom) StdoutLine: {'line': b'[ 70%] \x1b[32m\x1b[1mLinking CXX shared library libcustom__rosidl_typesupport_fastrtps_c.so\x1b[0m\n'}
+[14.746468] (-) TimerEvent: {}
+[14.853538] (-) TimerEvent: {}
+[14.959859] (-) TimerEvent: {}
+[15.070551] (-) TimerEvent: {}
+[15.172358] (-) TimerEvent: {}
+[15.177501] (custom) StdoutLine: {'line': b'[ 70%] Built target custom__rosidl_typesupport_fastrtps_c\n'}
+[15.276910] (-) TimerEvent: {}
+[15.382772] (-) TimerEvent: {}
+[15.404048] (custom) StdoutLine: {'line': b'[ 70%] Built target custom\n'}
+[15.493677] (-) TimerEvent: {}
+[15.571374] (custom) StdoutLine: {'line': b'[ 74%] \x1b[34m\x1b[1mGenerating Python code for ROS interfaces\x1b[0m\n'}
+[15.600734] (-) TimerEvent: {}
+[15.714843] (-) TimerEvent: {}
+[15.820512] (-) TimerEvent: {}
+[15.928262] (-) TimerEvent: {}
+[16.031673] (-) TimerEvent: {}
+[16.134128] (-) TimerEvent: {}
+[16.237719] (-) TimerEvent: {}
+[16.348132] (-) TimerEvent: {}
+[16.453612] (-) TimerEvent: {}
+[16.560311] (-) TimerEvent: {}
+[16.669035] (-) TimerEvent: {}
+[16.784708] (-) TimerEvent: {}
+[16.815545] (custom) StdoutLine: {'line': b'[ 74%] Built target custom__py\n'}
+[16.886556] (-) TimerEvent: {}
+[16.920507] (custom) StdoutLine: {'line': b'[ 77%] \x1b[32mBuilding C object CMakeFiles/custom__rosidl_generator_py.dir/rosidl_generator_py/custom/msg/_task_s.c.o\x1b[0m\n'}
+[16.988561] (-) TimerEvent: {}
+[17.103471] (-) TimerEvent: {}
+[17.205703] (-) TimerEvent: {}
+[17.307518] (-) TimerEvent: {}
+[17.416816] (-) TimerEvent: {}
+[17.523495] (-) TimerEvent: {}
+[17.626249] (-) TimerEvent: {}
+[17.733661] (-) TimerEvent: {}
+[17.835975] (-) TimerEvent: {}
+[17.943091] (-) TimerEvent: {}
+[18.051616] (custom) StdoutLine: {'line': b'[ 80%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/custom/libcustom__rosidl_generator_py.so\x1b[0m\n'}
+[18.052192] (-) TimerEvent: {}
+[18.161723] (-) TimerEvent: {}
+[18.268999] (-) TimerEvent: {}
+[18.372033] (-) TimerEvent: {}
+[18.372456] (custom) StdoutLine: {'line': b'[ 80%] Built target custom__rosidl_generator_py\n'}
+[18.474485] (-) TimerEvent: {}
+[18.559111] (custom) StdoutLine: {'line': b'[ 83%] \x1b[32mBuilding C object CMakeFiles/custom__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/custom/_custom_s.ep.rosidl_typesupport_fastrtps_c.c.o\x1b[0m\n'}
+[18.576637] (-) TimerEvent: {}
+[18.687482] (-) TimerEvent: {}
+[18.792210] (-) TimerEvent: {}
+[18.904420] (custom) StdoutLine: {'line': b'[ 87%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[18.904882] (-) TimerEvent: {}
+[19.009365] (-) TimerEvent: {}
+[19.063118] (custom) StdoutLine: {'line': b'[ 87%] Built target custom__rosidl_typesupport_fastrtps_c__pyext\n'}
+[19.109902] (-) TimerEvent: {}
+[19.158464] (custom) StdoutLine: {'line': b'[ 90%] \x1b[32mBuilding C object CMakeFiles/custom__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/custom/_custom_s.ep.rosidl_typesupport_c.c.o\x1b[0m\n'}
+[19.210479] (-) TimerEvent: {}
+[19.316017] (-) TimerEvent: {}
+[19.421524] (-) TimerEvent: {}
+[19.483988] (custom) StdoutLine: {'line': b'[ 93%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/custom/custom_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[19.524571] (-) TimerEvent: {}
+[19.633675] (-) TimerEvent: {}
+[19.745031] (-) TimerEvent: {}
+[19.847903] (-) TimerEvent: {}
+[19.897927] (custom) StdoutLine: {'line': b'[ 93%] Built target custom__rosidl_typesupport_c__pyext\n'}
+[19.949850] (-) TimerEvent: {}
+[20.058408] (-) TimerEvent: {}
+[20.098789] (custom) StdoutLine: {'line': b'[ 96%] \x1b[32mBuilding C object CMakeFiles/custom__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/custom/_custom_s.ep.rosidl_typesupport_introspection_c.c.o\x1b[0m\n'}
+[20.164371] (-) TimerEvent: {}
+[20.270461] (-) TimerEvent: {}
+[20.394281] (-) TimerEvent: {}
+[20.504562] (-) TimerEvent: {}
+[20.566767] (custom) StdoutLine: {'line': b'[100%] \x1b[32m\x1b[1mLinking C shared library rosidl_generator_py/custom/custom_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\x1b[0m\n'}
+[20.605427] (-) TimerEvent: {}
+[20.681902] (custom) StdoutLine: {'line': b'[100%] Built target custom__rosidl_typesupport_introspection_c__pyext\n'}
+[20.706711] (-) TimerEvent: {}
+[20.734817] (custom) CommandEnded: {'returncode': 0}
+[20.742450] (custom) JobProgress: {'identifier': 'custom', 'progress': 'install'}
+[20.768683] (custom) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/ubuntu/Documents/uvic/kraken-nano/build/custom'], 'cwd': '/home/ubuntu/Documents/uvic/kraken-nano/build/custom', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('USER', 'ubuntu'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/home/ubuntu'), ('CHROME_DESKTOP', 'code.desktop'), ('TERM_PROGRAM_VERSION', '1.101.2'), ('DESKTOP_SESSION', 'ubuntu'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/code.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('MANAGERPID', '1727'), ('SYSTEMD_EXEC_PID', '1898'), ('IM_CONFIG_CHECK_ENV', '1'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '3236'), ('IM_CONFIG_PHASE', '1'), ('WAYLAND_DISPLAY', 'wayland-0'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'ubuntu'), ('JOURNAL_STREAM', '8:10105'), ('_', '/home/ubuntu/.local/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'ubuntu'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/home/ubuntu/.local/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/ubuntu/.config/Code/User/globalStorage/github.copilot-chat/debugCommand'), ('SESSION_MANAGER', 'local/ubuntu-2204:@/tmp/.ICE-unix/1860,unix/ubuntu-2204:/tmp/.ICE-unix/1860'), ('INVOCATION_ID', 'c26104c178c64426ae88baea4fab869f'), ('XDG_MENU_PREFIX', 'gnome-'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.BWVEA3'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-4ff709044c.sock'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/bash'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', ''), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/ubuntu/Documents/uvic/kraken-nano/build/custom'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/opt/ros/humble')]), 'shell': False}
+[20.803257] (custom) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[20.806570] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/ament_index/resource_index/rosidl_interfaces/custom\n'}
+[20.806729] (-) TimerEvent: {}
+[20.807232] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom\n'}
+[20.807525] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg\n'}
+[20.809611] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/rosidl_generator_c__visibility_control.h\n'}
+[20.809916] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/task.h\n'}
+[20.810147] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail\n'}
+[20.810295] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__functions.c\n'}
+[20.810441] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__functions.h\n'}
+[20.812595] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__struct.h\n'}
+[20.815624] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__type_support.h\n'}
+[20.815960] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/library_path.sh\n'}
+[20.816196] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/library_path.dsv\n'}
+[20.816425] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_generator_c.so\n'}
+[20.829602] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_generator_c.so" to ""\n'}
+[20.830324] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom\n'}
+[20.830616] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg\n'}
+[20.832862] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/rosidl_typesupport_fastrtps_c__visibility_control.h\n'}
+[20.833865] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail\n'}
+[20.834021] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__rosidl_typesupport_fastrtps_c.h\n'}
+[20.834186] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_c.so\n'}
+[20.834342] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_c.so" to ""\n'}
+[20.834462] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom\n'}
+[20.834577] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg\n'}
+[20.834689] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/rosidl_typesupport_introspection_c__visibility_control.h\n'}
+[20.834803] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail\n'}
+[20.834916] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__rosidl_typesupport_introspection_c.h\n'}
+[20.835027] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__type_support.c\n'}
+[20.835140] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_introspection_c.so\n'}
+[20.835321] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_introspection_c.so" to ""\n'}
+[20.835524] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_c.so\n'}
+[20.835668] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_c.so" to ""\n'}
+[20.835795] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom\n'}
+[20.836022] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg\n'}
+[20.836158] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/rosidl_generator_cpp__visibility_control.hpp\n'}
+[20.836346] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/task.hpp\n'}
+[20.836482] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail\n'}
+[20.836598] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__builder.hpp\n'}
+[20.836717] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__struct.hpp\n'}
+[20.836831] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__type_support.hpp\n'}
+[20.836948] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__traits.hpp\n'}
+[20.837057] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom\n'}
+[20.837164] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg\n'}
+[20.843567] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h\n'}
+[20.843738] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail\n'}
+[20.843817] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/dds_fastrtps\n'}
+[20.844368] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__rosidl_typesupport_fastrtps_cpp.hpp\n'}
+[20.844658] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_cpp.so\n'}
+[20.844761] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_cpp.so" to ""\n'}
+[20.844831] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom\n'}
+[20.845058] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg\n'}
+[20.845599] (custom) StdoutLine: {'line': b'-- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail\n'}
+[20.845675] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__rosidl_typesupport_introspection_cpp.hpp\n'}
+[20.845890] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__type_support.cpp\n'}
+[20.846337] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_introspection_cpp.so\n'}
+[20.846483] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_introspection_cpp.so" to ""\n'}
+[20.846676] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_cpp.so\n'}
+[20.846833] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_cpp.so" to ""\n'}
+[20.847219] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/pythonpath.sh\n'}
+[20.847416] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/pythonpath.dsv\n'}
+[20.847656] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom-0.0.0-py3.10.egg-info\n'}
+[20.850595] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom-0.0.0-py3.10.egg-info/top_level.txt\n'}
+[20.850773] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom-0.0.0-py3.10.egg-info/SOURCES.txt\n'}
+[20.850900] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom-0.0.0-py3.10.egg-info/dependency_links.txt\n'}
+[20.851035] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom-0.0.0-py3.10.egg-info/PKG-INFO\n'}
+[20.851154] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom\n'}
+[20.851267] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/_custom_s.ep.rosidl_typesupport_fastrtps_c.c\n'}
+[20.851379] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/libcustom__rosidl_generator_py.so\n'}
+[20.851489] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/__init__.py\n'}
+[20.851597] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[20.851714] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[20.851909] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/_custom_s.ep.rosidl_typesupport_introspection_c.c\n'}
+[20.852030] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[20.852140] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/_custom_s.ep.rosidl_typesupport_c.c\n'}
+[20.852246] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg\n'}
+[20.852353] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg/__init__.py\n'}
+[20.852457] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg/_task_s.c\n'}
+[20.852778] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg/_task.py\n'}
+[20.910148] (-) TimerEvent: {}
+[20.948240] (custom) StdoutLine: {'line': b"Listing '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom'...\n"}
+[20.949024] (custom) StdoutLine: {'line': b"Compiling '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/__init__.py'...\n"}
+[20.949492] (custom) StdoutLine: {'line': b"Listing '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg'...\n"}
+[20.949585] (custom) StdoutLine: {'line': b"Compiling '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg/__init__.py'...\n"}
+[20.949676] (custom) StdoutLine: {'line': b"Compiling '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg/_task.py'...\n"}
+[20.976645] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so\n'}
+[20.983072] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so" to ""\n'}
+[20.993483] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so\n'}
+[20.994627] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so" to ""\n'}
+[20.994873] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so\n'}
+[20.994966] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" to ""\n'}
+[20.998083] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_generator_py.so\n'}
+[20.998547] (custom) StdoutLine: {'line': b'-- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_generator_py.so" to ""\n'}
+[20.998765] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/msg/Task.idl\n'}
+[21.008079] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/msg/Task.msg\n'}
+[21.008203] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/ament_index/resource_index/package_run_dependencies/custom\n'}
+[21.012657] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/ament_index/resource_index/parent_prefix_path/custom\n'}
+[21.014556] (-) TimerEvent: {}
+[21.014712] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/ament_prefix_path.sh\n'}
+[21.014829] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/ament_prefix_path.dsv\n'}
+[21.014888] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/path.sh\n'}
+[21.014932] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/path.dsv\n'}
+[21.014988] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/local_setup.bash\n'}
+[21.015031] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/local_setup.sh\n'}
+[21.015069] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/local_setup.zsh\n'}
+[21.015106] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/local_setup.dsv\n'}
+[21.015140] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/package.dsv\n'}
+[21.015175] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/ament_index/resource_index/packages/custom\n'}
+[21.015219] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_generator_cExport.cmake\n'}
+[21.015255] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_generator_cExport-noconfig.cmake\n'}
+[21.023837] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_typesupport_fastrtps_cExport.cmake\n'}
+[21.023979] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_typesupport_fastrtps_cExport-noconfig.cmake\n'}
+[21.024030] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cExport.cmake\n'}
+[21.024072] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cExport-noconfig.cmake\n'}
+[21.024121] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_cExport.cmake\n'}
+[21.024164] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_cExport-noconfig.cmake\n'}
+[21.024214] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_generator_cppExport.cmake\n'}
+[21.024251] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_typesupport_fastrtps_cppExport.cmake\n'}
+[21.043478] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake\n'}
+[21.043779] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cppExport.cmake\n'}
+[21.043854] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cppExport-noconfig.cmake\n'}
+[21.043909] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_cppExport.cmake\n'}
+[21.044382] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_cppExport-noconfig.cmake\n'}
+[21.044541] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_generator_pyExport.cmake\n'}
+[21.044613] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_generator_pyExport-noconfig.cmake\n'}
+[21.044675] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/rosidl_cmake-extras.cmake\n'}
+[21.044741] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[21.044798] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/ament_cmake_export_libraries-extras.cmake\n'}
+[21.044857] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/ament_cmake_export_targets-extras.cmake\n'}
+[21.044914] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake\n'}
+[21.045016] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/ament_cmake_export_dependencies-extras.cmake\n'}
+[21.045188] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake\n'}
+[21.045323] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/customConfig.cmake\n'}
+[21.045885] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/customConfig-version.cmake\n'}
+[21.046248] (custom) StdoutLine: {'line': b'-- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/package.xml\n'}
+[21.053481] (custom) CommandEnded: {'returncode': 0}
+[21.122403] (-) TimerEvent: {}
+[21.224113] (-) TimerEvent: {}
+[21.233856] (custom) JobEnded: {'identifier': 'custom', 'rc': 0}
+[21.242357] (kraken) JobStarted: {'identifier': 'kraken'}
+[21.324363] (-) TimerEvent: {}
+[21.432623] (-) TimerEvent: {}
+[21.537323] (-) TimerEvent: {}
+[21.640432] (-) TimerEvent: {}
+[21.762178] (-) TimerEvent: {}
+[21.862803] (-) TimerEvent: {}
+[21.965218] (-) TimerEvent: {}
+[22.070381] (-) TimerEvent: {}
+[22.175958] (-) TimerEvent: {}
+[22.283953] (-) TimerEvent: {}
+[22.385520] (-) TimerEvent: {}
+[22.510914] (-) TimerEvent: {}
+[22.615282] (-) TimerEvent: {}
+[22.717171] (-) TimerEvent: {}
+[22.819317] (-) TimerEvent: {}
+[22.923925] (-) TimerEvent: {}
+[23.078689] (-) TimerEvent: {}
+[23.195292] (-) TimerEvent: {}
+[23.298486] (-) TimerEvent: {}
+[23.399208] (-) TimerEvent: {}
+[23.503896] (-) TimerEvent: {}
+[23.605231] (-) TimerEvent: {}
+[23.706976] (-) TimerEvent: {}
+[23.816282] (-) TimerEvent: {}
+[23.917245] (-) TimerEvent: {}
+[24.026750] (-) TimerEvent: {}
+[24.134700] (-) TimerEvent: {}
+[24.215889] (kraken) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../../../build/kraken', 'build', '--build-base', '/home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build', 'install', '--record', '/home/ubuntu/Documents/uvic/kraken-nano/build/kraken/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/kraken', 'env': {'GJS_DEBUG_TOPICS': 'JS ERROR;JS LOG', 'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'ubuntu', 'XDG_SESSION_TYPE': 'wayland', 'GIT_ASKPASS': '/usr/share/code/resources/app/extensions/git/dist/askpass.sh', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib', 'HOME': '/home/ubuntu', 'CHROME_DESKTOP': 'code.desktop', 'TERM_PROGRAM_VERSION': '1.101.2', 'DESKTOP_SESSION': 'ubuntu', 'GIO_LAUNCHED_DESKTOP_FILE': '/usr/share/applications/code.desktop', 'ROS_PYTHON_VERSION': '3', 'GNOME_SHELL_SESSION_MODE': 'ubuntu', 'GTK_MODULES': 'gail:atk-bridge', 'VSCODE_GIT_ASKPASS_MAIN': '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js', 'VSCODE_GIT_ASKPASS_NODE': '/usr/share/code/code', 'MANAGERPID': '1727', 'SYSTEMD_EXEC_PID': '1898', 'IM_CONFIG_CHECK_ENV': '1', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'COLORTERM': 'truecolor', 'GIO_LAUNCHED_DESKTOP_FILE_PID': '3236', 'IM_CONFIG_PHASE': '1', 'WAYLAND_DISPLAY': 'wayland-0', 'ROS_DISTRO': 'humble', 'LOGNAME': 'ubuntu', 'JOURNAL_STREAM': '8:10105', '_': '/home/ubuntu/.local/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'USERNAME': 'ubuntu', 'TERM': 'xterm-256color', 'GNOME_DESKTOP_SESSION_ID': 'this-is-deprecated', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/humble/bin:/home/ubuntu/.local/bin:/home/ubuntu/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/home/ubuntu/.config/Code/User/globalStorage/github.copilot-chat/debugCommand', 'SESSION_MANAGER': 'local/ubuntu-2204:@/tmp/.ICE-unix/1860,unix/ubuntu-2204:/tmp/.ICE-unix/1860', 'INVOCATION_ID': 'c26104c178c64426ae88baea4fab869f', 'XDG_MENU_PREFIX': 'gnome-', 'GNOME_SETUP_DISPLAY': ':1', 'XDG_RUNTIME_DIR': '/run/user/1000', 'GDK_BACKEND': 'x11', 'DISPLAY': ':0', 'LANG': 'en_US.UTF-8', 'XDG_CURRENT_DESKTOP': 'Unity', 'XMODIFIERS': '@im=ibus', 'XDG_SESSION_DESKTOP': 'ubuntu', 'XAUTHORITY': '/run/user/1000/.mutter-Xwaylandauth.BWVEA3', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'VSCODE_GIT_IPC_HANDLE': '/run/user/1000/vscode-git-4ff709044c.sock', 'TERM_PROGRAM': 'vscode', 'SSH_AGENT_LAUNCHER': 'gnome-keyring', 'SSH_AUTH_SOCK': '/run/user/1000/keyring/ssh', 'AMENT_PREFIX_PATH': '/home/ubuntu/Documents/uvic/kraken-nano/install/custom:/opt/ros/humble', 'ORIGINAL_XDG_CURRENT_DESKTOP': 'ubuntu:GNOME', 'SHELL': '/bin/bash', 'QT_ACCESSIBILITY': '1', 'GDMSESSION': 'ubuntu', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'GJS_DEBUG_OUTPUT': 'stderr', 'VSCODE_GIT_ASKPASS_EXTRA_ARGS': '', 'QT_IM_MODULE': 'ibus', 'PWD': '/home/ubuntu/Documents/uvic/kraken-nano/build/kraken', 'XDG_CONFIG_DIRS': '/etc/xdg/xdg-ubuntu:/etc/xdg', 'XDG_DATA_DIRS': '/usr/share/ubuntu:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/ubuntu/Documents/uvic/kraken-nano/build/kraken/prefix_override:/home/ubuntu/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages:/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/ubuntu/Documents/uvic/kraken-nano/install/custom'}, 'shell': False}
+[24.235100] (-) TimerEvent: {}
+[24.336339] (-) TimerEvent: {}
+[24.439126] (-) TimerEvent: {}
+[24.542619] (-) TimerEvent: {}
+[24.649002] (-) TimerEvent: {}
+[24.749674] (-) TimerEvent: {}
+[24.853694] (-) TimerEvent: {}
+[24.972105] (-) TimerEvent: {}
+[24.980636] (kraken) StdoutLine: {'line': b'running egg_info\n'}
+[24.982579] (kraken) StdoutLine: {'line': b'creating ../../../../build/kraken/kraken.egg-info\n'}
+[24.984802] (kraken) StdoutLine: {'line': b'writing ../../../../build/kraken/kraken.egg-info/PKG-INFO\n'}
+[24.985062] (kraken) StdoutLine: {'line': b'writing dependency_links to ../../../../build/kraken/kraken.egg-info/dependency_links.txt\n'}
+[24.985152] (kraken) StdoutLine: {'line': b'writing entry points to ../../../../build/kraken/kraken.egg-info/entry_points.txt\n'}
+[24.990537] (kraken) StdoutLine: {'line': b'writing requirements to ../../../../build/kraken/kraken.egg-info/requires.txt\n'}
+[24.990989] (kraken) StdoutLine: {'line': b'writing top-level names to ../../../../build/kraken/kraken.egg-info/top_level.txt\n'}
+[24.991126] (kraken) StdoutLine: {'line': b"writing manifest file '../../../../build/kraken/kraken.egg-info/SOURCES.txt'\n"}
+[24.996756] (kraken) StdoutLine: {'line': b"reading manifest file '../../../../build/kraken/kraken.egg-info/SOURCES.txt'\n"}
+[24.997331] (kraken) StdoutLine: {'line': b"adding license file 'LICENSE'\n"}
+[24.997823] (kraken) StdoutLine: {'line': b"writing manifest file '../../../../build/kraken/kraken.egg-info/SOURCES.txt'\n"}
+[24.997962] (kraken) StdoutLine: {'line': b'running build\n'}
+[24.998028] (kraken) StdoutLine: {'line': b'running build_py\n'}
+[24.998163] (kraken) StdoutLine: {'line': b'creating /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build\n'}
+[24.999079] (kraken) StdoutLine: {'line': b'creating /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib\n'}
+[24.999301] (kraken) StdoutLine: {'line': b'creating /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken\n'}
+[24.999453] (kraken) StdoutLine: {'line': b'copying kraken/__init__.py -> /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken\n'}
+[25.000233] (kraken) StdoutLine: {'line': b'copying kraken/controller.py -> /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken\n'}
+[25.001528] (kraken) StdoutLine: {'line': b'copying kraken/planner.py -> /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken\n'}
+[25.001691] (kraken) StdoutLine: {'line': b'copying kraken/state_estimator.py -> /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken\n'}
+[25.019966] (kraken) StdoutLine: {'line': b'copying kraken/computer_vision.py -> /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken\n'}
+[25.024763] (kraken) StdoutLine: {'line': b'running install\n'}
+[25.025482] (kraken) StdoutLine: {'line': b'running install_lib\n'}
+[25.027176] (kraken) StdoutLine: {'line': b'creating /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken\n'}
+[25.027411] (kraken) StdoutLine: {'line': b'copying /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken/__init__.py -> /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken\n'}
+[25.027549] (kraken) StdoutLine: {'line': b'copying /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken/controller.py -> /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken\n'}
+[25.027675] (kraken) StdoutLine: {'line': b'copying /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken/planner.py -> /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken\n'}
+[25.027795] (kraken) StdoutLine: {'line': b'copying /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken/state_estimator.py -> /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken\n'}
+[25.028399] (kraken) StdoutLine: {'line': b'copying /home/ubuntu/Documents/uvic/kraken-nano/build/kraken/build/lib/kraken/computer_vision.py -> /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken\n'}
+[25.030563] (kraken) StdoutLine: {'line': b'byte-compiling /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken/__init__.py to __init__.cpython-310.pyc\n'}
+[25.030922] (kraken) StdoutLine: {'line': b'byte-compiling /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken/controller.py to controller.cpython-310.pyc\n'}
+[25.047621] (kraken) StdoutLine: {'line': b'byte-compiling /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken/planner.py to planner.cpython-310.pyc\n'}
+[25.047971] (kraken) StdoutLine: {'line': b'byte-compiling /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken/state_estimator.py to state_estimator.cpython-310.pyc\n'}
+[25.048114] (kraken) StdoutLine: {'line': b'byte-compiling /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken/computer_vision.py to computer_vision.cpython-310.pyc\n'}
+[25.048531] (kraken) StdoutLine: {'line': b'running install_data\n'}
+[25.048689] (kraken) StdoutLine: {'line': b'creating /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/share/ament_index\n'}
+[25.053835] (kraken) StdoutLine: {'line': b'creating /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/share/ament_index/resource_index\n'}
+[25.054234] (kraken) StdoutLine: {'line': b'creating /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/share/ament_index/resource_index/packages\n'}
+[25.054343] (kraken) StdoutLine: {'line': b'copying resource/kraken -> /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/share/ament_index/resource_index/packages\n'}
+[25.056803] (kraken) StdoutLine: {'line': b'copying package.xml -> /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/share/kraken\n'}
+[25.078348] (kraken) StdoutLine: {'line': b'creating /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/share/kraken/launch\n'}
+[25.079318] (-) TimerEvent: {}
+[25.080695] (kraken) StdoutLine: {'line': b'copying launch/kraken.launch.py -> /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/share/kraken/launch\n'}
+[25.086706] (kraken) StdoutLine: {'line': b'running install_egg_info\n'}
+[25.086905] (kraken) StdoutLine: {'line': b'Copying ../../../../build/kraken/kraken.egg-info to /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/python3.10/site-packages/kraken-0.0.0-py3.10.egg-info\n'}
+[25.109567] (kraken) StdoutLine: {'line': b'running install_scripts\n'}
+[25.179335] (-) TimerEvent: {}
+[25.186796] (kraken) StdoutLine: {'line': b'Installing computer_vision script to /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/kraken\n'}
+[25.189729] (kraken) StdoutLine: {'line': b'Installing controller script to /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/kraken\n'}
+[25.190614] (kraken) StdoutLine: {'line': b'Installing planner script to /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/kraken\n'}
+[25.190922] (kraken) StdoutLine: {'line': b'Installing state_estimator script to /home/ubuntu/Documents/uvic/kraken-nano/install/kraken/lib/kraken\n'}
+[25.191086] (kraken) StdoutLine: {'line': b"writing list of installed files to '/home/ubuntu/Documents/uvic/kraken-nano/build/kraken/install.log'\n"}
+[25.285026] (-) TimerEvent: {}
+[25.406678] (-) TimerEvent: {}
+[25.510085] (kraken) CommandEnded: {'returncode': 0}
+[25.514235] (-) TimerEvent: {}
+[25.552727] (kraken) JobEnded: {'identifier': 'kraken', 'rc': 0}
+[25.556644] (-) EventReactorShutdown: {}

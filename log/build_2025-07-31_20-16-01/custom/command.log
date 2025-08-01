@@ -1,0 +1,2 @@
+Invoking command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom': /usr/bin/cmake /home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Documents/uvic/kraken-nano/install/custom
+Invoked command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom' returned '1': /usr/bin/cmake /home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Documents/uvic/kraken-nano/install/custom

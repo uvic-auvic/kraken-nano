@@ -1,0 +1,33 @@
+[0.074s] Invoking command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom': /usr/bin/cmake /home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Documents/uvic/kraken-nano/install/custom
+[2.282s] -- The C compiler identification is GNU 11.4.0
+[3.851s] -- The CXX compiler identification is GNU 11.4.0
+[3.936s] -- Detecting C compiler ABI info
+[4.508s] -- Detecting C compiler ABI info - done
+[4.523s] -- Check for working C compiler: /usr/bin/cc - skipped
+[4.526s] -- Detecting C compile features
+[4.533s] -- Detecting C compile features - done
+[4.566s] -- Detecting CXX compiler ABI info
+[4.916s] -- Detecting CXX compiler ABI info - done
+[4.954s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[4.954s] -- Detecting CXX compile features
+[4.954s] -- Detecting CXX compile features - done
+[5.036s] -- Configuring incomplete, errors occurred!
+[5.039s] See also "/home/ubuntu/Documents/uvic/kraken-nano/build/custom/CMakeFiles/CMakeOutput.log".
+[5.040s] [31mCMake Error at CMakeLists.txt:9 (find_package):
+[5.040s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[5.040s]   has asked CMake to find a package configuration file provided by
+[5.040s]   "ament_cmake", but CMake did not find one.
+[5.040s] 
+[5.040s]   Could not find a package configuration file provided by "ament_cmake" with
+[5.040s]   any of the following names:
+[5.040s] 
+[5.041s]     ament_cmakeConfig.cmake
+[5.048s]     ament_cmake-config.cmake
+[5.049s] 
+[5.049s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[5.049s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[5.050s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[5.050s]   has been installed.
+[5.050s] 
+[5.050s] [0m
+[5.060s] Invoked command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom' returned '1': /usr/bin/cmake /home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Documents/uvic/kraken-nano/install/custom

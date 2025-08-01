@@ -1,0 +1,215 @@
+[0.056s] Invoking command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Documents/uvic/kraken-nano/install/custom
+[0.205s] -- Found ament_cmake: 1.3.11 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.851s] -- Found Python3: /usr/bin/python3 (found version "3.10.12") found components: Interpreter 
+[2.057s] -- Found ament_lint_auto: 0.12.12 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[2.341s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[2.413s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.529s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[3.212s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[5.329s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[6.242s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[7.169s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[7.282s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[7.289s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[7.413s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[7.414s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[7.414s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[7.414s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[7.469s] -- Found PythonExtra: .so  
+[7.873s] -- Added test 'lint_cmake' to check CMake code style
+[7.899s] -- Added test 'xmllint' to check XML markup files
+[7.972s] -- Configuring done
+[8.154s] -- Generating done
+[8.186s] -- Build files have been written to: /home/ubuntu/Documents/uvic/kraken-nano/build/custom
+[8.260s] Invoked command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Documents/uvic/kraken-nano/install/custom
+[8.261s] Invoking command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ubuntu/Documents/uvic/kraken-nano/build/custom -- -j7 -l7
+[8.582s] [  3%] [34m[1mGenerating C code for ROS interfaces[0m
+[8.588s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[8.711s] [  6%] Built target ament_cmake_python_copy_custom
+[9.580s] running egg_info
+[9.581s] creating custom.egg-info
+[9.581s] writing custom.egg-info/PKG-INFO
+[9.581s] writing dependency_links to custom.egg-info/dependency_links.txt
+[9.581s] writing top-level names to custom.egg-info/top_level.txt
+[9.581s] writing manifest file 'custom.egg-info/SOURCES.txt'
+[9.646s] reading manifest file 'custom.egg-info/SOURCES.txt'
+[9.666s] writing manifest file 'custom.egg-info/SOURCES.txt'
+[10.116s] [  6%] Built target ament_cmake_python_build_custom_egg
+[10.183s] [  6%] Built target custom__cpp
+[10.259s] [  9%] [32mBuilding C object CMakeFiles/custom__rosidl_generator_c.dir/rosidl_generator_c/custom/msg/detail/task__functions.c.o[0m
+[10.294s] [ 12%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[10.319s] [ 16%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[10.333s] [ 19%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[10.868s] [ 22%] [32m[1mLinking C shared library libcustom__rosidl_generator_c.so[0m
+[10.986s] [ 25%] [32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/custom/msg/task__type_support.cpp.o[0m
+[11.255s] [ 25%] Built target custom__rosidl_generator_c
+[11.284s] [ 29%] [32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/custom/msg/detail/task__type_support.cpp.o[0m
+[11.350s] [ 32%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[11.390s] [ 35%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[11.416s] [ 38%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[11.748s] [ 41%] [32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/custom/msg/detail/dds_fastrtps/task__type_support.cpp.o[0m
+[13.296s] [ 45%] [32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_c.dir/rosidl_typesupport_c/custom/msg/task__type_support.cpp.o[0m
+[13.418s] [ 48%] [32m[1mLinking CXX shared library libcustom__rosidl_typesupport_c.so[0m
+[13.425s] [ 51%] [32mBuilding CXX object CMakeFiles/custom__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/custom/msg/detail/task__type_support_c.cpp.o[0m
+[13.454s] [ 54%] [32mBuilding C object CMakeFiles/custom__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/custom/msg/detail/task__type_support.c.o[0m
+[13.507s] [ 58%] [32m[1mLinking CXX shared library libcustom__rosidl_typesupport_cpp.so[0m
+[13.529s] [ 58%] Built target custom__rosidl_typesupport_c
+[13.594s] [ 61%] [32m[1mLinking C shared library libcustom__rosidl_typesupport_introspection_c.so[0m
+[13.619s] [ 61%] Built target custom__rosidl_typesupport_cpp
+[13.704s] [ 61%] Built target custom__rosidl_typesupport_introspection_c
+[14.109s] [ 64%] [32m[1mLinking CXX shared library libcustom__rosidl_typesupport_fastrtps_cpp.so[0m
+[14.132s] [ 67%] [32m[1mLinking CXX shared library libcustom__rosidl_typesupport_introspection_cpp.so[0m
+[14.422s] [ 67%] Built target custom__rosidl_typesupport_introspection_cpp
+[14.474s] [ 67%] Built target custom__rosidl_typesupport_fastrtps_cpp
+[14.710s] [ 70%] [32m[1mLinking CXX shared library libcustom__rosidl_typesupport_fastrtps_c.so[0m
+[15.173s] [ 70%] Built target custom__rosidl_typesupport_fastrtps_c
+[15.399s] [ 70%] Built target custom
+[15.566s] [ 74%] [34m[1mGenerating Python code for ROS interfaces[0m
+[16.811s] [ 74%] Built target custom__py
+[16.915s] [ 77%] [32mBuilding C object CMakeFiles/custom__rosidl_generator_py.dir/rosidl_generator_py/custom/msg/_task_s.c.o[0m
+[18.047s] [ 80%] [32m[1mLinking C shared library rosidl_generator_py/custom/libcustom__rosidl_generator_py.so[0m
+[18.367s] [ 80%] Built target custom__rosidl_generator_py
+[18.554s] [ 83%] [32mBuilding C object CMakeFiles/custom__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/custom/_custom_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[18.899s] [ 87%] [32m[1mLinking C shared library rosidl_generator_py/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[19.058s] [ 87%] Built target custom__rosidl_typesupport_fastrtps_c__pyext
+[19.154s] [ 90%] [32mBuilding C object CMakeFiles/custom__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/custom/_custom_s.ep.rosidl_typesupport_c.c.o[0m
+[19.480s] [ 93%] [32m[1mLinking C shared library rosidl_generator_py/custom/custom_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[19.902s] [ 93%] Built target custom__rosidl_typesupport_c__pyext
+[20.094s] [ 96%] [32mBuilding C object CMakeFiles/custom__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/custom/_custom_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[20.562s] [100%] [32m[1mLinking C shared library rosidl_generator_py/custom/custom_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[20.677s] [100%] Built target custom__rosidl_typesupport_introspection_c__pyext
+[20.730s] Invoked command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ubuntu/Documents/uvic/kraken-nano/build/custom -- -j7 -l7
+[20.768s] Invoking command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ubuntu/Documents/uvic/kraken-nano/build/custom
+[20.801s] -- Install configuration: ""
+[20.801s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/ament_index/resource_index/rosidl_interfaces/custom
+[20.802s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom
+[20.802s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg
+[20.804s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/rosidl_generator_c__visibility_control.h
+[20.805s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/task.h
+[20.805s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail
+[20.805s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__functions.c
+[20.807s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__functions.h
+[20.807s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__struct.h
+[20.811s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__type_support.h
+[20.811s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/library_path.sh
+[20.811s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/library_path.dsv
+[20.811s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_generator_c.so
+[20.825s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_generator_c.so" to ""
+[20.825s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom
+[20.827s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg
+[20.828s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[20.829s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail
+[20.829s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__rosidl_typesupport_fastrtps_c.h
+[20.829s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_c.so
+[20.829s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_c.so" to ""
+[20.829s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom
+[20.829s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg
+[20.829s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[20.830s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail
+[20.830s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__rosidl_typesupport_introspection_c.h
+[20.830s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__type_support.c
+[20.830s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_introspection_c.so
+[20.830s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_introspection_c.so" to ""
+[20.830s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_c.so
+[20.830s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_c.so" to ""
+[20.831s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom
+[20.831s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg
+[20.831s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/rosidl_generator_cpp__visibility_control.hpp
+[20.831s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/task.hpp
+[20.831s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail
+[20.831s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__builder.hpp
+[20.831s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__struct.hpp
+[20.832s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__type_support.hpp
+[20.832s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__traits.hpp
+[20.832s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom
+[20.838s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg
+[20.838s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[20.838s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail
+[20.839s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/dds_fastrtps
+[20.839s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__rosidl_typesupport_fastrtps_cpp.hpp
+[20.839s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_cpp.so
+[20.839s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_fastrtps_cpp.so" to ""
+[20.840s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom
+[20.840s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg
+[20.840s] -- Up-to-date: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail
+[20.840s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__rosidl_typesupport_introspection_cpp.hpp
+[20.841s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/include/custom/custom/msg/detail/task__type_support.cpp
+[20.841s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_introspection_cpp.so
+[20.841s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_introspection_cpp.so" to ""
+[20.841s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_cpp.so
+[20.842s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_typesupport_cpp.so" to ""
+[20.842s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/pythonpath.sh
+[20.842s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/pythonpath.dsv
+[20.845s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom-0.0.0-py3.10.egg-info
+[20.845s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom-0.0.0-py3.10.egg-info/top_level.txt
+[20.846s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom-0.0.0-py3.10.egg-info/SOURCES.txt
+[20.846s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom-0.0.0-py3.10.egg-info/dependency_links.txt
+[20.846s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom-0.0.0-py3.10.egg-info/PKG-INFO
+[20.846s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom
+[20.846s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/_custom_s.ep.rosidl_typesupport_fastrtps_c.c
+[20.846s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/libcustom__rosidl_generator_py.so
+[20.846s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/__init__.py
+[20.846s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[20.847s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[20.847s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/_custom_s.ep.rosidl_typesupport_introspection_c.c
+[20.847s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[20.847s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/_custom_s.ep.rosidl_typesupport_c.c
+[20.847s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg
+[20.847s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg/__init__.py
+[20.847s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg/_task_s.c
+[20.848s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg/_task.py
+[20.944s] Listing '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom'...
+[20.944s] Compiling '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/__init__.py'...
+[20.944s] Listing '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg'...
+[20.944s] Compiling '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg/__init__.py'...
+[20.944s] Compiling '/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/msg/_task.py'...
+[20.976s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[20.987s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so" to ""
+[20.988s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[20.989s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so" to ""
+[20.990s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[20.992s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/local/lib/python3.10/dist-packages/custom/custom_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" to ""
+[20.993s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_generator_py.so
+[20.993s] -- Set runtime path of "/home/ubuntu/Documents/uvic/kraken-nano/install/custom/lib/libcustom__rosidl_generator_py.so" to ""
+[21.003s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/msg/Task.idl
+[21.003s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/msg/Task.msg
+[21.003s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/ament_index/resource_index/package_run_dependencies/custom
+[21.008s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/ament_index/resource_index/parent_prefix_path/custom
+[21.009s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/ament_prefix_path.sh
+[21.010s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/ament_prefix_path.dsv
+[21.010s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/path.sh
+[21.010s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/environment/path.dsv
+[21.010s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/local_setup.bash
+[21.010s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/local_setup.sh
+[21.010s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/local_setup.zsh
+[21.010s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/local_setup.dsv
+[21.010s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/package.dsv
+[21.010s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/ament_index/resource_index/packages/custom
+[21.010s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_generator_cExport.cmake
+[21.018s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_generator_cExport-noconfig.cmake
+[21.019s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_typesupport_fastrtps_cExport.cmake
+[21.019s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[21.019s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cExport.cmake
+[21.019s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[21.019s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_cExport.cmake
+[21.019s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_cExport-noconfig.cmake
+[21.019s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_generator_cppExport.cmake
+[21.019s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_typesupport_fastrtps_cppExport.cmake
+[21.038s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[21.039s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cppExport.cmake
+[21.039s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[21.039s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_cppExport.cmake
+[21.039s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/custom__rosidl_typesupport_cppExport-noconfig.cmake
+[21.039s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_generator_pyExport.cmake
+[21.039s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/export_custom__rosidl_generator_pyExport-noconfig.cmake
+[21.039s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/rosidl_cmake-extras.cmake
+[21.039s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/ament_cmake_export_include_directories-extras.cmake
+[21.040s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/ament_cmake_export_libraries-extras.cmake
+[21.040s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/ament_cmake_export_targets-extras.cmake
+[21.040s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[21.040s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/ament_cmake_export_dependencies-extras.cmake
+[21.040s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[21.040s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/customConfig.cmake
+[21.041s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/cmake/customConfig-version.cmake
+[21.041s] -- Installing: /home/ubuntu/Documents/uvic/kraken-nano/install/custom/share/custom/package.xml
+[21.048s] Invoked command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ubuntu/Documents/uvic/kraken-nano/build/custom

@@ -1,0 +1,233 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-fb30c930853461c9cf60.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				},
+				{
+					"build" : "custom__py",
+					"jsonFile" : "directory-custom__py-ca8bb13bc0dc1a1337c0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.12"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "/home/ubuntu/Documents/uvic/kraken-nano/build/custom/custom__py",
+					"targetIndexes" : 
+					[
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "custom",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_build_custom_egg::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_build_custom_egg-be636dd3cdb016ecd243.json",
+					"name" : "ament_cmake_python_build_custom_egg",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ament_cmake_python_copy_custom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ament_cmake_python_copy_custom-1cac2ad7dea0817b6905.json",
+					"name" : "ament_cmake_python_copy_custom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom-4f9d5e1a34fb1abb1571.json",
+					"name" : "custom",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__cpp-c3f8e1593b1eabe0fa26.json",
+					"name" : "custom__cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "custom__py::@e9c8d6248e243764c0d6",
+					"jsonFile" : "target-custom__py-dab675644fffa4831ac9.json",
+					"name" : "custom__py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_generator_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_generator_c-67dc72696d143aa83903.json",
+					"name" : "custom__rosidl_generator_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_generator_py::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_generator_py-e88ab0a8cf6655ccd114.json",
+					"name" : "custom__rosidl_generator_py",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_typesupport_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_typesupport_c-1a87a3cdfadbd07281c7.json",
+					"name" : "custom__rosidl_typesupport_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_typesupport_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_typesupport_c__pyext-49eb944ea1e30132a880.json",
+					"name" : "custom__rosidl_typesupport_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_typesupport_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_typesupport_cpp-98b8164edc5daea18bd9.json",
+					"name" : "custom__rosidl_typesupport_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_typesupport_fastrtps_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_typesupport_fastrtps_c-61d10bfa40c1f4fbeebe.json",
+					"name" : "custom__rosidl_typesupport_fastrtps_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_typesupport_fastrtps_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_typesupport_fastrtps_c__pyext-fe1b5a233390a698acf9.json",
+					"name" : "custom__rosidl_typesupport_fastrtps_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_typesupport_fastrtps_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_typesupport_fastrtps_cpp-e4540be36520f4b9a9d0.json",
+					"name" : "custom__rosidl_typesupport_fastrtps_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_typesupport_introspection_c::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_typesupport_introspection_c-7348509c7be4a3457847.json",
+					"name" : "custom__rosidl_typesupport_introspection_c",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_typesupport_introspection_c__pyext::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_typesupport_introspection_c__pyext-df6e5c591c180f4f27b3.json",
+					"name" : "custom__rosidl_typesupport_introspection_c__pyext",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom__rosidl_typesupport_introspection_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom__rosidl_typesupport_introspection_cpp-6c7a976c1a9e964ffdc7.json",
+					"name" : "custom__rosidl_typesupport_introspection_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "custom_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-custom_uninstall-6c049f0c68ba52ec6557.json",
+					"name" : "custom_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-aa79fa122bf32f5a1a78.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/ubuntu/Documents/uvic/kraken-nano/build/custom",
+		"source" : "/home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/custom"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

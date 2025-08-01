@@ -1,0 +1,6 @@
+Invoking command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Documents/uvic/kraken-nano/install/custom
+Invoked command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/ubuntu/Documents/uvic/kraken-nano/ROS/ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/ubuntu/Documents/uvic/kraken-nano/install/custom
+Invoking command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ubuntu/Documents/uvic/kraken-nano/build/custom -- -j7 -l7
+Invoked command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/ubuntu/Documents/uvic/kraken-nano/build/custom -- -j7 -l7
+Invoking command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ubuntu/Documents/uvic/kraken-nano/build/custom
+Invoked command in '/home/ubuntu/Documents/uvic/kraken-nano/build/custom' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/ubuntu/Documents/uvic/kraken-nano/build/custom

@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "custom__py",
+		"source" : "/home/ubuntu/Documents/uvic/kraken-nano/build/custom/custom__py"
+	}
+}
