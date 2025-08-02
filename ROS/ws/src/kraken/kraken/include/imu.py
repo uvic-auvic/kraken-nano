@@ -146,12 +146,14 @@ def parse_type(type_list):
 		coord = "ENU"
 
 	type_dict = {}
-	type_dict["name"] = type_lookup[type_code]
-	type_dict["length"] = length
-	type_dict["format"] = data_format
-	type_dict["system"] = coord
-
-	return type_dict
+	if type_code in type_lookup:
+                type_dict["name"] = type_lookup[type_code]
+                type_dict["length"] = length
+                type_dict["format"] = data_format
+                type_dict["system"] = coord
+                
+                return type_dict
+	return None
 
 def get_imu():
 	while get_byte() != int(0xfa): # Preamble
@@ -194,6 +196,8 @@ def get_imu():
 				state = 1
 				#print(type_list)
 				data_type = parse_type(type_list)
+				if data_type is None:
+					return None
 				type_list = []
 
 		elif state == 1: # Length (1 byte)

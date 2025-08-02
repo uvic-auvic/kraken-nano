@@ -15,13 +15,13 @@ class Controller(Node):
         self.timer = self.create_timer(timer_period, self.timer_callback)
         
         self.sim = Simulation(self)
-        self.sim.left(10)
+        #self.sim.left(10)
 
     def timer_callback(self):
         self.get_logger().info('Controller Running')
-        altimeter = self.sim.get_altimeter()
-        if altimeter is not None:
-	        self.get_logger().info(str(altimeter.vertical_position))
+        #altimeter = self.sim.get_altimeter()
+        #if altimeter is not None:
+	        #self.get_logger().info(str(altimeter.vertical_position))
 
 
 def main(args=None):
