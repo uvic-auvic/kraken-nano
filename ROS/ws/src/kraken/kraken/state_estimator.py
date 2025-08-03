@@ -40,6 +40,14 @@ class StateEstimator(Node):
         self.current = time.time()
         delta = self.current - self.prev
         self.prev = self.current
+        #imu_data = imu.get_imu()
+        #if imu_data:
+                #accel = imu_data["Acceleration"]
+                #delta_v = imu_data["DeltaV"]
+                #euler = imu_data["Euler Angles"]
+        #else:
+                #return
+
         accel = self.sim.get_acceleration()
         depth = self.sim.get_depth()
         orient = self.sim.get_orientation()
@@ -54,10 +62,11 @@ class StateEstimator(Node):
         
         if depth is not None:
                 self.z = depth
-                msg.pos.z = float(self.z)
+
+                msg.pos.z = float(-self.z)
         if accel is not None:
-                self.u += delta * accel.x
-                self.v += delta * accel.y
+                self.u += accel.x * delta
+                self.v += accel.y * delta
                 
                 self.x += delta * self.u
                 self.y += delta * self.v
@@ -73,7 +82,10 @@ class StateEstimator(Node):
                 
                 msg.rot.yaw = float(self.euler[0])
                 msg.rot.roll = float(self.euler[2])
-                msg.rot.pitch = float(self.euler[1])
+                msg.rot.pitch = float(self.euler[1])        
+                
+        self.pose_pub.publish(msg)
+
     
     
     """
