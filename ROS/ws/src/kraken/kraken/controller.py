@@ -6,6 +6,7 @@ from std_msgs.msg import Float64
 sys.path.append("/home/vboxuser/kraken-nano/ROS/ws/src/kraken/kraken/include")
 
 from simulation import Simulation
+from motorboard import MotorBoard
 from pid import PID
 
 from custom.msg import PoseE
@@ -21,6 +22,10 @@ class Controller(Node):
                 self.logger = self.get_logger()
                 
                 self.sim = Simulation(self)
+                
+                mb = MotorBoard("/dev/ttyUSB0")
+                mb.forward()
+                self.logger.info(str(mb.send_motors(100)))
                 
                 self.pose = None
                 self.forward_pid = PID(0, 0, 4, 0, 8)
@@ -40,7 +45,7 @@ class Controller(Node):
                         self.sim.left(left_speed)
                         self.sim.yaw(yaw_speed)
                         
-                        self.logger.info(str(self.pose.rot))
+                        #self.logger.info(str(self.pose.rot))
                        
                 
 	        

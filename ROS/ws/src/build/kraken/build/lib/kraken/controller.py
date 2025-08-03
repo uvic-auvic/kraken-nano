@@ -6,6 +6,7 @@ from std_msgs.msg import Float64
 sys.path.append("/home/vboxuser/kraken-nano/ROS/ws/src/kraken/kraken/include")
 
 from simulation import Simulation
+from motorboard import MotorBoard
 from pid import PID
 
 from custom.msg import PoseE
@@ -22,24 +23,29 @@ class Controller(Node):
                 
                 self.sim = Simulation(self)
                 
+                mb = MotorBoard("/dev/ttyUSB0")
+                mb.forward()
+                self.logger.info(str(mb.send_motors(100)))
+                
                 self.pose = None
+                self.forward_pid = PID(0, 0, 4, 0, 8)
                 self.up_pid = PID(0, 0, 4, 0, 8)
+                self.left_pid = PID(0, 0, 4, 0, 8)
                 self.yaw_pid = PID(0, 1, 5, 0, 20)
-                self.roll_pid = PID(0, 0, 4, 0, 8)
-                self.pitch_pid = PID(0, 0, 4, 0, 8)
 
         def pid_callback(self):
                 if self.pose:
+                        forward_speed = self.forward_pid.calculate(self.pose.pos.x)
                         up_speed = self.up_pid.calculate(self.pose.pos.z)
+                        left_speed = self.left_pid.calculate(self.pose.pos.y)
                         yaw_speed = self.yaw_pid.calculate(self.pose.rot.yaw)
-                        #roll_speed = self.roll_pid.calculate(self.pose.rot.roll)
-                        #pitch_speed = self.pitch_pid.calculate(self.pose.rot.pitch)
-                        #self.sim.up(up_speed)
-                        self.sim.yaw(yaw_speed)
-                        #self.sim.roll(roll_speed)
-                        #self.sim.pitch(pitch_speed)
                         
-                        self.logger.info(str(self.pose.rot))
+                        self.sim.forward(forward_speed)
+                        self.sim.up(forward_speed)
+                        self.sim.left(left_speed)
+                        self.sim.yaw(yaw_speed)
+                        
+                        #self.logger.info(str(self.pose.rot))
                        
                 
 	        

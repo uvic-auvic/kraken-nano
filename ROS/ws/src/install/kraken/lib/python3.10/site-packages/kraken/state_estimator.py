@@ -53,8 +53,6 @@ class StateEstimator(Node):
         depth = self.sim.get_depth()
         orient = self.sim.get_orientation()
         
-        #self.logger.info(str(delta_v[2] + delta*9.8092))
-        
         msg = PoseE()
         msg.pos.x = 0.0
         msg.pos.y = 0.0
@@ -87,14 +85,8 @@ class StateEstimator(Node):
                 msg.rot.roll = float(self.euler[2])
                 msg.rot.pitch = float(self.euler[1])
         
-       
-        #if self.euler is not None:
-                #msg.rot.yaw = float(self.euler[0])
-                #msg.rot.roll = float(self.euler[1])
-                #msg.rot.pitch = float(self.euler[2])
                 
         self.pose_pub.publish(msg)
-        #self.logger.info(str(msg))
     
     
     """
