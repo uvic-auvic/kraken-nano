@@ -8,7 +8,7 @@ CLASS_NAMES = ['bottom', 'center', 'gate', 'left', 'red_flare', 'right', 'top', 
 
 # --- ONNX Model Setup ---
 ONNX_MODEL_PATH = "best.onnx"
-session = ort.InferenceSession(ONNX_MODEL_PATH, providers=['CPUExecutionProvider'])
+session = ort.InferenceSession(ONNX_MODEL_PATH, providers=['CUDAExecutionProvider'])
 input_name = session.get_inputs()[0].name
 
 # --- RealSense Camera Setup ---
