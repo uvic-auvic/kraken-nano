@@ -63,6 +63,34 @@ class Simulation():
                 self.FRP.publish(msg)
                 self.BLP.publish(msg)
                 self.BRP.publish(msg)
+                
+        def yaw(self, speed):
+                msg_left = Float64()
+                msg_right = Float64()
+                msg_left.data = float(-speed)
+                msg_right.data = float(speed)
+                self.LP.publish(msg_left)
+                self.RP.publish(msg_right)
+        
+        def roll(self, speed):
+                msg_left = Float64()
+                msg_right = Float64()
+                msg_left.data = float(-speed)
+                msg_right.data = float(speed)
+                self.FLP.publish(msg_left)
+                self.BLP.publish(msg_left)
+                self.FRP.publish(msg_right)
+                self.BRP.publish(msg_right)
+        
+        def pitch(self, speed):
+                msg_front = Float64()
+                msg_back = Float64()
+                msg_front.data = float(speed)
+                msg_back.data = float(-speed)
+                self.FLP.publish(msg_front)
+                self.FRP.publish(msg_front)
+                self.BLP.publish(msg_back)
+                self.BRP.publish(msg_back)
 		
         def get_acceleration(self):
                 return self.imu.linear_acceleration if self.imu else None

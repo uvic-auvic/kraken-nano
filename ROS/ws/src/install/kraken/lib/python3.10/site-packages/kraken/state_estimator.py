@@ -10,7 +10,7 @@ sys.path.append("/home/vboxuser/kraken-nano/ROS/ws/src/kraken/kraken/include")
 
 #import ms5837
 from simulation import Simulation
-import imu
+#import imu
 
 class StateEstimator(Node):
 
@@ -42,16 +42,16 @@ class StateEstimator(Node):
         self.current = time.time()
         delta = self.current - self.prev
         self.prev = self.current
-        imu_data = imu.get_imu()
-        if imu_data:
-                accel = imu_data["Acceleration"]
-                delta_v = imu_data["DeltaV"]
-                euler = imu_data["Euler Angles"]
-        else:
-                return
-        #accel = self.sim.get_acceleration()
-        #depth = self.sim.get_depth()
-        #orient = self.sim.get_orientation()
+        #imu_data = imu.get_imu()
+        #if imu_data:
+                #accel = imu_data["Acceleration"]
+                #delta_v = imu_data["DeltaV"]
+                #euler = imu_data["Euler Angles"]
+        #else:
+                #return
+        accel = self.sim.get_acceleration()
+        depth = self.sim.get_depth()
+        orient = self.sim.get_orientation()
         
         #self.logger.info(str(delta_v[2] + delta*9.8092))
         
@@ -63,23 +63,20 @@ class StateEstimator(Node):
         msg.rot.roll = 0.0
         msg.rot.pitch = 0.0
         
-        #if depth is not None:
-                #self.z = depth
-                #msg.pos.z = float(self.z)
+        if depth is not None:
+                self.z = depth
+                msg.pos.z = float(-self.z)
         if accel is not None:
-                self.u += delta_v[0]
-                self.v += delta_v[1]
-                self.w += delta_v[2] + delta*9.81
+                self.u += accel.x * delta
+                self.v += accel.y * delta
                 
                 self.x += delta * self.u
                 self.y += delta * self.v
-                self.z += delta * self.w
                 
                 msg.pos.x = float(self.x)
                 msg.pos.y = float(self.y)
-                msg.pos.z = float(self.z)
                 
-        """
+        
         if orient is not None:
                 quat = (orient.x, orient.y, orient.z, orient.w)
                 
@@ -89,15 +86,15 @@ class StateEstimator(Node):
                 msg.rot.yaw = float(self.euler[0])
                 msg.rot.roll = float(self.euler[2])
                 msg.rot.pitch = float(self.euler[1])
-       """
+        
        
-        if euler is not None:
-                msg.rot.yaw = float(euler[0])
-                msg.rot.roll = float(euler[1])
-                msg.rot.pitch = float(euler[2])
+        #if self.euler is not None:
+                #msg.rot.yaw = float(self.euler[0])
+                #msg.rot.roll = float(self.euler[1])
+                #msg.rot.pitch = float(self.euler[2])
                 
         self.pose_pub.publish(msg)
-        self.logger.info(str(msg))
+        #self.logger.info(str(msg))
     
     
     """
