@@ -80,6 +80,14 @@ class MotorBoard():
                 self.buffer.append(255)
                 self.buffer.append(0)
                 #self.ser.write(bytes(self.buffer))
+                self.buffer = []
+
+        def init_motors(self):
+                self.buffer.append("I")
+                self.buffer.append("N")
+                self.buffer.append("I")
+                #self.ser.write(bytes(self.buffer))
+                self.buffer = []
                 
         def send_motors(self, speed):
                 if speed < -128 or speed > 127:
