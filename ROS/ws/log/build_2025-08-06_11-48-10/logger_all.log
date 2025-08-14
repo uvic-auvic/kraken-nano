@@ -1,0 +1,209 @@
+[0.222s] [34mcolcon[0m [1;30mDEBUG[0m [32mCommand line arguments: ['/usr/bin/colcon', 'build'][0m
+[0.223s] [34mcolcon[0m [1;30mDEBUG[0m [32mParsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=6, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, mixin_files=None, mixin=None, verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0xffffaa507eb0>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0xffffaa507a00>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0xffffaa507a00>>, mixin_verb=('build',))[0m
+[0.530s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) check parameters
+[0.531s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) check parameters
+[0.531s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) check parameters
+[0.531s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) check parameters
+[0.531s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(colcon_meta) discover
+[0.531s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) discover
+[0.531s] [34mcolcon.colcon_core.package_discovery[0m [1;30mINFO[0m Crawling recursively for packages in '/home/kraken/kraken-nano/ROS/ws'
+[0.532s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.532s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore'
+[0.532s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ignore_ament_install'
+[0.532s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_pkg']
+[0.532s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_pkg'
+[0.532s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['colcon_meta']
+[0.532s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'colcon_meta'
+[0.532s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['ros']
+[0.532s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'ros'
+[0.553s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['cmake', 'python']
+[0.553s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'cmake'
+[0.553s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python'
+[0.553s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extensions ['python_setup_py']
+[0.553s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(.) by extension 'python_setup_py'
+[0.553s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.554s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) by extension 'ignore'
+[0.554s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(build) ignored
+[0.554s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.554s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) by extension 'ignore'
+[0.554s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(install) ignored
+[0.554s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.555s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) by extension 'ignore'
+[0.555s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(log) ignored
+[0.555s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.555s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ignore'
+[0.555s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ignore_ament_install'
+[0.555s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['colcon_pkg']
+[0.555s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'colcon_pkg'
+[0.555s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['colcon_meta']
+[0.555s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'colcon_meta'
+[0.556s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['ros']
+[0.556s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'ros'
+[0.556s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['cmake', 'python']
+[0.556s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'cmake'
+[0.556s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'python'
+[0.556s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extensions ['python_setup_py']
+[0.556s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src) by extension 'python_setup_py'
+[0.556s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/build) by extensions ['ignore', 'ignore_ament_install']
+[0.556s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/build) by extension 'ignore'
+[0.556s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/build) ignored
+[0.557s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/custom) by extensions ['ignore', 'ignore_ament_install']
+[0.557s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/custom) by extension 'ignore'
+[0.557s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/custom) by extension 'ignore_ament_install'
+[0.557s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/custom) by extensions ['colcon_pkg']
+[0.557s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/custom) by extension 'colcon_pkg'
+[0.557s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/custom) by extensions ['colcon_meta']
+[0.557s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/custom) by extension 'colcon_meta'
+[0.557s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/custom) by extensions ['ros']
+[0.557s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/custom) by extension 'ros'
+[0.562s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/custom' with type 'ros.ament_cmake' and name 'custom'[0m
+[0.562s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/install) by extensions ['ignore', 'ignore_ament_install']
+[0.562s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/install) by extension 'ignore'
+[0.563s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/install) ignored
+[0.563s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/kraken) by extensions ['ignore', 'ignore_ament_install']
+[0.563s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/kraken) by extension 'ignore'
+[0.563s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/kraken) by extension 'ignore_ament_install'
+[0.563s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/kraken) by extensions ['colcon_pkg']
+[0.563s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/kraken) by extension 'colcon_pkg'
+[0.563s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/kraken) by extensions ['colcon_meta']
+[0.563s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/kraken) by extension 'colcon_meta'
+[0.563s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/kraken) by extensions ['ros']
+[0.564s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/kraken) by extension 'ros'
+[0.565s] [34mcolcon.colcon_core.package_identification[0m [1;30mDEBUG[0m [32mPackage 'src/kraken' with type 'ros.ament_python' and name 'kraken'[0m
+[0.565s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/log) by extensions ['ignore', 'ignore_ament_install']
+[0.565s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/log) by extension 'ignore'
+[0.565s] [34mcolcon.colcon_core.package_identification[0m [1;30mLevel 1[0m _identify(src/log) ignored
+[0.565s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(recursive) using defaults
+[0.565s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) discover
+[0.565s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(ignore) using defaults
+[0.565s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) discover
+[0.565s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(path) using defaults
+[0.625s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(prefix_path) check parameters
+[0.626s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(prefix_path) discover
+[0.630s] [34mcolcon.colcon_installed_package_information.package_discovery[0m [1;30mDEBUG[0m [32mFound 271 installed packages in /opt/ros/humble[0m
+[0.632s] [34mcolcon.colcon_core.package_discovery[0m [1;30mLevel 1[0m discover_packages(prefix_path) using defaults
+[0.696s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'custom' build argument 'cmake_args' from command line to 'None'
+[0.697s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'custom' build argument 'cmake_target' from command line to 'None'
+[0.697s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'custom' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.697s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'custom' build argument 'cmake_clean_cache' from command line to 'False'
+[0.697s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'custom' build argument 'cmake_clean_first' from command line to 'False'
+[0.697s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'custom' build argument 'cmake_force_configure' from command line to 'False'
+[0.697s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'custom' build argument 'ament_cmake_args' from command line to 'None'
+[0.697s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'custom' build argument 'catkin_cmake_args' from command line to 'None'
+[0.697s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'custom' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.697s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'custom' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kraken/kraken-nano/ROS/ws/build/custom', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kraken/kraken-nano/ROS/ws/install/custom', 'merge_install': False, 'path': '/home/kraken/kraken-nano/ROS/ws/src/custom', 'symlink_install': False, 'test_result_base': None}[0m
+[0.698s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'kraken' build argument 'cmake_args' from command line to 'None'
+[0.698s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'kraken' build argument 'cmake_target' from command line to 'None'
+[0.698s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'kraken' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.698s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'kraken' build argument 'cmake_clean_cache' from command line to 'False'
+[0.698s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'kraken' build argument 'cmake_clean_first' from command line to 'False'
+[0.698s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'kraken' build argument 'cmake_force_configure' from command line to 'False'
+[0.698s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'kraken' build argument 'ament_cmake_args' from command line to 'None'
+[0.698s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'kraken' build argument 'catkin_cmake_args' from command line to 'None'
+[0.698s] [34mcolcon.colcon_core.verb[0m [1;30mLevel 5[0m set package 'kraken' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.698s] [34mcolcon.colcon_core.verb[0m [1;30mDEBUG[0m [32mBuilding package 'kraken' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/kraken/kraken-nano/ROS/ws/build/kraken', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/kraken/kraken-nano/ROS/ws/install/kraken', 'merge_install': False, 'path': '/home/kraken/kraken-nano/ROS/ws/src/kraken', 'symlink_install': False, 'test_result_base': None}[0m
+[0.698s] [34mcolcon.colcon_core.executor[0m [1;30mINFO[0m Executing jobs using 'parallel' executor
+[0.700s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete[0m
+[0.701s] [34mcolcon.colcon_ros.task.ament_cmake.build[0m [1;30mINFO[0m Building ROS package in '/home/kraken/kraken-nano/ROS/ws/src/custom' with build type 'ament_cmake'
+[0.701s] [34mcolcon.colcon_cmake.task.cmake.build[0m [1;30mINFO[0m Building CMake package in '/home/kraken/kraken-nano/ROS/ws/src/custom'
+[0.705s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.705s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.705s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[0.720s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/kraken/kraken-nano/ROS/ws/build/custom': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/kraken/kraken-nano/ROS/ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/kraken/kraken-nano/ROS/ws/install/custom[0m
+[3.636s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/kraken/kraken-nano/ROS/ws/build/custom' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake /home/kraken/kraken-nano/ROS/ws/src/custom -DCMAKE_INSTALL_PREFIX=/home/kraken/kraken-nano/ROS/ws/install/custom[0m
+[3.639s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/kraken/kraken-nano/ROS/ws/build/custom': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/kraken/kraken-nano/ROS/ws/build/custom -- -j6 -l6[0m
+[9.803s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/kraken/kraken-nano/ROS/ws/build/custom' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/kraken/kraken-nano/ROS/ws/build/custom -- -j6 -l6[0m
+[9.825s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/kraken/kraken-nano/ROS/ws/build/custom': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/kraken/kraken-nano/ROS/ws/build/custom[0m
+[9.972s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(custom)
+[9.973s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/kraken/kraken-nano/ROS/ws/build/custom' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/kraken/kraken-nano/ROS/ws/build/custom[0m
+[9.979s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom' for CMake module files
+[9.980s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom' for CMake config files
+[9.981s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('custom', 'cmake_prefix_path')
+[9.982s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/cmake_prefix_path.ps1'
+[9.984s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/cmake_prefix_path.dsv'
+[9.985s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/cmake_prefix_path.sh'
+[9.987s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom/lib'
+[9.987s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('custom', 'ld_library_path_lib')
+[9.988s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/ld_library_path_lib.ps1'
+[9.989s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/ld_library_path_lib.dsv'
+[9.991s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/ld_library_path_lib.sh'
+[9.992s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom/bin'
+[9.992s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom/lib/pkgconfig/custom.pc'
+[9.993s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom/lib/python3.10/site-packages'
+[9.994s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom/bin'
+[9.995s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/package.ps1'
+[9.997s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/package.dsv'
+[9.998s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/package.sh'
+[9.999s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/package.bash'
+[10.000s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/package.zsh'
+[10.001s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/kraken/kraken-nano/ROS/ws/install/custom/share/colcon-core/packages/custom)
+[10.003s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(custom)
+[10.004s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom' for CMake module files
+[10.006s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom' for CMake config files
+[10.008s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('custom', 'cmake_prefix_path')
+[10.009s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/cmake_prefix_path.ps1'
+[10.010s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/cmake_prefix_path.dsv'
+[10.012s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/cmake_prefix_path.sh'
+[10.013s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom/lib'
+[10.013s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('custom', 'ld_library_path_lib')
+[10.014s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/ld_library_path_lib.ps1'
+[10.014s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/ld_library_path_lib.dsv'
+[10.015s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/hook/ld_library_path_lib.sh'
+[10.016s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom/bin'
+[10.016s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom/lib/pkgconfig/custom.pc'
+[10.017s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom/lib/python3.10/site-packages'
+[10.017s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/custom/bin'
+[10.017s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/package.ps1'
+[10.019s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/package.dsv'
+[10.019s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/package.sh'
+[10.020s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/package.bash'
+[10.022s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/custom/share/custom/package.zsh'
+[10.023s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/kraken/kraken-nano/ROS/ws/install/custom/share/colcon-core/packages/custom)
+[10.024s] [34mcolcon.colcon_ros.task.ament_python.build[0m [1;30mINFO[0m Building ROS package in '/home/kraken/kraken-nano/ROS/ws/src/kraken' with build type 'ament_python'
+[10.024s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('kraken', 'ament_prefix_path')
+[10.025s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/hook/ament_prefix_path.ps1'
+[10.027s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/hook/ament_prefix_path.dsv'
+[10.028s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/hook/ament_prefix_path.sh'
+[10.030s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[10.030s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[10.526s] [34mcolcon.colcon_core.task.python.build[0m [1;30mINFO[0m Building Python package in '/home/kraken/kraken-nano/ROS/ws/src/kraken'
+[10.526s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[10.526s] [34mcolcon.colcon_core.shell[0m [1;30mDEBUG[0m [32mSkip shell extension 'dsv' for command environment[0m
+[11.178s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoking command in '/home/kraken/kraken-nano/ROS/ws/src/kraken': AMENT_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom LD_LIBRARY_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kraken/kraken-nano/ROS/ws/build/kraken/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages:/home/kraken/kraken-nano/ROS/ws/install/custom/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/kraken build --build-base /home/kraken/kraken-nano/ROS/ws/build/kraken/build install --record /home/kraken/kraken-nano/ROS/ws/build/kraken/install.log --single-version-externally-managed install_data[0m
+[11.757s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/kraken' for CMake module files
+[11.759s] [34mcolcon.colcon_core.event_handler.log_command[0m [1;30mDEBUG[0m [32mInvoked command in '/home/kraken/kraken-nano/ROS/ws/src/kraken' returned '0': AMENT_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom LD_LIBRARY_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kraken/kraken-nano/ROS/ws/build/kraken/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages:/home/kraken/kraken-nano/ROS/ws/install/custom/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/kraken build --build-base /home/kraken/kraken-nano/ROS/ws/build/kraken/build install --record /home/kraken/kraken-nano/ROS/ws/build/kraken/install.log --single-version-externally-managed install_data[0m
+[11.760s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/kraken' for CMake config files
+[11.762s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/kraken/lib'
+[11.762s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/kraken/bin'
+[11.762s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/kraken/lib/pkgconfig/kraken.pc'
+[11.763s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages'
+[11.763s] [34mcolcon.colcon_core.shell[0m [1;30mLevel 1[0m create_environment_hook('kraken', 'pythonpath')
+[11.763s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/hook/pythonpath.ps1'
+[11.764s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment descriptor '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/hook/pythonpath.dsv'
+[11.765s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating environment hook '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/hook/pythonpath.sh'
+[11.766s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m checking '/home/kraken/kraken-nano/ROS/ws/install/kraken/bin'
+[11.766s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_environment_scripts_only(kraken)
+[11.766s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/package.ps1'
+[11.768s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package descriptor '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/package.dsv'
+[11.768s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/package.sh'
+[11.769s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/package.bash'
+[11.770s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating package script '/home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/package.zsh'
+[11.771s] [34mcolcon.colcon_core.environment[0m [1;30mLevel 1[0m create_file_with_runtime_dependencies(/home/kraken/kraken-nano/ROS/ws/install/kraken/share/colcon-core/packages/kraken)
+[11.771s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mclosing loop[0m
+[11.772s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mloop closed[0m
+[11.773s] [34mcolcon.colcon_parallel_executor.executor.parallel[0m [1;30mDEBUG[0m [32mrun_until_complete finished with '0'[0m
+[11.773s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoining thread[0m
+[11.790s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[11.790s] [34mcolcon.colcon_core.plugin_system[0m [1;30mINFO[0m Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[11.790s] [34mcolcon.colcon_notification.desktop_notification[0m [1;30mINFO[0m Sending desktop notification using 'notify2'
+[11.831s] [34mcolcon.colcon_core.event_reactor[0m [1;30mDEBUG[0m [32mjoined thread[0m
+[11.833s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/kraken/kraken-nano/ROS/ws/install/local_setup.ps1'
+[11.837s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module '/home/kraken/kraken-nano/ROS/ws/install/_local_setup_util_ps1.py'
+[11.842s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/kraken/kraken-nano/ROS/ws/install/setup.ps1'
+[11.845s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/kraken/kraken-nano/ROS/ws/install/local_setup.sh'
+[11.846s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix util module '/home/kraken/kraken-nano/ROS/ws/install/_local_setup_util_sh.py'
+[11.847s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/kraken/kraken-nano/ROS/ws/install/setup.sh'
+[11.849s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/kraken/kraken-nano/ROS/ws/install/local_setup.bash'
+[11.849s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/kraken/kraken-nano/ROS/ws/install/setup.bash'
+[11.851s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix script '/home/kraken/kraken-nano/ROS/ws/install/local_setup.zsh'
+[11.852s] [34mcolcon.colcon_core.shell[0m [1;30mINFO[0m Creating prefix chain script '/home/kraken/kraken-nano/ROS/ws/install/setup.zsh'

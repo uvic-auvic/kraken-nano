@@ -13,7 +13,9 @@ kraken/__init__.py
 kraken/computer_vision.py
 kraken/controller.py
 kraken/planner.py
+kraken/spinMotor.py
 kraken/state_estimator.py
+kraken/testMotor.py
 launch/kraken.launch.py
 resource/kraken
 test/test_copyright.py

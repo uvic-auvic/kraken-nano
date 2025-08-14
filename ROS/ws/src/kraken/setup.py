@@ -25,6 +25,7 @@ setup(
         'console_scripts': [
             'planner = kraken.planner:main',
             'controller = kraken.controller:main',
+            'spinMotor = kraken.spinMotor:main',
             'computer_vision = kraken.computer_vision:main',
             'state_estimator = kraken.state_estimator:main',
         ],

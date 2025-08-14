@@ -2,5 +2,6 @@
 computer_vision = kraken.computer_vision:main
 controller = kraken.controller:main
 planner = kraken.planner:main
+spinMotor = kraken.spinMotor:main
 state_estimator = kraken.state_estimator:main
 

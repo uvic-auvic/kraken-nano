@@ -1,0 +1,8 @@
+msg/Euler.idl
+msg/Euler.msg
+msg/Point.idl
+msg/Point.msg
+msg/PoseE.idl
+msg/PoseE.msg
+msg/Task.idl
+msg/Task.msg

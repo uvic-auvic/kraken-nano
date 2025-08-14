@@ -2,12 +2,14 @@ import rclpy
 from rclpy.node import Node
 import sys
 from std_msgs.msg import Float64
+import time
 
-sys.path.append("/home/vboxuser/kraken-nano/ROS/ws/src/kraken/kraken/include")
+sys.path.append("/home/kraken/kraken-nano/ROS/ws/src/kraken/kraken/include")
 
-from simulation import Simulation
+#from simulation import Simulation
 from motorboard import MotorBoard
 from pid import PID
+from serial import Serial
 
 from custom.msg import PoseE
 
@@ -18,21 +20,61 @@ class Controller(Node):
                 
                 self.subscription = self.create_subscription(PoseE, '/state_estimator/pose', self.pose_callback, 10)
                 pid_period = 0.01  # seconds
-                self.pid_timer = self.create_timer(pid_period, self.pid_callback)
+                #self.pid_timer = self.create_timer(pid_period, self.pid_callback)
                 self.logger = self.get_logger()
                 
-                self.sim = Simulation(self)
+                #self.sim = Simulation(self)
                 
-                mb = MotorBoard("/dev/ttyUSB0")
-                mb.forward()
-                self.logger.info(str(mb.send_motors(100)))
+                #self.kill_switch = Serial("/dev/ttyTCU0", 115200, timeout=3)
                 
-                self.pose = None
-                self.forward_pid = PID(0, 0, 4, 0, 8)
-                self.up_pid = PID(0, 0, 4, 0, 8)
-                self.left_pid = PID(0, 0, 4, 0, 8)
-                self.yaw_pid = PID(0, 1, 5, 0, 20)
+                mb = MotorBoard("/dev/ttyTHS1")
+                
+                self.logger.info("Init motors")
+                
+                #mb.init_motors()
+                
+                time.sleep(2)
+                
+                mb.down()
+                mb.send_motors(100, False)
+                time.sleep(3)
 
+                #time.sleep(20)
+                mb.down()
+                mb.send_motors(60, False)
+                
+                mb.back_motor(True, False)
+                mb.send_motors(47, True)
+
+                mb.forward()
+                mb.send_motors(127, True)
+                time.sleep(40)
+                
+                #
+                #mb.up()
+                #mb.send_motors(15, True)
+                #time.sleep(2)
+                #mb.send_motors(127, True)
+                #
+                #time.sleep(10)
+                #mb.cut_motors()
+                #mb.flip()
+                #mb.send_motors(15, True)
+                #time.sleep(2)
+                #mb.cut_motors()
+                #kills motors
+                mb.cut_motors()
+                
+                
+                #self.logger.info(str(mb.send_motors(100)))
+                
+                #self.pose = None
+                #self.forward_pid = PID(0, 0, 4, 0, 8)
+                #self.up_pid = PID(0, 0, 4, 0, 8)
+                #self.left_pid = PID(0, 0, 4, 0, 8)
+                #self.yaw_pid = PID(0, 1, 5, 0, 20)
+
+        """
         def pid_callback(self):
                 if self.pose:
                         forward_speed = self.forward_pid.calculate(self.pose.pos.x)
@@ -46,7 +88,7 @@ class Controller(Node):
                         self.sim.yaw(yaw_speed)
                         
                         #self.logger.info(str(self.pose.rot))
-                       
+        """
                 
 	        
 	        
