@@ -1,0 +1,2 @@
+Point pos
+Euler rot

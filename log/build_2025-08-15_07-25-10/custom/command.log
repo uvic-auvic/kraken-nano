@@ -1,0 +1,4 @@
+Invoking command in '/home/kraken/kraken-nano/build/custom': /usr/bin/cmake --build /home/kraken/kraken-nano/build/custom -- -j6 -l6
+Invoked command in '/home/kraken/kraken-nano/build/custom' returned '0': /usr/bin/cmake --build /home/kraken/kraken-nano/build/custom -- -j6 -l6
+Invoking command in '/home/kraken/kraken-nano/build/custom': /usr/bin/cmake --install /home/kraken/kraken-nano/build/custom
+Invoked command in '/home/kraken/kraken-nano/build/custom' returned '0': /usr/bin/cmake --install /home/kraken/kraken-nano/build/custom

@@ -1,7 +1,8 @@
 import rclpy
 from rclpy.node import Node
 import sys
-from std_msgs.msg import Float64, String
+from std_msgs.msg import Float64, String, Int32, Float32
+from std_msgs.msg import Int32
 import time
 import json
 
@@ -27,14 +28,14 @@ class Controller(Node):
             String, '/motor/command', self.motor_command_callback, 10)
 
         pid_period = 0.1  # seconds
-        self.pid_timer = self.create_timer(pid_period, self.pid_cont)
+        self.pid_timer = self.create_timer(pid_period, self.pid_control)
         self.logger = self.get_logger()
-        self.reset_yaw_pub =self.create_publisher(int, "/controller/reset_yaw", 10)
-        self.depth_reached_pub = self.create_publisher(int, "/controller/depth_reached", 10)
-        self.set_depth = 0;
+        self.reset_yaw_pub =self.create_publisher(Float32, "/controller/reset_yaw", 10)
+        self.depth_reached_pub = self.create_publisher(Float32, "/controller/depth_reached", 10)
+        self.set_depth = 0.25
         #self.sim = Simulation(self)
 
-        self.command_status_pub = self.create_publisher(int, "/controller/command_status", 10)
+        self.command_status_pub = self.create_publisher(Int32, "/controller/command_status", 10)
         self.command_stat = 0; # sends 0 for none, 1 for received, 2 for complete, 3 for overwritten
         # self.kill_switch = Serial("/dev/ttyTCU0", 115200, timeout=3)
 
@@ -60,8 +61,8 @@ class Controller(Node):
         """Callback for motor commands from planner"""
         try:
             command_data = json.loads(msg.data)
-            command = command_data.get('command', '')
-            speed = command_data.get('speed', 15)
+            command = command_data["command"]
+            speed = command_data["speed"]
             duration = command_data.get('duration', '')
 
             self.logger.info(f"Received motor command: {command} at speed {speed}")
@@ -69,25 +70,29 @@ class Controller(Node):
                 self.command_stat = 3
             else:
                 self.command_stat = 1
-            self.command_status_pub.publish(self.command_stat)
+            
+            # Create and publish Int32 message
+            status_msg = Int32()
+            status_msg.data = self.command_stat
+            self.command_status_pub.publish(status_msg)
 
             if self.mb:
                 self.execute_motor_command(command, speed, duration)
+                self.mb.cut_motors()
             else:
                 self.logger.warn("Motor board not available, simulating command")
-            self.md.cut_motors()
+            
         except json.JSONDecodeError as e:
             self.logger.error(f"Error parsing motor command: {str(e)}")
+        
 
-    def execute_motor_command(self, command: str, speed: int, duration: int):
+
+    def execute_motor_command(self, command: str, speed: int, duration: float = 1.0):
         """Execute a motor command"""
         if not self.mb:
             return
 
         try:
-            # Reset motor masks
-            self.mb.positive_mask = [0, 0, 0, 0, 0, 0, 0, 0]
-            self.mb.negative_mask = [0, 0, 0, 0, 0, 0, 0, 0]
 
             # Execute specific command
             if command == "forward":
@@ -104,6 +109,7 @@ class Controller(Node):
 
             elif command == "setdepth":
                 self.set_depth = speed
+                print(self.set_depth)
                 return
 
             elif command == "yaw_ccw":
@@ -130,7 +136,11 @@ class Controller(Node):
             while time.time() < time_start + duration or self.command_stat == 2:
                 pass
             self.command_stat = 2
-            self.command_status_pub.publish(self.command_stat)
+            
+            # Create and publish Int32 message
+            status_msg = Int32()
+            status_msg.data = self.command_stat
+            self.command_status_pub.publish(status_msg)
 
         except Exception as e:
             self.logger.error(f"Error executing motor command {command}: {str(e)}")
@@ -142,10 +152,16 @@ class Controller(Node):
         self.logger.info("EMERGENCY STOP executed")
 
     def yaw_pid(self):
-        yaw = self.pose.yaw
+        if not self.pose:
+            return
+            
+        yaw = self.pose.rot.yaw
         yaw_K = 30
+        
+        reset_msg = Float32()
         if self.current_command == "yaw_ccw" or self.current_command == "yaw_cw":
-            self.reset_yaw_pub.publish(1)
+            reset_msg.data = 1.0
+            self.reset_yaw_pub.publish(reset_msg)
             return
         elif self.current_command == "left" or self.current_command == "right":
             pass
@@ -156,28 +172,47 @@ class Controller(Node):
                 self.mb.yaw_ccw()
             speed = min(int(abs(yaw)*yaw_K), 127)
             self.mb.send_motors(speed)
-        self.reset_yaw_pub.publish(0)    
+        
+        reset_msg.data = 0.0
+        self.reset_yaw_pub.publish(reset_msg)    
 
     def depth_pid(self):
+        # print(self.pose)
+        if not self.pose:
+            print("no pose")
+            return
+            
         depth = self.pose.pos.z
-        down_K = 60
-        up_K = 20
+        down_K = 40
+        up_K = 30
+
+        depth_msg = Float32()
         if self.set_depth - 0.2 < depth < self.set_depth + 0.2:
-            self.depth_reached_pub(1)
+            depth_msg.data = 1.0
+            self.depth_reached_pub.publish(depth_msg)
+            print(1)
             return
         elif depth > self.set_depth:
             self.mb.up()
             speed = min(int(abs(depth - self.set_depth) * up_K), 127)
+            print(speed)
+            self.mb.send_motors(speed)
+            print(2)
+
         elif depth < self.set_depth:
             self.mb.down()
-            speed = min(int(abs(depth-self.set_depth)*down_K), 127)
-        self.mb.send_motors(speed)
-        self.depth_reached_pub(0)
+            speed = min(int(abs(depth - self.set_depth) * down_K), 127)
+            self.mb.send_motors(speed)
+            print(3)
+        else:
+            print("missed ")
+        
+        depth_msg.data = 0.0
+        self.depth_reached_pub.publish(depth_msg)
 
-    def pid_cont(self):
-        if self.pose():
-            self.yaw_pid(self)
-            self.depth_pid(self)
+    def pid_control(self):        
+        self.yaw_pid()
+        # self.depth_pid()
 
     """
     def pid_callback(self):
@@ -197,6 +232,7 @@ class Controller(Node):
 
     def pose_callback(self, msg):
         """Callback for pose updates"""
+        # print(msg)
         self.pose = msg
 
 

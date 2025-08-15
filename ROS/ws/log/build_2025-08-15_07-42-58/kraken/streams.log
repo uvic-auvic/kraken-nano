@@ -1,0 +1,69 @@
+[1.218s] Invoking command in '/home/kraken/kraken-nano/ROS/ws/src/kraken': AMENT_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kraken/kraken-nano/ROS/ws/build/kraken/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages:/home/kraken/kraken-nano/ROS/ws/install/custom/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/kraken build --build-base /home/kraken/kraken-nano/ROS/ws/build/kraken/build install --record /home/kraken/kraken-nano/ROS/ws/build/kraken/install.log --single-version-externally-managed install_data
+[1.685s] running egg_info
+[1.688s] creating ../../build/kraken/kraken.egg-info
+[1.688s] writing ../../build/kraken/kraken.egg-info/PKG-INFO
+[1.689s] writing dependency_links to ../../build/kraken/kraken.egg-info/dependency_links.txt
+[1.689s] writing entry points to ../../build/kraken/kraken.egg-info/entry_points.txt
+[1.689s] writing requirements to ../../build/kraken/kraken.egg-info/requires.txt
+[1.690s] writing top-level names to ../../build/kraken/kraken.egg-info/top_level.txt
+[1.690s] writing manifest file '../../build/kraken/kraken.egg-info/SOURCES.txt'
+[1.692s] reading manifest file '../../build/kraken/kraken.egg-info/SOURCES.txt'
+[1.693s] adding license file 'LICENSE'
+[1.693s] writing manifest file '../../build/kraken/kraken.egg-info/SOURCES.txt'
+[1.694s] running build
+[1.694s] running build_py
+[1.694s] creating /home/kraken/kraken-nano/ROS/ws/build/kraken/build
+[1.695s] creating /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib
+[1.695s] creating /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken
+[1.695s] copying kraken/spinMotor.py -> /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken
+[1.696s] copying kraken/planner.py -> /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken
+[1.696s] copying kraken/computer_vision.py -> /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken
+[1.696s] copying kraken/controller_test.py -> /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken
+[1.696s] copying kraken/state_estimator.py -> /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken
+[1.697s] copying kraken/controller.py -> /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken
+[1.697s] copying kraken/__init__.py -> /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken
+[1.697s] copying kraken/planner_test.py -> /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken
+[1.697s] copying kraken/testMotor.py -> /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken
+[1.698s] running install
+[1.698s] running install_lib
+[1.699s] creating /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken
+[1.699s] copying /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken/spinMotor.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken
+[1.699s] copying /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken/planner.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken
+[1.699s] copying /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken/computer_vision.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken
+[1.700s] copying /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken/controller_test.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken
+[1.700s] copying /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken/state_estimator.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken
+[1.700s] copying /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken/controller.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken
+[1.701s] copying /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken/__init__.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken
+[1.701s] copying /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken/planner_test.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken
+[1.701s] copying /home/kraken/kraken-nano/ROS/ws/build/kraken/build/lib/kraken/testMotor.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken
+[1.701s] byte-compiling /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken/spinMotor.py to spinMotor.cpython-310.pyc
+[1.702s] byte-compiling /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken/planner.py to planner.cpython-310.pyc
+[1.705s] byte-compiling /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken/computer_vision.py to computer_vision.cpython-310.pyc
+[1.709s] byte-compiling /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken/controller_test.py to controller_test.cpython-310.pyc
+[1.710s] byte-compiling /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken/state_estimator.py to state_estimator.cpython-310.pyc
+[1.711s] byte-compiling /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken/controller.py to controller.cpython-310.pyc
+[1.713s] byte-compiling /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken/__init__.py to __init__.cpython-310.pyc
+[1.714s] byte-compiling /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken/planner_test.py to planner_test.cpython-310.pyc
+[1.715s] byte-compiling /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken/testMotor.py to testMotor.cpython-310.pyc
+[1.715s] running install_data
+[1.715s] creating /home/kraken/kraken-nano/ROS/ws/install/kraken/share/ament_index
+[1.716s] creating /home/kraken/kraken-nano/ROS/ws/install/kraken/share/ament_index/resource_index
+[1.716s] creating /home/kraken/kraken-nano/ROS/ws/install/kraken/share/ament_index/resource_index/packages
+[1.716s] copying resource/kraken -> /home/kraken/kraken-nano/ROS/ws/install/kraken/share/ament_index/resource_index/packages
+[1.717s] copying package.xml -> /home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken
+[1.717s] creating /home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/launch
+[1.717s] copying launch/kraken.launch.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/launch
+[1.717s] copying launch/kraken_system.launch.py -> /home/kraken/kraken-nano/ROS/ws/install/kraken/share/kraken/launch
+[1.717s] running install_egg_info
+[1.720s] Copying ../../build/kraken/kraken.egg-info to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken-0.0.0-py3.10.egg-info
+[1.722s] running install_scripts
+[1.760s] Installing computer_vision script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.760s] Installing controller script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.760s] Installing controller_test script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.761s] Installing fsm_node script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.761s] Installing planner script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.761s] Installing planner_test script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.761s] Installing spinMotor script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.762s] Installing state_estimator script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.762s] writing list of installed files to '/home/kraken/kraken-nano/ROS/ws/build/kraken/install.log'
+[1.835s] Invoked command in '/home/kraken/kraken-nano/ROS/ws/src/kraken' returned '0': AMENT_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kraken/kraken-nano/ROS/ws/build/kraken/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages:/home/kraken/kraken-nano/ROS/ws/install/custom/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/kraken build --build-base /home/kraken/kraken-nano/ROS/ws/build/kraken/build install --record /home/kraken/kraken-nano/ROS/ws/build/kraken/install.log --single-version-externally-managed install_data

@@ -1,0 +1,29 @@
+[1.207s] Invoking command in '/home/kraken/kraken-nano/ROS/ws/src/kraken': AMENT_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kraken/kraken-nano/ROS/ws/build/kraken/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages:/home/kraken/kraken-nano/ROS/ws/install/custom/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/kraken build --build-base /home/kraken/kraken-nano/ROS/ws/build/kraken/build install --record /home/kraken/kraken-nano/ROS/ws/build/kraken/install.log --single-version-externally-managed install_data
+[1.677s] running egg_info
+[1.680s] writing ../../build/kraken/kraken.egg-info/PKG-INFO
+[1.681s] writing dependency_links to ../../build/kraken/kraken.egg-info/dependency_links.txt
+[1.681s] writing entry points to ../../build/kraken/kraken.egg-info/entry_points.txt
+[1.682s] writing requirements to ../../build/kraken/kraken.egg-info/requires.txt
+[1.682s] writing top-level names to ../../build/kraken/kraken.egg-info/top_level.txt
+[1.685s] reading manifest file '../../build/kraken/kraken.egg-info/SOURCES.txt'
+[1.686s] adding license file 'LICENSE'
+[1.687s] writing manifest file '../../build/kraken/kraken.egg-info/SOURCES.txt'
+[1.687s] running build
+[1.687s] running build_py
+[1.688s] running install
+[1.689s] running install_lib
+[1.691s] running install_data
+[1.692s] running install_egg_info
+[1.695s] removing '/home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken-0.0.0-py3.10.egg-info' (and everything under it)
+[1.696s] Copying ../../build/kraken/kraken.egg-info to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages/kraken-0.0.0-py3.10.egg-info
+[1.697s] running install_scripts
+[1.733s] Installing computer_vision script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.734s] Installing controller script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.734s] Installing controller_test script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.735s] Installing fsm_node script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.735s] Installing planner script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.735s] Installing planner_test script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.736s] Installing spinMotor script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.736s] Installing state_estimator script to /home/kraken/kraken-nano/ROS/ws/install/kraken/lib/kraken
+[1.736s] writing list of installed files to '/home/kraken/kraken-nano/ROS/ws/build/kraken/install.log'
+[1.802s] Invoked command in '/home/kraken/kraken-nano/ROS/ws/src/kraken' returned '0': AMENT_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom:${CMAKE_PREFIX_PATH} LD_LIBRARY_PATH=/home/kraken/kraken-nano/ROS/ws/install/custom/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/kraken/kraken-nano/ROS/ws/build/kraken/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/kraken/kraken-nano/ROS/ws/install/kraken/lib/python3.10/site-packages:/home/kraken/kraken-nano/ROS/ws/install/custom/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/kraken build --build-base /home/kraken/kraken-nano/ROS/ws/build/kraken/build install --record /home/kraken/kraken-nano/ROS/ws/build/kraken/install.log --single-version-externally-managed install_data

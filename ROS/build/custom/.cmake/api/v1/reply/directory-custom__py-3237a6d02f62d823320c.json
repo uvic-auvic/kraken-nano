@@ -1,0 +1,14 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : [],
+		"nodes" : []
+	},
+	"installers" : [],
+	"paths" : 
+	{
+		"build" : "custom__py",
+		"source" : "/home/kraken/kraken-nano/ROS/build/custom/custom__py"
+	}
+}

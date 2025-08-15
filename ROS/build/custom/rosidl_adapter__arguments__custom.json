@@ -1,0 +1,9 @@
+{
+  "package_name": "custom",
+  "non_idl_tuples": [
+    "/home/kraken/kraken-nano/ROS/ws/src/custom:msg/Task.msg",
+    "/home/kraken/kraken-nano/ROS/ws/src/custom:msg/PoseE.msg",
+    "/home/kraken/kraken-nano/ROS/ws/src/custom:msg/Point.msg",
+    "/home/kraken/kraken-nano/ROS/ws/src/custom:msg/Euler.msg"
+  ]
+}

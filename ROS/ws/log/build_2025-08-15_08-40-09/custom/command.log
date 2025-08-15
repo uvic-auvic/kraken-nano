@@ -1,0 +1,4 @@
+Invoking command in '/home/kraken/kraken-nano/ROS/ws/build/custom': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/kraken/kraken-nano/install/kraken:/opt/ros/humble /usr/bin/cmake --build /home/kraken/kraken-nano/ROS/ws/build/custom -- -j6 -l6
+Invoked command in '/home/kraken/kraken-nano/ROS/ws/build/custom' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/kraken/kraken-nano/install/kraken:/opt/ros/humble /usr/bin/cmake --build /home/kraken/kraken-nano/ROS/ws/build/custom -- -j6 -l6
+Invoking command in '/home/kraken/kraken-nano/ROS/ws/build/custom': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/kraken/kraken-nano/install/kraken:/opt/ros/humble /usr/bin/cmake --install /home/kraken/kraken-nano/ROS/ws/build/custom
+Invoked command in '/home/kraken/kraken-nano/ROS/ws/build/custom' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/kraken/kraken-nano/install/kraken:/opt/ros/humble /usr/bin/cmake --install /home/kraken/kraken-nano/ROS/ws/build/custom

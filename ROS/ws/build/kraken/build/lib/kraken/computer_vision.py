@@ -18,6 +18,9 @@ class ComputerVision(Node):
         timer_period = 0.05  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         
+        # Shutdown flag
+        self.shutdown_requested = False
+        
         # Publishers
         self.publisher_ = self.create_publisher(Int32MultiArray, 'objects', 10)
         self.detection_info_publisher = self.create_publisher(String, 'detection_info', 10)
@@ -62,7 +65,20 @@ class ComputerVision(Node):
         # Create depth colorizer for better depth visualization
         self.colorizer = rs.colorizer()
 
+    def shutdown_gracefully(self):
+        """Gracefully shutdown the computer vision node"""
+        self.shutdown_requested = True
+        try:
+            if hasattr(self, 'pipeline'):
+                self.pipeline.stop()
+        except Exception as e:
+            self.get_logger().error(f"Error stopping pipeline during shutdown: {str(e)}")
+        cv2.destroyAllWindows()
+
     def timer_callback(self):
+        if self.shutdown_requested:
+            return
+            
         self.get_logger().info('Computer Vision Running')
         self.boolList = self.objectDetector()
         self.get_logger().info(str(self.boolList))
@@ -193,7 +209,11 @@ class ComputerVision(Node):
             self.get_logger().error(f'Error writing gyro/accel report: {str(e)}')
 
     def objectDetector(self):
-        frames = self.pipeline.wait_for_frames()
+        try:
+            frames = self.pipeline.wait_for_frames(timeout_ms=1000)  # Add 1 second timeout
+        except RuntimeError as e:
+            self.get_logger().warn(f"Failed to get frames: {str(e)}")
+            return [0] * 8
         
         # GET IMU DATA FIRST (ADD THIS BACK)
         gyro_data = [0, 0, 0]  # Default values
@@ -335,8 +355,8 @@ class ComputerVision(Node):
                 self.publish_detection_info(detections_info)
 
         # Show live feed with bounding boxes and depth info
-        cv2.imshow('RealSense ONNX Detection', frame)
-        cv2.waitKey(1)  # Add this to properly handle OpenCV window events
+        # cv2.imshow('RealSense ONNX Detection', frame)
+        # cv2.waitKey(1)  # Add this to properly handle OpenCV window events
         
         return validObjectBools
 
@@ -348,16 +368,15 @@ def main(args=None):
 
     try:
         rclpy.spin(computer_vision)
+    except KeyboardInterrupt:
+        computer_vision.get_logger().info("Computer Vision shutting down...")
     finally:
-        # Clean up
-        computer_vision.pipeline.stop()
-        cv2.destroyAllWindows()
-
-    # Destroy the node explicitly
-    # (optional - otherwise it will be done automatically
-    # when the garbage collector destroys the node object)
-    computer_vision.destroy_node()
-    rclpy.shutdown()
+        # Clean up gracefully
+        computer_vision.shutdown_gracefully()
+        
+        # Destroy the node explicitly
+        computer_vision.destroy_node()
+        rclpy.shutdown()
 
 
 if __name__ == '__main__':

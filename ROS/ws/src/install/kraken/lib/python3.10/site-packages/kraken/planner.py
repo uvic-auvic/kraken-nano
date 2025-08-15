@@ -6,16 +6,14 @@ import time
 from enum import Enum
 
 class TaskType(Enum):
-    MOVE_FORWARD = "move_forward"
-    MOVE_BACKWARD = "move_backward"
-    MOVE_LEFT = "move_left"
-    MOVE_RIGHT = "move_right"
-    MOVE_UP = "move_up"
-    MOVE_DOWN = "move_down"
-    ROTATE_LEFT = "rotate_left"
-    ROTATE_RIGHT = "rotate_right"
+    MOVE_FORWARD = "forward"
+    MOVE_BACKWARD = "backward"
+    MOVE_LEFT = "left"
+    MOVE_RIGHT = "right"
+    ROTATE_LEFT = "yaw_ccw"
+    ROTATE_RIGHT = "yaw_cw"
     SET_DEPTH = "setdepth"
-    STOP_MOTORS = "stop_motors"
+    STOP_MOTORS = "stop"
 
 class Planner(Node):
     def __init__(self):
@@ -71,64 +69,14 @@ class Planner(Node):
         if self.current_task:
             self.execute_task_step()
 
-    def execute_task_step(self):
-        """Execute one step of the current task"""
-        task_type = self.current_task['task_type']
-        parameters = self.current_task['parameters']
-        
-        # Check if task should timeout
-        if self.task_start_time:
-            elapsed_time = time.time() - self.task_start_time
-            max_duration = parameters.get('duration', 10.0)  # Default 10 seconds
-            
-            if elapsed_time > max_duration:
-                self.get_logger().info(f'Task {task_type} timed out')
-                self.complete_current_task()
-                return
-        
-        # Execute task based on type
-        if task_type == TaskType.MOVE_FORWARD.value:
-            self.send_motor_command("forward", parameters.get('speed', 60))
-            
-        elif task_type == TaskType.MOVE_BACKWARD.value:
-            self.send_motor_command("backward", parameters.get('speed', 60))
-            
-        elif task_type == TaskType.MOVE_LEFT.value:
-            self.send_motor_command("left", parameters.get('speed', 60))
-            
-        elif task_type == TaskType.MOVE_RIGHT.value:
-            self.send_motor_command("right", parameters.get('speed', 60))
-            
-        elif task_type == TaskType.MOVE_UP.value:
-            self.send_motor_command("up", parameters.get('speed', 60))
-            
-        elif task_type == TaskType.MOVE_DOWN.value:
-            self.send_motor_command("down", parameters.get('speed', 60))
-            
-        elif task_type == TaskType.ROTATE_LEFT.value:
-            self.send_motor_command("yaw_ccw", parameters.get('speed', 60))
-            
-        elif task_type == TaskType.ROTATE_RIGHT.value:
-            self.send_motor_command("yaw_cw", parameters.get('speed', 60))
-            
-        elif task_type == TaskType.STOP_MOTORS.value:
-            self.send_motor_command("stop", 0)
-            self.complete_current_task()
+ 
 
-    def complete_current_task(self):
-        """Mark current task as complete"""
-        if self.current_task:
-            self.get_logger().info(f'Completed task: {self.current_task["task_type"]}')
-            self.send_motor_command("stop", 0)  # Stop motors between tasks
-            self.current_task = None
-            self.task_start_time = None
-
-    def send_motor_command(self, command: str, speed: int):
+    def send_motor_command(self, command: str, speed: int, duration: float):
         """Send motor command to controller"""
         motor_msg = {
             'command': command,
             'speed': speed,
-            'timestamp': str(self.get_clock().now().nanoseconds)
+            'duration': duration
         }
         
         message = String()
@@ -138,47 +86,43 @@ class Planner(Node):
     # Convenience methods for basic movements
     def move_forward(self, duration: float = 3.0, speed: int = 60):
         """Add move forward task"""
-        self.add_task(TaskType.MOVE_FORWARD, {"duration": duration, "speed": speed})
+        self.send_motor_command("forward", speed, duration)
 
     def move_backward(self, duration: float = 3.0, speed: int = 60):
         """Add move backward task"""
-        self.add_task(TaskType.MOVE_BACKWARD, {"duration": duration, "speed": speed})
+        self.send_motor_command("backward", speed, duration)
+
 
     def move_left(self, duration: float = 2.0, speed: int = 50):
         """Add move left task"""
-        self.add_task(TaskType.MOVE_LEFT, {"duration": duration, "speed": speed})
+        self.send_motor_command("left", speed, duration)
 
     def move_right(self, duration: float = 2.0, speed: int = 50):
         """Add move right task"""
-        self.add_task(TaskType.MOVE_RIGHT, {"duration": duration, "speed": speed})
-
-    def move_up(self, duration: float = 2.0, speed: int = 50):
-        """Add move up task"""
-        self.add_task(TaskType.MOVE_UP, {"duration": duration, "speed": speed})
-
-    def move_down(self, duration: float = 2.0, speed: int = 50):
-        """Add move down task"""
-        self.add_task(TaskType.MOVE_DOWN, {"duration": duration, "speed": speed})
+        self.send_motor_command("right", speed, duration)
 
     def rotate_left(self, duration: float = 2.0, speed: int = 40):
         """Add rotate left task"""
-        self.add_task(TaskType.ROTATE_LEFT, {"duration": duration, "speed": speed})
+        self.send_motor_command("yaw_ccw", speed, duration)
 
     def rotate_right(self, duration: float = 2.0, speed: int = 40):
         """Add rotate right task"""
-        self.add_task(TaskType.ROTATE_RIGHT, {"duration": duration, "speed": speed})
+        self.send_motor_command("yaw_cw", speed, duration)
+
 
     def stop_all_motors(self):
         """Immediately stop all motors"""
-        self.add_task(TaskType.STOP_MOTORS, {"duration": 0.1})
+        self.send_motor_command("stop", 0, 0)
+
 
     def set_depth(self, depth: float):
-        self.add_task(TaskType.SET_DEPTH, {"speed": depth})
+        """Set target depth"""
+        self.send_motor_command("setdepth", depth, 0)
 
     def step1_go_to_depth(self):
         """Step 1: Go to Depth"""
         self.get_logger().info("SENDING SETDEPTH")
-        self.send_motor_command(command="setdepth", speed=1)
+        self.send_motor_command(command="setdepth", speed=1, duration=0)
         self.get_logger().info("Step 1: Go to Depth")
         self.set_depth(depth=1)
         time.sleep(0.1)
@@ -287,19 +231,35 @@ def main(args=None):
     try:
         planner.get_logger().info("Starting planner test scenarios...")
 
-        #planner.move_forward(duration=1.0, speed=35)  # Move up to start
+        # planner.move_forward(duration=1.0, speed=20)  # Move up to start
+        # planner.move_backward(duration=1.0, speed=20)
+        # planner.move_left(duration=1.0, speed=20)
+        # planner.move_right(duration=1.0, speed=20)
+        # planner.stop_all_motors()
+        # time.sleep(5.0)
+        # planner.rotate_left(duration=2.0, speed=20)
+        #wait a bit
+        time_start = time.time()
+        while time.time() < time_start + 5:
+            print("Waiting for 5 seconds before next action...")
+
+        # planner.rotate_right(duration=1.0, speed=20)
+        planner.set_depth(depth=2)
+          # Set depth to 1 meter
+
+
         
         # Execute all steps
-        planner.step1_go_to_depth()
-        planner.step2_yaw_rotation()
-        planner.step3_center_gate()
-        planner.step4_move_through_gate()
-        planner.step5_continue_forward()
-        planner.step6_find_slalom()
-        planner.step7_center_slalom_red()
-        planner.step8_slalom_distance()
-        planner.step9_position_slalom_right()
-        planner.step10_full_gas()
+        # planner.step1_go_to_depth()
+        # planner.step2_yaw_rotation()
+        # planner.step3_center_gate()
+        # planner.step4_move_through_gate()
+        # planner.step5_continue_forward()
+        # planner.step6_find_slalom()
+        # planner.step7_center_slalom_red()
+        # planner.step8_slalom_distance()
+        # planner.step9_position_slalom_right()
+        # planner.step10_full_gas()
         
     except KeyboardInterrupt:
         planner.get_logger().info('Planner shutting down...')

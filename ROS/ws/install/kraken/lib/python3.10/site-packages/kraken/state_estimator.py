@@ -6,11 +6,9 @@ import serial
 import json
 
 from custom.msg import PoseE
+from std_msgs.msg import String
 
 sys.path.append("/home/kraken/kraken-nano/ROS/ws/src/kraken/kraken/include")
-
-import ms5837
-from simulation import Simulation
 
 class StateEstimator(Node):
 
@@ -19,12 +17,11 @@ class StateEstimator(Node):
         timer_period = 0.005  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.pose_pub = self.create_publisher(PoseE, "/state_estimator/pose", 10)
-        self.imu_sub = self.create_subscription(String, "gyro_data", self.imu_callback,10)
+        self.imu_sub = self.create_subscription(String, "gyro_data", self.imu_callback, 10)
         
-        self.sim = Simulation(self)
         self.logger = self.get_logger()
 
-        self.depth_serial = serial.Serial("/dev/ttyUSB0", 115200, 3)
+        self.depth_serial = serial.Serial("/dev/ttyUSB0", 115200, timeout=3)
         
         # Position
         self.z = 0
@@ -41,7 +38,7 @@ class StateEstimator(Node):
         delta = self.current - self.prev
         self.prev = self.current
 
-        depth = get_depth()
+        depth = self.get_depth()
         
         msg = PoseE()
         msg.pos.x = 0.0
@@ -52,21 +49,28 @@ class StateEstimator(Node):
         msg.rot.pitch = 0.0
         
         if depth is not None:
-                self.z = depth
-                msg.pos.z = float(self.z)
+            self.z = depth
+            msg.pos.z = float(self.z)
                 
-        if yaw_velocity is not None:
-                self.yaw += delta * self.yaw_velocity
+        if self.yaw_velocity is not None:
+            # self.logger.info(str(self.yaw_velocity))
+            msg.rot.yaw += delta * self.yaw_velocity
 
         self.pose_pub.publish(msg)
+        # self.logger.info(f"Published pose: {msg.pos.x}, {msg.pos.y}, {msg.pos.z}, {msg.rot.yaw}, {msg.rot.roll}, {msg.rot.pitch}")
 
     def get_depth(self):
-        depth_str = self.depth_serial.readline()
-        return float(depth_str[:-2])
+        try:
+            depth_str = self.depth_serial.readline()
+            # print(depth_str)
+            # print(float(depth_str[:-2]))
+            return float(depth_str[:-2])
+        except (ValueError, serial.SerialTimeoutException):
+            return None
 
     def imu_callback(self, msg):
-        data = json.loads(msg)
-        self.yaw_velocity = int(msg["gyro"]["y"])
+        data = json.loads(str(msg.data))
+        self.yaw_velocity = float(data["gyro"]["y"])
 
 def main(args=None):
     rclpy.init(args=args)
