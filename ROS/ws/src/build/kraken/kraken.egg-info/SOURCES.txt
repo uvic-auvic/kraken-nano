@@ -13,7 +13,9 @@ kraken/FSM.py
 kraken/__init__.py
 kraken/computer_vision.py
 kraken/controller.py
+kraken/controller_pid.py
 kraken/controller_test.py
+kraken/motor_controller.py
 kraken/planner.py
 kraken/planner_test.py
 kraken/spinMotor.py
@@ -21,6 +23,7 @@ kraken/state_estimator.py
 kraken/testMotor.py
 launch/kraken.launch.py
 launch/kraken_system.launch.py
+launch/planner_controller.launch.py
 resource/kraken
 test/test_copyright.py
 test/test_flake8.py

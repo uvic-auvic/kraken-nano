@@ -6,9 +6,10 @@ import cv2
 from rclpy.node import Node
 import os
 from datetime import datetime
+import json
 
 import sys
-from std_msgs.msg import Int32MultiArray 
+from std_msgs.msg import Int32MultiArray, String
 
 class ComputerVision(Node):
 
@@ -16,7 +17,12 @@ class ComputerVision(Node):
         super().__init__('computer_vision')
         timer_period = 0.05  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
+        
+        # Publishers
         self.publisher_ = self.create_publisher(Int32MultiArray, 'objects', 10)
+        self.detection_info_publisher = self.create_publisher(String, 'detection_info', 10)
+        self.gyro_publisher = self.create_publisher(String, 'gyro_data', 10)
+        self.accel_publisher = self.create_publisher(String, 'accel_data', 10)
 
         # --- Class Names from your data.yaml ---
         self.CLASS_NAMES = ['Sawfish Gate Banner', 'Shark Gate Banner', 'Full Gate', 'Red Slalom', 'White Slalom', 'Full Torpedo Banner', 'Sawfish Torpedo Hole', 'Shark Torpedo Hole']
@@ -31,6 +37,8 @@ class ComputerVision(Node):
         config = rs.config()
         config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
         config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+        config.enable_stream(rs.stream.gyro)
+        config.enable_stream(rs.stream.accel)
         
         # Start pipeline and get profile for intrinsics
         profile = self.pipeline.start(config)
@@ -49,6 +57,7 @@ class ComputerVision(Node):
         os.makedirs(self.error_report_dir, exist_ok=True)
         os.makedirs(self.image_folder, exist_ok=True)
         self.report_file = os.path.join(self.error_report_dir, "detection_distances.txt")
+        self.gyro_report_file = os.path.join(self.error_report_dir, "gyro_accel_report.txt")
 
         # Create depth colorizer for better depth visualization
         self.colorizer = rs.colorizer()
@@ -57,10 +66,70 @@ class ComputerVision(Node):
         self.get_logger().info('Computer Vision Running')
         self.boolList = self.objectDetector()
         self.get_logger().info(str(self.boolList))
+        
+        # Publish the boolean array (existing functionality)
         self.msg = Int32MultiArray()
         self.msg.data = self.boolList
         self.publisher_.publish(self.msg)
 
+    def publish_detection_info(self, detections_info):
+        """Publish detailed detection information for FSM"""
+        try:
+            # Create detection summary for FSM
+            detection_summary = {
+                'timestamp': str(self.get_clock().now().nanoseconds),
+                'total_detections': len(detections_info),
+                'detections': []
+            }
+            
+            for detection in detections_info:
+                detection_data = {
+                    'class_name': detection['class_name'],
+                    'class_id': self.CLASS_NAMES.index(detection['class_name']) if detection['class_name'] in self.CLASS_NAMES else -1,
+                    'confidence': float(detection['confidence']),
+                    'center_x': int(detection['center_x']),
+                    'center_y': int(detection['center_y']),
+                    'distance': float(detection['distance']),
+                    'bbox': {
+                        'x1': int(detection['x1']),
+                        'y1': int(detection['y1']),
+                        'x2': int(detection['x2']),
+                        'y2': int(detection['y2'])
+                    }
+                }
+                detection_summary['detections'].append(detection_data)
+            
+            # Publish detection info as JSON string
+            detection_msg = String()
+            detection_msg.data = json.dumps(detection_summary)
+            self.detection_info_publisher.publish(detection_msg)
+            
+            self.get_logger().info(f'Published detection info: {len(detections_info)} objects')
+            
+        except Exception as e:
+            self.get_logger().error(f'Error publishing detection info: {str(e)}')
+
+    def publish_gyro_accel_data(self, gyro_data, accel_data):
+        """Publish gyroscope and accelerometer data"""
+        try:
+            gyro_msg = String()
+            gyro_msg.data = json.dumps({
+                'timestamp': str(self.get_clock().now().nanoseconds),
+                'gyro': {'x': gyro_data[0], 'y': gyro_data[1], 'z': gyro_data[2]}
+            })
+            self.gyro_publisher.publish(gyro_msg)
+
+            accel_msg = String()
+            accel_msg.data = json.dumps({
+                'timestamp': str(self.get_clock().now().nanoseconds),
+                'accel': {'x': accel_data[0], 'y': accel_data[1], 'z': accel_data[2]}
+            })
+            self.accel_publisher.publish(accel_msg)
+            
+        except Exception as e:
+            self.get_logger().error(f'Error publishing IMU data: {str(e)}')
+
+    # ... keep all your existing functions (save_images, write_detection_report, etc.) ...
     def save_images(self, color_frame_with_boxes, depth_frame, timestamp):
         """Save color image with bounding boxes and depth images to imageFolder"""
         timestamp_str = timestamp.replace(" ", "_").replace(":", "-").replace(".", "-")
@@ -91,7 +160,6 @@ class ComputerVision(Node):
 
     def write_detection_report(self, detections_info, image_filenames, timestamp):
         """Write detection information to report file"""
-        
         with open(self.report_file, 'a') as f:
             f.write(f"\n--- Detection Report - {timestamp} ---\n")
             f.write(f"Color Image: imageFolder/{image_filenames['color_image']}\n")
@@ -110,8 +178,46 @@ class ComputerVision(Node):
             f.write(f"Total objects detected: {len(detections_info)}\n")
             f.write("\n")
 
+    def write_gyro_accel_report(self, gyro_data, accel_data):
+        """Write gyroscope and accelerometer data to report file"""
+        try:
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+            with open(self.gyro_report_file, 'a') as f:
+                f.write(f"{timestamp} - Gyro: x={gyro_data[0]:.3f}, y={gyro_data[1]:.3f}, z={gyro_data[2]:.3f} | ")
+                f.write(f"Accel: x={accel_data[0]:.3f}, y={accel_data[1]:.3f}, z={accel_data[2]:.3f}\n")
+        except Exception as e:
+            self.get_logger().error(f'Error writing gyro/accel report: {str(e)}')
+
     def objectDetector(self):
         frames = self.pipeline.wait_for_frames()
+        
+        # GET IMU DATA FIRST (ADD THIS BACK)
+        gyro_data = [0, 0, 0]  # Default values
+        accel_data = [0, 0, 0]  # Default values
+        
+        # Try to get gyroscope data
+        try:
+            gyro_frame = frames.first_or_default(rs.stream.gyro)
+            if gyro_frame:
+                gyro_data_raw = gyro_frame.as_motion_frame().get_motion_data()
+                gyro_data = [gyro_data_raw.x, gyro_data_raw.y, gyro_data_raw.z]
+        except Exception as e:
+            self.get_logger().debug(f'No gyro data available: {str(e)}')
+
+        # Try to get accelerometer data
+        try:
+            accel_frame = frames.first_or_default(rs.stream.accel)
+            if accel_frame:
+                accel_data_raw = accel_frame.as_motion_frame().get_motion_data()
+                accel_data = [accel_data_raw.x, accel_data_raw.y, accel_data_raw.z]
+        except Exception as e:
+            self.get_logger().debug(f'No accel data available: {str(e)}')
+
+        # Publish IMU data
+        self.publish_gyro_accel_data(gyro_data, accel_data)
+        
+        # Write IMU data to report
+        self.write_gyro_accel_report(gyro_data, accel_data)
         
         # Align depth frame to color frame
         aligned_frames = self.align.process(frames)
@@ -120,7 +226,7 @@ class ComputerVision(Node):
         depth_frame = aligned_frames.get_depth_frame()
         
         if not color_frame or not depth_frame:
-           return [0] * 8
+            return [0] * 8
 
         frame = np.asanyarray(color_frame.get_data())
         depth_image = np.asanyarray(depth_frame.get_data())
@@ -211,13 +317,9 @@ class ComputerVision(Node):
                     # Draw label with class name, confidence, and distance
                     label = f'{class_name}: {confidence:.2f} - {depth_value:.2f}m'
                     cv2.putText(frame, label, (x1, y1-10), 
-                              cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
                     
-                    # Print detection info to console
-                    print(f"Detected: {class_name} with confidence {confidence:.2f} at ({x_center_pixel},{y_center_pixel}) - Distance: {depth_value:.3f}m")
                     validObjectBools[class_id] = 1 
-                
-                print(f"Total objects detected: {len(valid_boxes)}")
                 
                 # Save images with bounding boxes already drawn
                 image_filenames = self.save_images(frame, depth_frame, timestamp)
@@ -225,9 +327,8 @@ class ComputerVision(Node):
                 # Write detection report to file with image references (only when objects detected)
                 self.write_detection_report(detections_info, image_filenames, timestamp)
                 
-            # No else clause for "Nil" - we just don't report anything when no detections
-        else:
-            print("ONNX output shape:", outputs[0].shape)
+                # PUBLISH DETECTION INFO FOR FSM
+                self.publish_detection_info(detections_info)
 
         # Show live feed with bounding boxes and depth info
         cv2.imshow('RealSense ONNX Detection', frame)

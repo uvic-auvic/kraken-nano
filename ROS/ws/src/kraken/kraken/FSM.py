@@ -8,20 +8,11 @@ from enum import Enum
 class RobotState(Enum):
     IDLE = "idle"
     STEP_01_INITIAL_DESCENT = "step_01_initial_descent"
-    STEP_02_STABILIZE_DEPTH = "step_02_stabilize_depth"
-    STEP_03_YAW_SEARCH = "step_03_yaw_search"
-    STEP_04_GATE_DETECTION = "step_04_gate_detection"
-    STEP_05_GATE_APPROACH = "step_05_gate_approach"
-    STEP_06_GATE_TRANSIT = "step_06_gate_transit"
-    STEP_07_POST_GATE_SEARCH = "step_07_post_gate_search"
-    STEP_08_TORPEDO_TARGET_SEARCH = "step_08_torpedo_target_search"
-    STEP_09_TORPEDO_APPROACH = "step_09_torpedo_approach"
-    STEP_10_TORPEDO_FIRE = "step_10_torpedo_fire"
-    STEP_11_SLALOM_SEARCH = "step_11_slalom_search"
-    STEP_12_SLALOM_NAVIGATION = "step_12_slalom_navigation"
-    STEP_13_FINAL_TASK_SEARCH = "step_13_final_task_search"
-    STEP_14_SURFACE_PREPARATION = "step_14_surface_preparation"
-    STEP_15_MISSION_COMPLETE = "step_15_mission_complete"
+    STEP_02_YAW_SEARCH = "step_02_yaw_search"
+    STEP_03_GATE_DETECTION = "step_03_gate_detection"
+    STEP_04_GATE_APPROACH = "step_04_gate_approach"
+    STEP_05_GATE_TRANSIT = "step_05_gate_transit"
+    STEP_06_POST_GATE_SEARCH = "step_06_post_gate_search"
     EMERGENCY = "emergency"
 
 class FSMNode(Node):
@@ -74,12 +65,10 @@ class FSMNode(Node):
         
         # Mission tracking variables
         self.gate_passed = False
-        self.torpedo_fired = False
-        self.slalom_completed = False
         self.target_depth = 2.0  # meters
         self.mission_start_time = None
         
-        self.get_logger().info('Enhanced FSM Node initialized with 15 competition steps')
+        self.get_logger().info('Simplified FSM Node initialized with 7 basic navigation steps')
 
     def objects_callback(self, msg):
         """Callback for object detection updates"""
@@ -171,36 +160,16 @@ class FSMNode(Node):
             self.step_idle()
         elif self.current_state == RobotState.STEP_01_INITIAL_DESCENT:
             self.step_01_initial_descent()
-        elif self.current_state == RobotState.STEP_02_STABILIZE_DEPTH:
-            self.step_02_stabilize_depth()
-        elif self.current_state == RobotState.STEP_03_YAW_SEARCH:
-            self.step_03_yaw_search()
-        elif self.current_state == RobotState.STEP_04_GATE_DETECTION:
-            self.step_04_gate_detection()
-        elif self.current_state == RobotState.STEP_05_GATE_APPROACH:
-            # Skip - now handled in step 4
-            self.transition_to_state(RobotState.STEP_07_POST_GATE_SEARCH)
-        elif self.current_state == RobotState.STEP_06_GATE_TRANSIT:
-            # Skip - now handled in step 4  
-            self.transition_to_state(RobotState.STEP_07_POST_GATE_SEARCH)
-        elif self.current_state == RobotState.STEP_07_POST_GATE_SEARCH:
-            self.step_07_post_gate_search()
-        elif self.current_state == RobotState.STEP_08_TORPEDO_TARGET_SEARCH:
-            self.step_08_torpedo_target_search()
-        elif self.current_state == RobotState.STEP_09_TORPEDO_APPROACH:
-            self.step_09_torpedo_approach()
-        elif self.current_state == RobotState.STEP_10_TORPEDO_FIRE:
-            self.step_10_torpedo_fire()
-        elif self.current_state == RobotState.STEP_11_SLALOM_SEARCH:
-            self.step_11_slalom_search()
-        elif self.current_state == RobotState.STEP_12_SLALOM_NAVIGATION:
-            self.step_12_slalom_navigation()
-        elif self.current_state == RobotState.STEP_13_FINAL_TASK_SEARCH:
-            self.step_13_final_task_search()
-        elif self.current_state == RobotState.STEP_14_SURFACE_PREPARATION:
-            self.step_14_surface_preparation()
-        elif self.current_state == RobotState.STEP_15_MISSION_COMPLETE:
-            self.step_15_mission_complete()
+        elif self.current_state == RobotState.STEP_02_YAW_SEARCH:
+            self.step_02_yaw_search()
+        elif self.current_state == RobotState.STEP_03_GATE_DETECTION:
+            self.step_03_gate_detection()
+        elif self.current_state == RobotState.STEP_04_GATE_APPROACH:
+            self.step_04_gate_approach()
+        elif self.current_state == RobotState.STEP_05_GATE_TRANSIT:
+            self.step_05_gate_transit()
+        elif self.current_state == RobotState.STEP_06_POST_GATE_SEARCH:
+            self.step_06_post_gate_search()
 
     # ================== STEP FUNCTIONS ==================
 
@@ -226,33 +195,15 @@ class FSMNode(Node):
         if self.imu_data['depth'] >= self.target_depth:
             self.get_logger().info(f"Reached target depth early: {self.imu_data['depth']:.2f}m")
             self._descent_command_sent = False  # Reset for potential re-entry
-            self.transition_to_state(RobotState.STEP_02_STABILIZE_DEPTH)
+            self.transition_to_state(RobotState.STEP_02_YAW_SEARCH)
         
         # 2. Time-based transition (2-3 seconds as you specified)
         elif self.step_start_time and time.time() - self.step_start_time >= 2.5:  # 2.5 seconds
             self.get_logger().info(f"Descent time complete. Current depth: {self.imu_data['depth']:.2f}m")
             self._descent_command_sent = False  # Reset for potential re-entry
-            self.transition_to_state(RobotState.STEP_02_STABILIZE_DEPTH)
+            self.transition_to_state(RobotState.STEP_02_YAW_SEARCH)
 
-    def step_02_stabilize_depth(self):
-        """STEP 2: Stabilize at target depth and trim"""
-        # TODO: Implement depth stabilization
-        # - Fine-tune depth control
-        # - Stabilize roll/pitch using IMU feedback
-        # - Ensure submarine is level
-        
-        depth_error = abs(self.imu_data['depth'] - self.target_depth)
-        if depth_error > 0.2:  # 20cm tolerance
-            if self.imu_data['depth'] < self.target_depth:
-                self.send_planner_command("move_down", {"speed": 30, "duration": 0.5})
-            else:
-                self.send_planner_command("move_up", {"speed": 30, "duration": 0.5})
-        
-        # Transition condition: stable depth and level attitude
-        if depth_error < 0.1 and abs(self.imu_data['roll']) < 5 and abs(self.imu_data['pitch']) < 5:
-            self.transition_to_state(RobotState.STEP_03_YAW_SEARCH)
-
-    def step_03_yaw_search(self):
+    def step_02_yaw_search(self):
         """STEP 3: Clockwise yaw search for gate detection"""
         # Perform continuous clockwise yaw search until gate + banner detected
         # - Rotate clockwise indefinitely 
@@ -274,9 +225,9 @@ class FSMNode(Node):
         if gate_detected and (sawfish_banner or shark_banner):
             banner_type = "sawfish" if sawfish_banner else "shark"
             self.get_logger().info(f"Gate and {banner_type} banner detected - proceeding to gate transit")
-            self.transition_to_state(RobotState.STEP_04_GATE_DETECTION)
+            self.transition_to_state(RobotState.STEP_03_GATE_DETECTION)
 
-    def step_04_gate_detection(self):
+    def step_03_gate_detection(self):
         """STEP 4: Gate transit - move through gate while maintaining proper alignment"""
         # Navigate through the detected gate
         # - Move forward through gate center
@@ -312,14 +263,14 @@ class FSMNode(Node):
             if self.step_start_time and time.time() - self.step_start_time > 8.0:
                 self.gate_passed = True
                 self.get_logger().info("Gate transit completed - moving to post-gate search")
-                self.transition_to_state(RobotState.STEP_07_POST_GATE_SEARCH)
+                self.transition_to_state(RobotState.STEP_06_POST_GATE_SEARCH)
         else:
             # Lost sight of gate or banner, go back to yaw search
             self.get_logger().warn("Lost gate or banner detection - returning to yaw search")
-            self.transition_to_state(RobotState.STEP_03_YAW_SEARCH)
+            self.transition_to_state(RobotState.STEP_02_YAW_SEARCH)
 
-    def step_05_gate_approach(self):
-        """STEP 5: Approach the detected gate"""
+    def step_04_gate_approach(self):
+        """STEP 4: Approach the detected gate"""
         # TODO: Implement gate approach logic
         # - Center the gate in camera view
         # - Approach at controlled speed
@@ -329,13 +280,13 @@ class FSMNode(Node):
             self.send_planner_command("approach_target", {"target": "gate", "speed": 40})
             # Transition condition: close enough to gate (use depth sensor or time)
             if self.step_start_time and time.time() - self.step_start_time > 5.0:
-                self.transition_to_state(RobotState.STEP_06_GATE_TRANSIT)
+                self.transition_to_state(RobotState.STEP_05_GATE_TRANSIT)
         else:
             # Lost the gate, go back to detection
-            self.transition_to_state(RobotState.STEP_04_GATE_DETECTION)
+            self.transition_to_state(RobotState.STEP_03_GATE_DETECTION)
 
-    def step_06_gate_transit(self):
-        """STEP 6: Pass through the gate"""
+    def step_05_gate_transit(self):
+        """STEP 5: Pass through the gate"""
         # TODO: Implement gate transit logic
         # - Pass through gate center
         # - Monitor for successful passage
@@ -346,10 +297,10 @@ class FSMNode(Node):
         # Transition condition: passed through gate (no longer detected behind)
         if self.step_start_time and time.time() - self.step_start_time > 3.0:
             self.gate_passed = True
-            self.transition_to_state(RobotState.STEP_07_POST_GATE_SEARCH)
+            self.transition_to_state(RobotState.STEP_06_POST_GATE_SEARCH)
 
-    def step_07_post_gate_search(self):
-        """STEP 7: Search for next task after gate"""
+    def step_06_post_gate_search(self):
+        """STEP 6: Search for next task after gate - Final step"""
         # TODO: Implement post-gate search
         # - Search for torpedo targets or other tasks
         # - Scan area methodically
@@ -357,113 +308,11 @@ class FSMNode(Node):
         
         self.send_planner_command("search_pattern", {"pattern": "post_gate", "duration": 2.0})
         
-        # Transition condition: detect torpedo target
-        if self.detected_objects[5] or self.detected_objects[6] or self.detected_objects[7]:  # Torpedo related
-            self.transition_to_state(RobotState.STEP_08_TORPEDO_TARGET_SEARCH)
-
-    def step_08_torpedo_target_search(self):
-        """STEP 8: Locate and identify torpedo targets"""
-        # TODO: Implement torpedo target identification
-        # - Identify specific torpedo holes (Sawfish vs Shark)
-        # - Determine target priority
-        # - Position for approach
-        
-        if self.detected_objects[6] or self.detected_objects[7]:  # Specific holes detected
-            self.transition_to_state(RobotState.STEP_09_TORPEDO_APPROACH)
-        else:
-            self.send_planner_command("search_pattern", {"pattern": "torpedo_search", "duration": 1.0})
-
-    def step_09_torpedo_approach(self):
-        """STEP 9: Approach torpedo firing position"""
-        # TODO: Implement torpedo approach
-        # - Position submarine for optimal firing angle
-        # - Maintain proper distance and orientation
-        # - Center target in firing solution
-        
-        self.send_planner_command("approach_target", {"target": "torpedo", "speed": 30})
-        
-        # Transition condition: in firing position
-        if self.step_start_time and time.time() - self.step_start_time > 4.0:
-            self.transition_to_state(RobotState.STEP_10_TORPEDO_FIRE)
-
-    def step_10_torpedo_fire(self):
-        """STEP 10: Fire torpedo at target"""
-        # TODO: Implement torpedo firing
-        # - Activate torpedo mechanism
-        # - Confirm firing success
-        # - Assess target hit
-        
-        self.send_planner_command("fire_torpedo", {"target_id": "sawfish" if self.detected_objects[6] else "shark"})
-        
-        # Transition condition: torpedo fired (time-based or confirmation)
-        if self.step_start_time and time.time() - self.step_start_time > 2.0:
-            self.torpedo_fired = True
-            self.transition_to_state(RobotState.STEP_11_SLALOM_SEARCH)
-
-    def step_11_slalom_search(self):
-        """STEP 11: Search for slalom markers"""
-        # TODO: Implement slalom search
-        # - Search for red and white slalom markers
-        # - Identify slalom course layout
-        # - Plan slalom navigation route
-        
-        self.send_planner_command("search_pattern", {"pattern": "slalom_search", "duration": 2.0})
-        
-        # Transition condition: detect slalom markers
-        if self.detected_objects[3] or self.detected_objects[4]:  # Red or White Slalom
-            self.transition_to_state(RobotState.STEP_12_SLALOM_NAVIGATION)
-
-    def step_12_slalom_navigation(self):
-        """STEP 12: Navigate through slalom course"""
-        # TODO: Implement slalom navigation
-        # - Navigate around slalom markers in correct pattern
-        # - Maintain proper speed and depth
-        # - Follow slalom rules and sequence
-        
-        self.send_planner_command("slalom_navigation", {"pattern": "standard", "speed": 45})
-        
-        # Transition condition: completed slalom course
-        if self.step_start_time and time.time() - self.step_start_time > 15.0:
-            self.slalom_completed = True
-            self.transition_to_state(RobotState.STEP_13_FINAL_TASK_SEARCH)
-
-    def step_13_final_task_search(self):
-        """STEP 13: Search for any remaining tasks"""
-        # TODO: Implement final task search
-        # - Search for any missed objectives
-        # - Complete bonus tasks if time permits
-        # - Prepare for mission completion
-        
-        self.send_planner_command("search_pattern", {"pattern": "final_sweep", "duration": 3.0})
-        
-        # Transition condition: time limit or all tasks complete
+        # Final step - mission simplified to basic navigation
+        # Could transition back to IDLE or continue searching
         if self.step_start_time and time.time() - self.step_start_time > 10.0:
-            self.transition_to_state(RobotState.STEP_14_SURFACE_PREPARATION)
-
-    def step_14_surface_preparation(self):
-        """STEP 14: Prepare to surface"""
-        # TODO: Implement surface preparation
-        # - Navigate to safe surfacing area
-        # - Stabilize submarine attitude
-        # - Prepare for controlled ascent
-        
-        self.send_planner_command("move_to_surface_area", {"speed": 30})
-        
-        # Transition condition: in safe area and ready to surface
-        if self.step_start_time and time.time() - self.step_start_time > 5.0:
-            self.transition_to_state(RobotState.STEP_15_MISSION_COMPLETE)
-
-    def step_15_mission_complete(self):
-        """STEP 15: Surface and complete mission"""
-        # TODO: Implement mission completion
-        # - Surface to competition pool surface
-        # - Signal mission completion
-        # - Shut down non-essential systems
-        
-        self.send_planner_command("surface", {"speed": 40})
-        self.get_logger().info("MISSION COMPLETE - Surfacing submarine")
-        
-        # Mission complete - could transition back to IDLE or shutdown
+            self.get_logger().info("Mission complete - simplified FSM finished at step 7")
+            self.transition_to_state(RobotState.IDLE)
 
     # ================== HELPER FUNCTIONS ==================
 
@@ -473,10 +322,11 @@ class FSMNode(Node):
         # Could implement recovery logic or advance to next step
         # For now, just continue to next logical step
         
+
         if self.current_state == RobotState.STEP_01_INITIAL_DESCENT:
-            self.transition_to_state(RobotState.STEP_02_STABILIZE_DEPTH)
-        elif self.current_state == RobotState.STEP_03_YAW_SEARCH:
-            self.transition_to_state(RobotState.STEP_07_POST_GATE_SEARCH)  # Skip gate if not found
+            self.transition_to_state(RobotState.STEP_02_YAW_SEARCH)
+        elif self.current_state == RobotState.STEP_02_YAW_SEARCH:
+            self.transition_to_state(RobotState.STEP_06_POST_GATE_SEARCH)  # Skip gate if not found
         # Add more timeout recovery logic as needed
 
     def send_planner_command(self, command_type: str, parameters: dict = None):
