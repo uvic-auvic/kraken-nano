@@ -42,7 +42,6 @@ class StateEstimator(Node):
         self.prev = self.current
 
         depth = get_depth()
-        yaw_velocity = # Get yaw
         
         msg = PoseE()
         msg.pos.x = 0.0
@@ -57,7 +56,7 @@ class StateEstimator(Node):
                 msg.pos.z = float(self.z)
                 
         if yaw_velocity is not None:
-                self.yaw += delta * yaw_velocity
+                self.yaw += delta * self.yaw_velocity
 
         self.pose_pub.publish(msg)
 
