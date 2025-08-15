@@ -84,12 +84,12 @@ class MotorBoard():
                 self.back_right_motor(False)
         
         def yaw_ccw(self):
-                self.left_motor(False)
-                self.right_motor(True)
+                self.back_motor(False)
+                self.front_motor(True)
                 
         def yaw_cw(self):
-                self.left_motor(True)
-                self.right_motor(False)
+                self.back_motor(True)
+                self.front_motor(False)
         
         def cut_motors(self):
                 self.buffer.append(ord("M"))
