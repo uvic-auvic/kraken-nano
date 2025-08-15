@@ -5,10 +5,11 @@ import onnxruntime as ort
 import cv2
 from rclpy.node import Node
 import os
+import json
 from datetime import datetime
 
 import sys
-from std_msgs.msg import Int32MultiArray 
+from std_msgs.msg import Int32MultiArray, String 
 
 class ComputerVision(Node):
 
@@ -17,6 +18,13 @@ class ComputerVision(Node):
         timer_period = 0.05  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.publisher_ = self.create_publisher(Int32MultiArray, 'objects', 10)
+        
+        # Add publisher for object positioning data
+        self.position_publisher_ = self.create_publisher(String, 'object_positions', 10)
+        
+        # Add publishers for gyro and accel data
+        self.gyro_publisher_ = self.create_publisher(String, 'gyro_data', 10)
+        self.accel_publisher_ = self.create_publisher(String, 'accel_data', 10)
 
         # --- Class Names from your data.yaml ---
         self.CLASS_NAMES = ['Sawfish Gate Banner', 'Shark Gate Banner', 'Full Gate', 'Red Slalom', 'White Slalom', 'Full Torpedo Banner', 'Sawfish Torpedo Hole', 'Shark Torpedo Hole']
@@ -32,6 +40,10 @@ class ComputerVision(Node):
         config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
         config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
         
+        # this is the shit for real sense that gets the acceleration data and the gyro, it will publish so our state estimator can get the info and do some calc with it. calc is short for calculus and calculator btw
+        config.enable_stream(rs.stream.accel)
+        config.enable_stream(rs.stream.gyro)
+
         # Start pipeline and get profile for intrinsics
         profile = self.pipeline.start(config)
         
@@ -52,6 +64,31 @@ class ComputerVision(Node):
 
         # Create depth colorizer for better depth visualization
         self.colorizer = rs.colorizer()
+
+    def get_object_quadrant_and_position(self, x_center, y_center, frame_width, frame_height):
+        """
+        Determine object quadrant and relative position in frame
+        Returns quadrant (1-4) and relative position (-1 to 1 for both x,y)
+        """
+        # Calculate frame center
+        center_x = frame_width // 2
+        center_y = frame_height // 2
+        
+        # Calculate relative position (-1 to 1)
+        relative_x = (x_center - center_x) / (frame_width / 2)
+        relative_y = (y_center - center_y) / (frame_height / 2)
+        
+        # Determine quadrant (1=top-right, 2=top-left, 3=bottom-left, 4=bottom-right)
+        if x_center >= center_x and y_center <= center_y:
+            quadrant = 1  # Top-right
+        elif x_center < center_x and y_center <= center_y:
+            quadrant = 2  # Top-left
+        elif x_center < center_x and y_center > center_y:
+            quadrant = 3  # Bottom-left
+        else:
+            quadrant = 4  # Bottom-right
+            
+        return quadrant, relative_x, relative_y
 
     def timer_callback(self):
         self.get_logger().info('Computer Vision Running')
@@ -89,29 +126,92 @@ class ComputerVision(Node):
             'depth_colorized_image': depth_colorized_filename
         }
 
-    def write_detection_report(self, detections_info, image_filenames, timestamp):
-        """Write detection information to report file"""
+    def write_positioning_report(self, positioning_data, image_filenames, timestamp):
+        """Write positioning data being sent to planner to report file"""
         
         with open(self.report_file, 'a') as f:
-            f.write(f"\n--- Detection Report - {timestamp} ---\n")
+            f.write(f"\n--- PLANNER POSITIONING DATA - {timestamp} ---\n")
             f.write(f"Color Image: imageFolder/{image_filenames['color_image']}\n")
             f.write(f"Depth Raw Image: imageFolder/{image_filenames['depth_raw_image']}\n")
             f.write(f"Depth Colorized Image: imageFolder/{image_filenames['depth_colorized_image']}\n")
             f.write("---\n")
             
-            for info in detections_info:
-                f.write(f"Object: {info['class_name']}\n")
-                f.write(f"Confidence: {info['confidence']:.3f}\n")
-                f.write(f"Center Position: ({info['center_x']}, {info['center_y']})\n")
-                f.write(f"Distance: {info['distance']:.3f} meters\n")
-                f.write(f"Bounding Box: ({info['x1']}, {info['y1']}) to ({info['x2']}, {info['y2']})\n")
+            for class_name, data in positioning_data.items():
+                f.write(f"Object: {class_name}\n")
+                f.write(f"Class ID: {data['class_id']}\n")
+                f.write(f"Quadrant: {data['quadrant']}\n")
+                f.write(f"Relative Position: X={data['relative_x']:.3f}, Y={data['relative_y']:.3f}\n")
+                f.write(f"Pixel Center: ({data['center_x']}, {data['center_y']})\n")
+                f.write(f"Distance: {data['distance']:.3f} meters\n")
+                f.write(f"Confidence: {data['confidence']:.3f}\n")
+                f.write(f"Size: {data['width']}x{data['height']} pixels\n")
                 f.write("---\n")
             
-            f.write(f"Total objects detected: {len(detections_info)}\n")
+            f.write(f"Total objects sent to planner: {len(positioning_data)}\n")
+            f.write(f"JSON Data: {json.dumps(positioning_data, indent=2)}\n")
             f.write("\n")
+
+
+    def write_gyro_accel_report(self, gyro, accel, timestamp):
+        """Write gyro and accel data being sent to state estimator to report file"""
+
+        with open(self.report_file, 'a') as f:
+            f.write(f"\n--- GYRO ACCEL DATA - {timestamp} ---\n")
+            f.write(f"GYRO INFO: X={gyro.x:.6f}, Y={gyro.y:.6f}, Z={gyro.z:.6f} rad/s\n")
+            f.write(f"ACCEL INFO: X={accel.x:.6f}, Y={accel.y:.6f}, Z={accel.z:.6f} m/s²\n")
+            f.write("---\n")
 
     def objectDetector(self):
         frames = self.pipeline.wait_for_frames()
+        
+        # Get gyro and accel data from RealSense
+        gyro_frame = None
+        accel_frame = None
+        
+        for f in frames:
+            if f.profile.stream_type() == rs.stream.gyro:
+                gyro_frame = f.as_motion_frame()
+            elif f.profile.stream_type() == rs.stream.accel:
+                accel_frame = f.as_motion_frame()
+        
+        # Generate timestamp for IMU data
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+        
+        # Process and publish gyro/accel data if available
+        if gyro_frame and accel_frame:
+            gyro_data = gyro_frame.get_motion_data()
+            accel_data = accel_frame.get_motion_data()
+            
+            # Create data structures for publishing
+            gyro_json = {
+                'timestamp': timestamp,
+                'x': float(gyro_data.x),
+                'y': float(gyro_data.y),
+                'z': float(gyro_data.z),
+                'units': 'rad/s'
+            }
+            
+            accel_json = {
+                'timestamp': timestamp,
+                'x': float(accel_data.x),
+                'y': float(accel_data.y),
+                'z': float(accel_data.z),
+                'units': 'm/s²'
+            }
+            
+            # Publish gyro and accel data
+            gyro_msg = String()
+            gyro_msg.data = json.dumps(gyro_json)
+            self.gyro_publisher_.publish(gyro_msg)
+            
+            accel_msg = String()
+            accel_msg.data = json.dumps(accel_json)
+            self.accel_publisher_.publish(accel_msg)
+            
+            # Write gyro/accel report continuously
+            self.write_gyro_accel_report(gyro_data, accel_data, timestamp)
+            
+            print(f"IMU DATA - Gyro: X={gyro_data.x:.3f}, Y={gyro_data.y:.3f}, Z={gyro_data.z:.3f} rad/s | Accel: X={accel_data.x:.3f}, Y={accel_data.y:.3f}, Z={accel_data.z:.3f} m/s²")
         
         # Align depth frame to color frame
         aligned_frames = self.align.process(frames)
@@ -137,7 +237,7 @@ class ComputerVision(Node):
         
         # Initialize default return value
         validObjectBools = [0] * 8
-        detections_info = []
+        positioning_data = {}  # Store positioning data for planner use
         
         # --- YOLO Postprocessing ---
         if len(outputs[0].shape) == 3:  # YOLOv8 format [1, 84, 8400]
@@ -183,24 +283,30 @@ class ComputerVision(Node):
                     # Get depth at center of detection
                     depth_value = depth_frame.get_distance(x_center_pixel, y_center_pixel)
                     
+                    # Get quadrant and relative position
+                    quadrant, relative_x, relative_y = self.get_object_quadrant_and_position(
+                        x_center_pixel, y_center_pixel, original_width, original_height)
+                    
                     # Get class name from class ID
                     class_id = valid_class_ids[i]
                     class_name = self.CLASS_NAMES[class_id] if class_id < len(self.CLASS_NAMES) else f"Class_{class_id}"
                     confidence = valid_scores[i]
                     
-                    # Store detection info for reporting
-                    detection_info = {
-                        'class_name': class_name,
-                        'confidence': confidence,
-                        'center_x': x_center_pixel,
-                        'center_y': y_center_pixel,
-                        'distance': depth_value,
-                        'x1': x1,
-                        'y1': y1,
-                        'x2': x2,
-                        'y2': y2
+
+                    
+                    # Store positioning data by class name for planner use
+                    positioning_data[class_name] = {
+                        'class_id': int(class_id),
+                        'center_x': int(x_center_pixel),
+                        'center_y': int(y_center_pixel),
+                        'relative_x': float(relative_x),
+                        'relative_y': float(relative_y),
+                        'quadrant': int(quadrant),
+                        'distance': float(depth_value),
+                        'confidence': float(confidence),
+                        'width': int(width_pixel),
+                        'height': int(height_pixel)
                     }
-                    detections_info.append(detection_info)
                     
                     # Draw bounding box on the frame
                     cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
@@ -208,28 +314,53 @@ class ComputerVision(Node):
                     # Draw center point
                     cv2.circle(frame, (x_center_pixel, y_center_pixel), 5, (255, 0, 0), -1)
                     
-                    # Draw label with class name, confidence, and distance
-                    label = f'{class_name}: {confidence:.2f} - {depth_value:.2f}m'
+                    # Draw label with class name, confidence, distance, and quadrant
+                    label = f'{class_name}: {confidence:.2f} - {depth_value:.2f}m - Q{quadrant}'
                     cv2.putText(frame, label, (x1, y1-10), 
                               cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
                     
-                    # Print detection info to console
-                    print(f"Detected: {class_name} with confidence {confidence:.2f} at ({x_center_pixel},{y_center_pixel}) - Distance: {depth_value:.3f}m")
+                    # Draw relative position info
+                    pos_label = f'Rel: ({relative_x:.2f}, {relative_y:.2f})'
+                    cv2.putText(frame, pos_label, (x1, y1-25), 
+                              cv2.FONT_HERSHEY_SIMPLEX, 0.4, (255, 255, 0), 1)
+                    
+                    # Print positioning data being sent to planner
+                    print(f"PLANNER DATA - {class_name}: Q{quadrant}, Rel_X:{relative_x:.3f}, Rel_Y:{relative_y:.3f}, Dist:{depth_value:.3f}m, Conf:{confidence:.3f}")
                     validObjectBools[class_id] = 1 
                 
                 print(f"Total objects detected: {len(valid_boxes)}")
+                print(f"POSITIONING DATA TO PLANNER: {json.dumps(positioning_data, indent=2)}")
                 
-                # Save images with bounding boxes already drawn
+                # Publish positioning data for planner use
+                if positioning_data:
+                    position_msg = String()
+                    position_msg.data = json.dumps(positioning_data)
+                    self.position_publisher_.publish(position_msg)
+                
+                # Save images and write positioning data to report file
                 image_filenames = self.save_images(frame, depth_frame, timestamp)
-                
-                # Write detection report to file with image references (only when objects detected)
-                self.write_detection_report(detections_info, image_filenames, timestamp)
+                self.write_positioning_report(positioning_data, image_filenames, timestamp)
                 
             # No else clause for "Nil" - we just don't report anything when no detections
         else:
             print("ONNX output shape:", outputs[0].shape)
 
         # Show live feed with bounding boxes and depth info
+        
+        # Draw frame reference lines (quadrant dividers)
+        center_x = original_width // 2
+        center_y = original_height // 2
+        
+        # Draw center crosshair
+        cv2.line(frame, (center_x, 0), (center_x, original_height), (255, 255, 255), 1)  # Vertical line
+        cv2.line(frame, (0, center_y), (original_width, center_y), (255, 255, 255), 1)   # Horizontal line
+        
+        # Label quadrants
+        cv2.putText(frame, 'Q1', (center_x + 10, center_y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        cv2.putText(frame, 'Q2', (10, center_y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        cv2.putText(frame, 'Q3', (10, center_y + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        cv2.putText(frame, 'Q4', (center_x + 10, center_y + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1)
+        
         cv2.imshow('RealSense ONNX Detection', frame)
         cv2.waitKey(1)  # Add this to properly handle OpenCV window events
         
