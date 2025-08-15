@@ -1,7 +1,8 @@
 import rclpy
 from rclpy.node import Node
 import sys
-from std_msgs.msg import Float64, String
+from std_msgs.msg import Float64, String, Int32
+from std_msgs.msg import Int32
 import time
 import json
 
@@ -29,12 +30,12 @@ class Controller(Node):
         pid_period = 0.1  # seconds
         self.pid_timer = self.create_timer(pid_period, self.pid_cont)
         self.logger = self.get_logger()
-        self.reset_yaw_pub =self.create_publisher(int, "/controller/reset_yaw", 10)
-        self.depth_reached_pub = self.create_publisher(int, "/controller/depth_reached", 10)
+        self.reset_yaw_pub =self.create_publisher(Float64, "/controller/reset_yaw", 10)
+        self.depth_reached_pub = self.create_publisher(Float64, "/controller/depth_reached", 10)
         self.set_depth = 0;
         #self.sim = Simulation(self)
 
-        self.command_status_pub = self.create_publisher(int, "/controller/command_status", 10)
+        self.command_status_pub = self.create_publisher(Int32, "/controller/command_status", 10)
         self.command_stat = 0; # sends 0 for none, 1 for received, 2 for complete, 3 for overwritten
         # self.kill_switch = Serial("/dev/ttyTCU0", 115200, timeout=3)
 
@@ -60,8 +61,8 @@ class Controller(Node):
         """Callback for motor commands from planner"""
         try:
             command_data = json.loads(msg.data)
-            command = command_data.get('command', '')
-            speed = command_data.get('speed', 15)
+            command = command_data["command"]
+            speed = command_data["speed"]
             duration = command_data.get('duration', '')
 
             self.logger.info(f"Received motor command: {command} at speed {speed}")
@@ -69,13 +70,17 @@ class Controller(Node):
                 self.command_stat = 3
             else:
                 self.command_stat = 1
-            self.command_status_pub.publish(self.command_stat)
+            
+            # Create and publish Int32 message
+            status_msg = Int32()
+            status_msg.data = self.command_stat
+            self.command_status_pub.publish(status_msg)
 
             if self.mb:
                 self.execute_motor_command(command, speed, duration)
             else:
                 self.logger.warn("Motor board not available, simulating command")
-            self.md.cut_motors()
+            
         except json.JSONDecodeError as e:
             self.logger.error(f"Error parsing motor command: {str(e)}")
 
@@ -130,7 +135,11 @@ class Controller(Node):
             while time.time() < time_start + duration or self.command_stat == 2:
                 pass
             self.command_stat = 2
-            self.command_status_pub.publish(self.command_stat)
+            
+            # Create and publish Int32 message
+            status_msg = Int32()
+            status_msg.data = self.command_stat
+            self.command_status_pub.publish(status_msg)
 
         except Exception as e:
             self.logger.error(f"Error executing motor command {command}: {str(e)}")
@@ -142,42 +151,60 @@ class Controller(Node):
         self.logger.info("EMERGENCY STOP executed")
 
     def yaw_pid(self):
+        if not self.pose:
+            return
+            
         yaw = self.pose.yaw
         yaw_K = 30
+        
+        reset_msg = Float32()
         if self.current_command == "yaw_ccw" or self.current_command == "yaw_cw":
-            self.reset_yaw_pub.publish(1)
+            reset_msg.data = 1.0
+            self.reset_yaw_pub.publish(reset_msg)
             return
         elif self.current_command == "left" or self.current_command == "right":
             pass
         else:
-            if yaw > 0:
-                self.mb.yaw_cw()
-            elif yaw < 0:
-                self.mb.yaw_ccw()
-            speed = min(int(abs(yaw)*yaw_K), 127)
-            self.mb.send_motors(speed)
-        self.reset_yaw_pub.publish(0)    
+            if self.mb:
+                if yaw > 0:
+                    self.mb.yaw_cw()
+                elif yaw < 0:
+                    self.mb.yaw_ccw()
+                speed = min(int(abs(yaw)*yaw_K), 127)
+                self.mb.send_motors(speed)
+        
+        reset_msg.data = 0.0
+        self.reset_yaw_pub.publish(reset_msg)    
 
     def depth_pid(self):
+        if not self.pose:
+            return
+            
         depth = self.pose.pos.z
         down_K = 60
         up_K = 20
+        
+        depth_msg = Float32()
         if self.set_depth - 0.2 < depth < self.set_depth + 0.2:
-            self.depth_reached_pub(1)
+            depth_msg.data = 1.0
+            self.depth_reached_pub.publish(depth_msg)
             return
-        elif depth > self.set_depth:
+        elif depth > self.set_depth and self.mb:
             self.mb.up()
             speed = min(int(abs(depth - self.set_depth) * up_K), 127)
-        elif depth < self.set_depth:
+            self.mb.send_motors(speed)
+        elif depth < self.set_depth and self.mb:
             self.mb.down()
             speed = min(int(abs(depth-self.set_depth)*down_K), 127)
-        self.mb.send_motors(speed)
-        self.depth_reached_pub(0)
+            self.mb.send_motors(speed)
+        
+        depth_msg.data = 0.0
+        self.depth_reached_pub.publish(depth_msg)
 
     def pid_cont(self):
-        if self.pose():
-            self.yaw_pid(self)
-            self.depth_pid(self)
+        if self.pose:
+            self.yaw_pid()
+            self.depth_pid()
 
     """
     def pid_callback(self):

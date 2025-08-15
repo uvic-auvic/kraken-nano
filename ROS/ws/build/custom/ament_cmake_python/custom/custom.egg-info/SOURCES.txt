@@ -4,3 +4,8 @@ custom.egg-info/PKG-INFO
 custom.egg-info/SOURCES.txt
 custom.egg-info/dependency_links.txt
 custom.egg-info/top_level.txt
+custom/msg/__init__.py
+custom/msg/_euler.py
+custom/msg/_point.py
+custom/msg/_pose_e.py
+custom/msg/_task.py

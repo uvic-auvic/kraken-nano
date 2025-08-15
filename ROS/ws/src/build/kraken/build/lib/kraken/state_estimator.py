@@ -2,14 +2,13 @@ import rclpy
 from rclpy.node import Node
 import sys
 import time
-from scipy.spatial.transform import Rotation
+import serial
+import json
 
 from custom.msg import PoseE
+from std_msgs.msg import String
 
 sys.path.append("/home/kraken/kraken-nano/ROS/ws/src/kraken/kraken/include")
-
-import ms5837
-from simulation import Simulation
 
 class StateEstimator(Node):
 
@@ -18,20 +17,18 @@ class StateEstimator(Node):
         timer_period = 0.005  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.pose_pub = self.create_publisher(PoseE, "/state_estimator/pose", 10)
+        self.imu_sub = self.create_subscription(String, "gyro_data", self.imu_callback, 10)
         
-        self.sim = Simulation(self)
         self.logger = self.get_logger()
+
+        self.depth_serial = serial.Serial("/dev/ttyUSB0", 115200, timeout=3)
         
         # Position
-        self.x = 0
-        self.y = 0
         self.z = 0
+        self.yaw = 0
         
         # Velocity
-        self.u = 0
-        self.v = 0
-        self.w = 0
-        self.euler = None
+        self.yaw_velocity = 0
         self.current = time.time()
         self.prev = time.time()
 
@@ -40,17 +37,8 @@ class StateEstimator(Node):
         self.current = time.time()
         delta = self.current - self.prev
         self.prev = self.current
-        #imu_data = imu.get_imu()
-        #if imu_data:
-                #accel = imu_data["Acceleration"]
-                #delta_v = imu_data["DeltaV"]
-                #euler = imu_data["Euler Angles"]
-        #else:
-                #return
 
-        accel = self.sim.get_acceleration()
-        depth = self.sim.get_depth()
-        orient = self.sim.get_orientation()
+        depth = self.get_depth()
         
         msg = PoseE()
         msg.pos.x = 0.0
@@ -62,52 +50,25 @@ class StateEstimator(Node):
         
         if depth is not None:
                 self.z = depth
+                msg.pos.z = float(self.z)
+                
+        if self.yaw_velocity is not None:
+                self.logger.info(str(self.yaw_velocity))
+                msg.rot.yaw += delta * self.yaw_velocity
 
-                msg.pos.z = float(-self.z)
-        if accel is not None:
-                self.u += accel.x * delta
-                self.v += accel.y * delta
-                
-                self.x += delta * self.u
-                self.y += delta * self.v
-                
-                msg.pos.x = float(self.x)
-                msg.pos.y = float(self.y)
-                
-        if orient is not None:
-                quat = (orient.x, orient.y, orient.z, orient.w)
-                
-                rot = Rotation.from_quat(quat)
-                self.euler = rot.as_euler('zyx')
-                
-                msg.rot.yaw = float(self.euler[0])
-                msg.rot.roll = float(self.euler[2])
-                msg.rot.pitch = float(self.euler[1])        
-                
         self.pose_pub.publish(msg)
+        self.logger.info(f"Published pose: {msg.pos.x}, {msg.pos.y}, {msg.pos.z}, {msg.rot.yaw}, {msg.rot.roll}, {msg.rot.pitch}")
 
-    
-    
-    """
-    Estimated movement of the sub:
-    
-    X drag force: 40 * v^2 N
-    Y drag force: 80 * v^2 N
-    Z drag force: 200 * v^2 N
-    Maximum forward force per thruster: 23.14 N
-    Maximum backward force per thruster: 18.14 N
-    AUV mass: 40kg
-    
-    Expected values:
-        Forward acceleration: 1.157 - v^2
-        Backward acceleration: 0.907 - v^2
-        Right acceleration: 0.907 - 2 * v^2
-        Left acceleration: 1.157 - 2 * v^2
-        Up acceleration: 2.314 - 5 * v^2
-        Down acceleration: 1.814 - 5 * v^2
-    
-    """
+    def get_depth(self):
+        try:
+            depth_str = self.depth_serial.readline()
+            return float(depth_str[:-2])
+        except (ValueError, serial.SerialTimeoutException):
+            return None
 
+    def imu_callback(self, msg):
+        data = json.loads(str(msg.data))
+        self.yaw_velocity = float(data["gyro"]["y"])
 
 def main(args=None):
     rclpy.init(args=args)

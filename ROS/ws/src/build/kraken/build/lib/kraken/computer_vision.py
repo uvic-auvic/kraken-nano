@@ -117,6 +117,10 @@ class ComputerVision(Node):
                 'timestamp': str(self.get_clock().now().nanoseconds),
                 'gyro': {'x': gyro_data[0], 'y': gyro_data[1], 'z': gyro_data[2]}
             })
+            #publish without timestamp
+            gyro_msg.data = json.dumps({
+                'gyro': {'x': gyro_data[0], 'y': gyro_data[1], 'z': gyro_data[2]}
+            })
             self.gyro_publisher.publish(gyro_msg)
 
             accel_msg = String()

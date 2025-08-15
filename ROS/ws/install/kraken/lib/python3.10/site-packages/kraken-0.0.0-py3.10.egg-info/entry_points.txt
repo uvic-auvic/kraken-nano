@@ -1,6 +1,10 @@
 [console_scripts]
 computer_vision = kraken.computer_vision:main
 controller = kraken.controller:main
+controller_test = kraken.controller_test:main
+fsm_node = kraken.fsm_node:main
 planner = kraken.planner:main
+planner_test = kraken.planner_test:main
+spinMotor = kraken.spinMotor:main
 state_estimator = kraken.state_estimator:main
 
