@@ -4,10 +4,10 @@ import cv2
 import onnxruntime as ort
 
 # --- Class Names from your data.yaml ---
-CLASS_NAMES = ['bottom', 'center', 'gate', 'left', 'red_flare', 'right', 'top', 'tubs']
+CLASS_NAMES = ['sawfish Gate Banner', 'Shark Gate Banner', 'Full Gate', 'Red Slalom', 'White Slalom', 'Full Torpedo', 'Sawfish Torpedo Banner', 'Shark Torpedo Hole']
 
 # --- ONNX Model Setup ---
-ONNX_MODEL_PATH = "best.onnx"
+ONNX_MODEL_PATH = "new_arvp_front.onnx"
 session = ort.InferenceSession(ONNX_MODEL_PATH, providers=['CUDAExecutionProvider'])
 input_name = session.get_inputs()[0].name
 

@@ -36,8 +36,14 @@ class spinMotor(Node):
                 mb.down()
                 mb.left()
                 mb.forward()
-                mb.send_motors(60, False)
-                time.sleep(2)
+                mb.send_motors(40)
+                time.sleep(1)
+                mb.cut_motors()
+                mb.right()
+                mb.up()
+                mb.backward()
+                mb.send_motors(40)
+                time.sleep(1)
                 mb.cut_motors()
 
 def main(args=None):

@@ -9,51 +9,51 @@ class MotorBoard():
                 
         def front_motor(self, positive=True):
                 if positive:
-                        self.positive_mask[3] = int(on)
+                        self.positive_mask[3] = int(1)
                 else:
-                        self.negative_mask[3] = int(on)
+                        self.negative_mask[3] = int(1)
         
         def back_motor(self, positive=True):
                 if positive:
-                        self.positive_mask[1] = int(on)
+                        self.positive_mask[1] = int(1)
                 else:
-                        self.negative_mask[1] = int(on)
+                        self.negative_mask[1] = int(1)
         
         def left_motor(self, positive=True):
                 if positive:
-                        self.positive_mask[6] = int(on)
+                        self.positive_mask[6] = int(1)
                 else:
-                        self.negative_mask[6] = int(on)
+                        self.negative_mask[6] = int(1)
         
         def right_motor(self, positive=True):
                 if positive:
-                        self.positive_mask[0] = int(on)
+                        self.positive_mask[0] = int(1)
                 else:
-                        self.negative_mask[0] = int(on)
+                        self.negative_mask[0] = int(1)
         
         def front_left_motor(self, positive=True):
                 if positive:
-                        self.positive_mask[4] = int(on)
+                        self.positive_mask[4] = int(1)
                 else:
-                        self.negative_mask[4] = int(on)
+                        self.negative_mask[4] = int(1)
         
         def front_right_motor(self, positive=True):
                 if positive:
-                        self.positive_mask[7] = int(on)
+                        self.positive_mask[7] = int(1)
                 else:
-                        self.negative_mask[7] = int(on)
+                        self.negative_mask[7] = int(1)
         
         def back_left_motor(self, positive=True):
                 if positive:
-                        self.positive_mask[2] = int(on)
+                        self.positive_mask[2] = int(1)
                 else:
-                        self.negative_mask[2] = int(on)
+                        self.negative_mask[2] = int(1)
         
         def back_right_motor(self, positive=True):
                 if positive:
-                        self.positive_mask[7] = int(on)
+                        self.positive_mask[7] = int(1)
                 else:
-                        self.negative_mask[7] = int(on)
+                        self.negative_mask[7] = int(1)
                 
         def forward(self):
                 self.left_motor(True)

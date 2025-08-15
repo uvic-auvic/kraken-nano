@@ -1,8 +1,9 @@
 import rclpy
 from rclpy.node import Node
 import sys
-from std_msgs.msg import Float64
+from std_msgs.msg import Float64, String
 import time
+import json
 
 sys.path.append("/home/kraken/kraken-nano/ROS/ws/src/kraken/kraken/include")
 
@@ -19,6 +20,11 @@ class Controller(Node):
                 super().__init__('controller')
                 
                 self.subscription = self.create_subscription(PoseE, '/state_estimator/pose', self.pose_callback, 10)
+                
+                # Subscribe to motor commands from planner
+                self.motor_command_subscriber = self.create_subscription(
+                    String, '/motor/command', self.motor_command_callback, 10)
+                
                 pid_period = 0.01  # seconds
                 #self.pid_timer = self.create_timer(pid_period, self.pid_callback)
                 self.logger = self.get_logger()
@@ -27,52 +33,98 @@ class Controller(Node):
                 
                 #self.kill_switch = Serial("/dev/ttyTCU0", 115200, timeout=3)
                 
-                mb = MotorBoard("/dev/ttyTHS1")
+                # Initialize motor board
+                try:
+                    self.mb = MotorBoard("/dev/ttyTHS1")
+                    self.logger.info("Motor board initialized")
+                    #self.mb.init_motors()
+                    time.sleep(1)
+                except Exception as e:
+                    self.logger.error(f"Failed to initialize motor board: {str(e)}")
+                    self.mb = None
                 
-                self.logger.info("Init motors")
+                # Motor control state
+                self.current_command = None
+                self.command_start_time = None
                 
-                #mb.init_motors()
+                self.pose = None
                 
-                time.sleep(2)
-                
-                mb.down()
-                mb.send_motors(100, False)
-                time.sleep(3)
+                self.logger.info("Controller initialized and ready for planner commands")
 
-                #time.sleep(20)
-                mb.down()
-                mb.send_motors(60, False)
-                
-                mb.back_motor(True, False)
-                mb.send_motors(47, True)
+        def motor_command_callback(self, msg):
+                """Callback for motor commands from planner"""
+                try:
+                    command_data = json.loads(msg.data)
+                    command = command_data.get('command', '')
+                    speed = command_data.get('speed', 15)
+                    
+                    self.logger.info(f"Received motor command: {command} at speed {speed}")
+                    
+                    if self.mb:
+                        self.execute_motor_command(command, speed)
+                    else:
+                        self.logger.warn("Motor board not available, simulating command")
+                        
+                except json.JSONDecodeError as e:
+                    self.logger.error(f"Error parsing motor command: {str(e)}")
 
-                mb.forward()
-                mb.send_motors(127, True)
-                time.sleep(40)
-                
-                #
-                #mb.up()
-                #mb.send_motors(15, True)
-                #time.sleep(2)
-                #mb.send_motors(127, True)
-                #
-                #time.sleep(10)
-                #mb.cut_motors()
-                #mb.flip()
-                #mb.send_motors(15, True)
-                #time.sleep(2)
-                #mb.cut_motors()
-                #kills motors
-                mb.cut_motors()
-                
-                
-                #self.logger.info(str(mb.send_motors(100)))
-                
-                #self.pose = None
-                #self.forward_pid = PID(0, 0, 4, 0, 8)
-                #self.up_pid = PID(0, 0, 4, 0, 8)
-                #self.left_pid = PID(0, 0, 4, 0, 8)
-                #self.yaw_pid = PID(0, 1, 5, 0, 20)
+        def execute_motor_command(self, command: str, speed: int):
+                """Execute a motor command"""
+                if not self.mb:
+                    return
+                    
+                try:
+                    # Reset motor masks
+                    self.mb.positive_mask = [0, 0, 0, 0, 0, 0, 0, 0]
+                    self.mb.negative_mask = [0, 0, 0, 0, 0, 0, 0, 0]
+                    
+                    # Execute specific command
+                    if command == "forward":
+                        self.mb.forward()
+                        
+                    elif command == "backward":
+                        self.mb.backward()
+                        
+                    elif command == "left":
+                        self.mb.left()
+                        
+                    elif command == "right":
+                        self.mb.right()
+                        
+                    elif command == "up":
+                        self.mb.up()
+                        
+                    elif command == "down":
+                        self.mb.down()
+                        
+                    elif command == "yaw_ccw":
+                        self.mb.yaw_ccw()
+                        
+                    elif command == "yaw_cw":
+                        self.mb.yaw_cw()
+                        
+                    elif command == "stop":
+                        self.mb.cut_motors()
+                        self.logger.info("Motors stopped")
+                        return
+                        
+                    else:
+                        self.logger.warn(f"Unknown motor command: {command}")
+                        return
+                    
+                    # Send motors with specified speed
+                    if speed > 0:
+                        self.mb.send_motors(min(speed, 127))
+                        self.logger.debug(f"Executed {command} at speed {speed}")
+                    
+                except Exception as e:
+                    self.logger.error(f"Error executing motor command {command}: {str(e)}")
+
+        def emergency_stop(self):
+                """Emergency stop all motors"""
+                if self.mb:
+                    self.mb.cut_motors()
+                self.logger.info("EMERGENCY STOP executed")
 
         """
         def pid_callback(self):
@@ -93,6 +145,7 @@ class Controller(Node):
 	        
 	        
         def pose_callback(self, msg):
+                """Callback for pose updates"""
                 self.pose = msg
 
 
@@ -101,13 +154,17 @@ def main(args=None):
 
         controller = Controller() 
 
-        rclpy.spin(controller)
-
-        # Destroy the node explicitly
-        # (optional - otherwise it will be done automatically
-        # when the garbage collector destroys the node object)
-        controller.destroy_node()
-        rclpy.shutdown()
+        try:
+            rclpy.spin(controller)
+        except KeyboardInterrupt:
+            controller.logger.info("Controller shutting down...")
+            controller.emergency_stop()
+        finally:
+            # Destroy the node explicitly
+            # (optional - otherwise it will be done automatically
+            # when the garbage collector destroys the node object)
+            controller.destroy_node()
+            rclpy.shutdown()
 
 
 if __name__ == '__main__':
