@@ -279,8 +279,8 @@ class ComputerVision(Node):
             class_ids = detections[:, 4:].argmax(axis=1)
             
             # Filter by confidence threshold
-            conf_threshold = 0.5
-            valid_detections = scores > conf_threshold
+            conf_threshold = 0.45
+            valid_detections = scores >= conf_threshold
             
             if valid_detections.any():
                 valid_boxes = boxes[valid_detections]

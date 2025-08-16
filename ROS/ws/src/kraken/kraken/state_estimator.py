@@ -71,6 +71,7 @@ class StateEstimator(Node):
                 depth_byte = self.depth_serial.read()
                 depth_str += depth_byte.decode()
                 
+            self.logger.info(depth_str)
             return float(depth_str)
         except (ValueError, serial.SerialTimeoutException):
             return None

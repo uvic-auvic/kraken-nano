@@ -104,6 +104,14 @@ class MotorBoard():
                 self.back_left_motor(False)
                 self.back_right_motor(False)
 
+        def roll(self):
+                self.front_left_motor(True)
+                self.front_right_motor(False)
+                self.back_left_motor(True)
+                self.back_right_motor(False)
+                # self.back_motor(True)
+                # self.front_motor(True)
+
         def init_motors(self):
                 self.buffer.append(ord("I"))
                 self.buffer.append(ord("N"))

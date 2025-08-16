@@ -62,7 +62,7 @@ class Controller(Node):
 
         self.logger = self.get_logger()
         self.reset_yaw_pub =self.create_publisher(Float32, "/controller/reset_yaw", 10)
-        self.depth_target = 0.25
+        self.depth_target = 0.9
         self.depth_current = 0.0
         self.yaw_target = 0.0
         self.yaw_current = 0.0
@@ -72,6 +72,10 @@ class Controller(Node):
         self.states = [
             self.state1,
             self.state2,
+            self.state3,
+            self.state4,  # This is a duplicate state, consider renaming or removing
+            self.state5,
+            self.state6
         ]
 
         self.current_state = 0
@@ -105,16 +109,56 @@ class Controller(Node):
             rclpy.spin_once(self, timeout_sec=0.01)
 
     def state1(self):
-        self.logger.info("Running state 1")
-        self.execute("forward", 30)
-        self.non_blocking_delay(2.0)
-        self.execute("stop")
+        """Wait for the AUV to reach depth"""
+        self.non_blocking_delay(5)
 
     def state2(self):
-        self.logger.info("Running state 2")
-        self.execute("left", 30)
-        self.non_blocking_delay(2.0)
-        self.execute("stop")   
+        """Rotate until the gate is in view"""
+        self.execute("setyaw", 6.3)
+        while True:
+            if self.objects[2] == 1:
+                self.yaw_target = self.yaw_current
+                self.execute("stop")
+                break
+        
+
+    def state3(self):
+        """Center gate"""
+        isGateCentered = False
+        while not isGateCentered:
+            if self.detection_info.get('center_x'):
+                if self.detection_info.get('class_name') == 'Full Gate':
+                    center_x = self.detection_info['center_x']
+                    if center_x > 400:
+                        self.rotate_right(duration=0.5, speed=50)
+                        self.execute("set_yaw", -0.1)
+                    elif center_x < 240:
+                        self.rotate_left(duration=0.5, speed=50)
+                        self.execute("set_yaw", 0.1)
+
+            if center_x > 240 and center_x < 400:
+                self.get_logger().info("Gate is centered")
+                isGateCentered = True
+
+    def state4(self):
+        """Move through gate"""
+        self.execute("forward", 80)
+        self.non_blocking_delay(6)
+        self.execute("stop")
+
+    def state5(self):
+        self.execute("setdepth", 1.4)
+        self.non_blocking_delay(3)
+        self.yaw_correction = False
+        self.depth_correction = False
+        self.execute("roll", 127)
+        self.yaw_correction = True
+        self.depth_correction = True
+        
+
+    def state6(self):
+        pass
+
 
     def initialize(self):
         self.mb.init_motors()
@@ -161,6 +205,10 @@ class Controller(Node):
         elif command == "right":
             self.yaw_correction = False
             self.mb.right()
+
+        elif command == "roll":
+            self.mb.roll()
+            
         
         else:
             self.logger.error(f"Unknown command: {command}")
@@ -175,14 +223,14 @@ class Controller(Node):
         if not self.yaw_correction:
             return
 
-        yaw_K = 40
+        yaw_K = 80
 
         self.logger.info(f"Yaw: {self.yaw_current}, {self.yaw_target}")
         
         if self.yaw_current > self.yaw_target:
-            self.mb.yaw_cw()
-        else:
             self.mb.yaw_ccw()
+        else:
+            self.mb.yaw_cw()
         speed = min(int(abs(self.yaw_current - self.yaw_target)*yaw_K), 127)
         self.mb.send_motors(speed)
         
@@ -198,8 +246,8 @@ class Controller(Node):
         if not self.depth_correction:
             return
 
-        down_K = 40
-        up_K = 30
+        down_K = 80
+        up_K = 60
 
         self.logger.info(f"Depth: {self.depth_current}, {self.depth_target}")
         
@@ -232,6 +280,8 @@ class Controller(Node):
         # print(msg)
         if msg.rot.yaw:
             self.yaw_current = msg.rot.yaw
+        if msg.pos.z:
+            self.depth_current = msg.pos.z
 
     def delay(self, seconds):
         current = time.time()

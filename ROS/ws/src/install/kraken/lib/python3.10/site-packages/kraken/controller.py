@@ -62,7 +62,7 @@ class Controller(Node):
 
         self.logger = self.get_logger()
         self.reset_yaw_pub =self.create_publisher(Float32, "/controller/reset_yaw", 10)
-        self.depth_target = 0.25
+        self.depth_target = 0.9
         self.depth_current = 0.0
         self.yaw_target = 0.0
         self.yaw_current = 0.0
@@ -105,9 +105,10 @@ class Controller(Node):
             rclpy.spin_once(self, timeout_sec=0.01)
 
     def state1(self):
+        self.non_blocking_delay(10.0)
         self.logger.info("Running state 1")
-        self.execute("forward", 30)
-        self.non_blocking_delay(2.0)
+        self.execute("forward", 80)
+        self.non_blocking_delay(8.0)
         self.execute("stop")
 
     def state2(self):
@@ -175,14 +176,14 @@ class Controller(Node):
         if not self.yaw_correction:
             return
 
-        yaw_K = 40
+        yaw_K = 80
 
         self.logger.info(f"Yaw: {self.yaw_current}, {self.yaw_target}")
         
         if self.yaw_current > self.yaw_target:
-            self.mb.yaw_cw()
-        else:
             self.mb.yaw_ccw()
+        else:
+            self.mb.yaw_cw()
         speed = min(int(abs(self.yaw_current - self.yaw_target)*yaw_K), 127)
         self.mb.send_motors(speed)
         
@@ -198,8 +199,8 @@ class Controller(Node):
         if not self.depth_correction:
             return
 
-        down_K = 40
-        up_K = 30
+        down_K = 80
+        up_K = 60
 
         self.logger.info(f"Depth: {self.depth_current}, {self.depth_target}")
         
@@ -232,6 +233,8 @@ class Controller(Node):
         # print(msg)
         if msg.rot.yaw:
             self.yaw_current = msg.rot.yaw
+        if msg.pos.z:
+            self.depth_current = msg.pos.z
 
     def delay(self, seconds):
         current = time.time()
