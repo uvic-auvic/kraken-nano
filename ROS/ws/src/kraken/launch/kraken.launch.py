@@ -4,6 +4,7 @@ from subprocess import Popen
 import time
 
 def generate_launch_description():
+    """
     Popen(["ign", "gazebo", "-r", "/home/vboxuser/kraken-nano/ROS/ws/src/kraken/worlds/kraken.sdf"])
     
     Popen(["ros2", "run", "ros_gz_bridge", "parameter_bridge", "/model/auv/joint/F_joint/cmd_thrust@std_msgs/msg/Float64]ignition.msgs.Double"])
@@ -18,6 +19,7 @@ def generate_launch_description():
     Popen(["ros2", "run", "ros_gz_bridge", "parameter_bridge", "/imu@sensor_msgs/msg/Imu[ignition.msgs.IMU"])
     
     time.sleep(10)
+    """
 
     return launch.LaunchDescription([
         launch_ros.actions.Node(
@@ -29,4 +31,9 @@ def generate_launch_description():
             package="kraken",
             executable="state_estimator",
             name="state_estimator"),
+
+        launch_ros.actions.Node(
+            package="kraken",
+            executable="computer_vision",
+            name="computer_vision"),
     ])

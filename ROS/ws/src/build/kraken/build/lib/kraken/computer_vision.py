@@ -15,7 +15,7 @@ class ComputerVision(Node):
 
     def __init__(self):
         super().__init__('computer_vision')
-        timer_period = 0.05  # seconds
+        timer_period = 0.1  # seconds (10 FPS - reduced from 20 FPS for power saving)
         self.timer = self.create_timer(timer_period, self.timer_callback)
         
         # Shutdown flag
@@ -38,8 +38,8 @@ class ComputerVision(Node):
         # --- RealSense Camera Setup with Depth ---
         self.pipeline = rs.pipeline()
         config = rs.config()
-        config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
-        config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+        config.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 15)  # Reduced from 30 to 15 FPS
+        config.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 15)   # Reduced from 30 to 15 FPS
         config.enable_stream(rs.stream.gyro)
         config.enable_stream(rs.stream.accel)
         

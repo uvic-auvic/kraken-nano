@@ -9,6 +9,7 @@ setup.py
 ../build/kraken/kraken.egg-info/requires.txt
 ../build/kraken/kraken.egg-info/top_level.txt
 ../build/kraken/kraken.egg-info/zip-safe
+kraken/FSM.py
 kraken/__init__.py
 kraken/computer_vision.py
 kraken/controller.py

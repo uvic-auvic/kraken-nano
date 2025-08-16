@@ -54,17 +54,24 @@ class StateEstimator(Node):
                 
         if self.yaw_velocity is not None:
             # self.logger.info(str(self.yaw_velocity))
-            msg.rot.yaw += delta * self.yaw_velocity
+            self.yaw += delta * self.yaw_velocity
+            msg.rot.yaw = self.yaw
 
         self.pose_pub.publish(msg)
-        # self.logger.info(f"Published pose: {msg.pos.x}, {msg.pos.y}, {msg.pos.z}, {msg.rot.yaw}, {msg.rot.roll}, {msg.rot.pitch}")
+        self.logger.info(f"Published pose: {msg.pos.x}, {msg.pos.y}, {msg.pos.z}, {msg.rot.yaw}, {msg.rot.roll}, {msg.rot.pitch}")
 
     def get_depth(self):
         try:
-            depth_str = self.depth_serial.readline()
-            # print(depth_str)
-            # print(float(depth_str[:-2]))
-            return float(depth_str[:-2])
+            depth_str = ""
+            depth_byte = self.depth_serial.read()
+            while depth_byte != b"\n":
+                depth_byte = self.depth_serial.read()
+
+            while depth_byte != b"\r":
+                depth_byte = self.depth_serial.read()
+                depth_str += depth_byte.decode()
+                
+            return float(depth_str)
         except (ValueError, serial.SerialTimeoutException):
             return None
 

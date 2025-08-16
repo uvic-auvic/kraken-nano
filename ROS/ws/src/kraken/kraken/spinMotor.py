@@ -11,7 +11,6 @@ from motorboard import MotorBoard
 from pid import PID
 from serial import Serial
 
-from custom.msg import PoseE
 
 class spinMotor(Node):
 
@@ -29,22 +28,23 @@ class spinMotor(Node):
                 
                 self.logger.info("Init motors")
                 
-                mb.init_motors()
+                #mb.init_motors()
                 
                 time.sleep(2)
                 #time.sleep(20)
-                mb.down()
-                mb.left()
+                #mb.down()
+                #mb.left()
                 mb.forward()
-                mb.send_motors(40)
-                time.sleep(1)
-                mb.cut_motors()
                 mb.right()
-                mb.up()
-                mb.backward()
-                mb.send_motors(40)
-                time.sleep(1)
+                mb.send_motors(30)
+                time.sleep(2)
                 mb.cut_motors()
+                #mb.right()
+                #mb.up()
+                #mb.backward()
+                #mb.send_motors(40)
+                #time.sleep(1)
+                #mb.cut_motors()
 
 def main(args=None):
         rclpy.init(args=args)

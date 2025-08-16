@@ -5,6 +5,7 @@ from std_msgs.msg import Float64, String, Int32, Float32
 from std_msgs.msg import Int32
 import time
 import json
+import signal
 
 sys.path.append("/home/kraken/kraken-nano/ROS/ws/src/kraken/kraken/include")
 
@@ -15,36 +16,70 @@ from serial import Serial
 
 from custom.msg import PoseE
 
+"""
+init:
+    sub to pose and task
+    create depth and yaw pid timers
+    keep track of target/current yaw and depth
+
+when task received:
+    get command, speed/angle, duration
+    if command is depth and yaw
+        set class variable
+    execute command at speed
+
+yaw timer:
+    continuous pid on current/target yaw
+    send reset after task to SE
+    send confirmation
+    pause if going left or right
+
+depth timer:
+    continuous pid on current/target depth
+    send confirmation
+"""
+
 
 class Controller(Node):
 
     def __init__(self):
         super().__init__('controller')
 
+        # Subscribe to pose from state estimator
         self.subscription = self.create_subscription(PoseE, '/state_estimator/pose', self.pose_callback, 10)
 
         # Subscribe to motor commands from planner
-        self.motor_command_subscriber = self.create_subscription(
-            String, '/motor/command', self.motor_command_callback, 10)
+        #self.motor_command_subscriber = self.create_subscription(
+            #String, '/motor/command', self.motor_command_callback, 10)
 
-        pid_period = 0.1  # seconds
-        self.pid_timer = self.create_timer(pid_period, self.pid_control)
+        signal.signal(signal.SIGINT, self.signal_handler)
+
+        depth_period = 0.1  # seconds
+        self.depth_timer = self.create_timer(depth_period, self.depth_callback)
+
+        yaw_period = 0.1  # seconds
+        self.yaw_timer = self.create_timer(yaw_period, self.yaw_callback)
+
         self.logger = self.get_logger()
         self.reset_yaw_pub =self.create_publisher(Float32, "/controller/reset_yaw", 10)
-        self.depth_reached_pub = self.create_publisher(Float32, "/controller/depth_reached", 10)
-        self.set_depth = 0.25
-        #self.sim = Simulation(self)
+        self.depth_target = 0.25
+        self.depth_current = 0.0
+        self.yaw_target = 0.0
+        self.yaw_current = 0.0
+        self.yaw_correction = True
+        self.depth_correction = True
 
-        self.command_status_pub = self.create_publisher(Int32, "/controller/command_status", 10)
-        self.command_stat = 0; # sends 0 for none, 1 for received, 2 for complete, 3 for overwritten
-        # self.kill_switch = Serial("/dev/ttyTCU0", 115200, timeout=3)
+        self.states = [
+            self.state1,
+            self.state2,
+        ]
+
+        self.current_state = 0
 
         # Initialize motor board
         try:
             self.mb = MotorBoard("/dev/ttyTHS1")
             self.logger.info("Motor board initialized")
-            # self.mb.init_motors()
-            time.sleep(1)
         except Exception as e:
             self.logger.error(f"Failed to initialize motor board: {str(e)}")
             self.mb = None
@@ -53,166 +88,128 @@ class Controller(Node):
         self.current_command = None
         self.command_start_time = None
 
-        self.pose = None
-
         self.logger.info("Controller initialized and ready for planner commands")
 
-    def motor_command_callback(self, msg):
+        self.run_next_state()
+
+    def run_next_state(self):
+        if self.current_state < len(self.states):
+            func = self.states[self.current_state]
+            func()
+            self.current_state += 1
+            self.run_next_state()
+
+    def non_blocking_delay(self, duration_seconds):
+        end_time = self.get_clock().now() + rclpy.duration.Duration(seconds=duration_seconds)
+        while self.get_clock().now() < end_time:
+            rclpy.spin_once(self, timeout_sec=0.01)
+
+    def state1(self):
+        self.logger.info("Running state 1")
+        self.execute("forward", 30)
+        self.non_blocking_delay(2.0)
+        self.execute("stop")
+
+    def state2(self):
+        self.logger.info("Running state 2")
+        self.execute("left", 30)
+        self.non_blocking_delay(2.0)
+        self.execute("stop")   
+
+    def initialize(self):
+        self.mb.init_motors()
+        self.yaw_correction = True
+        self.depth_correction = True
+
+    def execute(self, command: str, magnitude: int = 0):
         """Callback for motor commands from planner"""
-        try:
-            command_data = json.loads(msg.data)
-            command = command_data["command"]
-            speed = command_data["speed"]
-            duration = command_data.get('duration', '')
+        self.logger.info(f"Received motor command: {command} at speed {magnitude}")
 
-            self.logger.info(f"Received motor command: {command} at speed {speed}")
-            if self.command_stat == 1 or self.command_stat == 3:
-                self.command_stat = 3
-            else:
-                self.command_stat = 1
-            
-            # Create and publish Int32 message
-            status_msg = Int32()
-            status_msg.data = self.command_stat
-            self.command_status_pub.publish(status_msg)
-
-            if self.mb:
-                self.execute_motor_command(command, speed, duration)
-                self.mb.cut_motors()
-            else:
-                self.logger.warn("Motor board not available, simulating command")
-            
-        except json.JSONDecodeError as e:
-            self.logger.error(f"Error parsing motor command: {str(e)}")
-        
-
-
-    def execute_motor_command(self, command: str, speed: int, duration: float = 1.0):
-        """Execute a motor command"""
-        if not self.mb:
+        if command == "setdepth":
+            self.depth_correction = True
+            self.depth_target = magnitude
             return
 
-        try:
-
-            # Execute specific command
-            if command == "forward":
-                self.mb.forward()
-
-            elif command == "backward":
-                self.mb.backward()
-
-            elif command == "left":
-                self.mb.left()
-
-            elif command == "right":
-                self.mb.right()
-
-            elif command == "setdepth":
-                self.set_depth = speed
-                print(self.set_depth)
-                return
-
-            elif command == "yaw_ccw":
-                self.mb.yaw_ccw()
-
-            elif command == "yaw_cw":
-                self.mb.yaw_cw()
-
-            elif command == "stop":
-                self.mb.cut_motors()
-                self.logger.info("Motors stopped")
-                return
-
-            else:
-                self.logger.warn(f"Unknown motor command: {command}")
-                return
-
-            # Send motors with specified speed
-            if speed > 0:
-                self.mb.send_motors(min(speed, 127))
-                self.logger.debug(f"Executed {command} at speed {speed}")
-
-            time_start = time.time()
-            while time.time() < time_start + duration or self.command_stat == 2:
-                pass
-            self.command_stat = 2
-            
-            # Create and publish Int32 message
-            status_msg = Int32()
-            status_msg.data = self.command_stat
-            self.command_status_pub.publish(status_msg)
-
-        except Exception as e:
-            self.logger.error(f"Error executing motor command {command}: {str(e)}")
-
-    def emergency_stop(self):
-        """Emergency stop all motors"""
-        if self.mb:
+        elif command == "setyaw":
+            self.yaw_correction = True
+            self.yaw_target = magnitude
+            return
+        
+        elif command == "stop":
+            self.yaw_target = self.yaw_current
             self.mb.cut_motors()
-        self.logger.info("EMERGENCY STOP executed")
+            self.yaw_correction = True
+            return
 
-    def yaw_pid(self):
-        if not self.pose:
+        elif command == "stopall":
+            if self.mb:
+                self.yaw_correction = False
+                self.depth_correction = False
+                self.mb.cut_motors()
             return
-            
-        yaw = self.pose.rot.yaw
-        yaw_K = 30
+
+        if command == "forward":
+            self.mb.forward()
+
+        elif command == "backward":
+            self.mb.backward()
+
+        elif command == "left":
+            self.yaw_correction = False
+            self.mb.left()
+
+        elif command == "right":
+            self.yaw_correction = False
+            self.mb.right()
         
-        reset_msg = Float32()
-        if self.current_command == "yaw_ccw" or self.current_command == "yaw_cw":
-            reset_msg.data = 1.0
-            self.reset_yaw_pub.publish(reset_msg)
-            return
-        elif self.current_command == "left" or self.current_command == "right":
-            pass
         else:
-            if yaw > 0:
-                self.mb.yaw_cw()
-            elif yaw < 0:
-                self.mb.yaw_ccw()
-            speed = min(int(abs(yaw)*yaw_K), 127)
-            self.mb.send_motors(speed)
-        
-        reset_msg.data = 0.0
-        self.reset_yaw_pub.publish(reset_msg)    
+            self.logger.error(f"Unknown command: {command}")
 
-    def depth_pid(self):
-        # print(self.pose)
-        if not self.pose:
-            print("no pose")
+        if magnitude > 0:
+            self.mb.send_motors(min(magnitude, 127))
+            self.logger.debug(f"Executed {command} at speed {magnitude}")
+
+    def yaw_callback(self):
+        self.logger.info("Yaw timer running")
+
+        if not self.yaw_correction:
             return
-            
-        depth = self.pose.pos.z
+
+        yaw_K = 40
+
+        self.logger.info(f"Yaw: {self.yaw_current}, {self.yaw_target}")
+        
+        if self.yaw_current > self.yaw_target:
+            self.mb.yaw_cw()
+        else:
+            self.mb.yaw_ccw()
+        speed = min(int(abs(self.yaw_current - self.yaw_target)*yaw_K), 127)
+        self.mb.send_motors(speed)
+        
+        if self.yaw_target != 0 and abs(self.yaw_target - self.yaw_current) < 0.005:
+            reset_msg = Float32()
+            reset_msg.data = 0.0
+            self.yaw_target = 0
+            self.reset_yaw_pub.publish(reset_msg)
+
+    def depth_callback(self):
+        self.logger.info("Depth")
+
+        if not self.depth_correction:
+            return
+
         down_K = 40
         up_K = 30
 
-        depth_msg = Float32()
-        if self.set_depth - 0.2 < depth < self.set_depth + 0.2:
-            depth_msg.data = 1.0
-            self.depth_reached_pub.publish(depth_msg)
-            print(1)
-            return
-        elif depth > self.set_depth:
-            self.mb.up()
-            speed = min(int(abs(depth - self.set_depth) * up_K), 127)
-            print(speed)
-            self.mb.send_motors(speed)
-            print(2)
-
-        elif depth < self.set_depth:
-            self.mb.down()
-            speed = min(int(abs(depth - self.set_depth) * down_K), 127)
-            self.mb.send_motors(speed)
-            print(3)
-        else:
-            print("missed ")
+        self.logger.info(f"Depth: {self.depth_current}, {self.depth_target}")
         
-        depth_msg.data = 0.0
-        self.depth_reached_pub.publish(depth_msg)
-
-    def pid_control(self):        
-        self.yaw_pid()
-        # self.depth_pid()
+        if self.depth_current > self.depth_target:
+            self.mb.up()
+            speed = min(int(abs(self.depth_current - self.depth_target)*up_K), 127)
+        else:
+            self.mb.down()
+            speed = min(int(abs(self.depth_current - self.depth_target)*down_K), 127)
+        self.mb.send_motors(speed)
 
     """
     def pid_callback(self):
@@ -233,19 +230,64 @@ class Controller(Node):
     def pose_callback(self, msg):
         """Callback for pose updates"""
         # print(msg)
-        self.pose = msg
+        if msg.rot.yaw:
+            self.yaw_current = msg.rot.yaw
 
+    def delay(self, seconds):
+        current = time.time()
+        while time.time() - current < seconds:
+            continue
+
+    def signal_handler(self, sig, frame):
+        print('You pressed Ctrl+C!')
+        self.execute("stopall")
+        sys.exit(0)
 
 def main(args=None):
     rclpy.init(args=args)
 
     controller = Controller()
 
+    """
+    controller.mb.forward()
+    controller.mb.send_motors(30)
+    controller.delay(3)
+    #time.sleep(3)
+    controller.mb.cut_motors()
+    controller.mb.left()
+    controller.mb.send_motors(30)
+    controller.delay(3)
+    #time.sleep(3)
+    controller.mb.cut_motors()
+    """
+
+
+    #controller.delay(4)
+
+    #controller.execute("setdepth", 0)
+
+    #print("test")
+    
+    #self.mb.init_motors()
+    #controller.mb.forward()
+    #controller.mb.send_motors(30)
+    #time.sleep(3)
+    #controller.mb.cut_motors()
+
+    #controller.initialize()
+    #time.sleep(2)
+    #controller.execute("forward", 20)
+    #time.sleep(1)
+    #controller.execute("stop")
+
+    #controller.step1()
+    #controller.step2()
+
     try:
         rclpy.spin(controller)
     except KeyboardInterrupt:
         controller.logger.info("Controller shutting down...")
-        controller.emergency_stop()
+        #controller.emergency_stop()
     finally:
         # Destroy the node explicitly
         # (optional - otherwise it will be done automatically
