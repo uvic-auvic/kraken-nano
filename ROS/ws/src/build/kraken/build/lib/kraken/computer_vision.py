@@ -11,6 +11,9 @@ import json
 import sys
 from std_msgs.msg import Int32MultiArray, String
 
+import sys
+from std_msgs.msg import Int32MultiArray 
+
 class ComputerVision(Node):
 
     def __init__(self):
